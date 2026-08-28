@@ -12,11 +12,6 @@
         <property name="fechaInicio" column="fechaInicio" type="java.time.LocalDate" not-null="true"/>
         <property name="fechaFin" column="fechaFin" type="java.time.LocalDate" not-null="true"/>
 
-        <set name="costos" cascade="all-delete-orphan">
-            <key column="idFestival"/>
-            <one-to-many class="datos.CostoAdicional"/>
-        </set>
-
         <set name="unidadesHabilitadas" table="festival_unidadventa">
             <key column="idFestival"/>
             <many-to-many column="idUnidadVenta" class="datos.UnidadVenta"/>

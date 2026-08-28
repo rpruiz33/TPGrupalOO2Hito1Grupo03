@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Festival {
+	private Long id;
     private String nombre;
     private String temporada;
     private LocalDate fechaInicio;
@@ -40,10 +41,17 @@ public class Festival {
                 Objects.equals(unidadesHabilitadas, festival.unidadesHabilitadas) &&
                 Objects.equals(staffGeneral, festival.staffGeneral);
     }
+    
+    
+    public Long getId() {
+		return id;
+	}
 
-    
-    
-    public String getNombre() {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
 		return nombre;
 	}
 
@@ -74,7 +82,6 @@ public class Festival {
 	public void setFechaFin(LocalDate fechaFin) {
 		this.fechaFin = fechaFin;
 	}
-
 
 
 	public Set<UnidadVenta> getUnidadesHabilitadas() {
