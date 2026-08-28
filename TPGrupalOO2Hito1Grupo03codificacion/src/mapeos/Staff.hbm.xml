@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+    <class name="datos.UnidadVenta" table="unidadventa" abstract="true">
+        
+        <id name="id" column="idUnidadVenta">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="codigo" column="codigo" type="string" unique="true" not-null="true"/>
+        <property name="nombreComercial" column="nombreComercial" type="string" not-null="true"/>
+        <property name="superficieM2" column="superficieM2" type="double" not-null="true"/>
+
+        <many-to-one name="responsable" column="idResponsable" class="datos.Staff" not-null="false"/>
+
+        <set name="pedidos" inverse="true" cascade="all">
+            <key column="idUnidadVenta"/>
+            <one-to-many class="datos.Pedido"/>
+        </set>
+
+        <set name="platosOfrecidos" table="unidadventa_plato">
+            <key column="idUnidadVenta"/>
+            <many-to-many column="idPlato" class="datos.Plato"/>
+        </set>
+
+        <set name="staffPuesto" table="unidadventa_staff">
+            <key column="idUnidadVenta"/>
+            <many-to-many column="idStaff" class="datos.Staff"/>
+        </set>
+
+        <!-- Herencia: tabla por subclase -->
+        <joined-subclass name="datos.Foodtrack" table="foodtrack">
+            <key column="idUnidadVenta"/>
+            <property name="patente" column="patente" type="string" not-null="true"/>
+            <property name="requiereElectricidad" column="requiereElectricidad" type="boolean" not-null="true"/>
+        </joined-subclass>
+
+        <joined-subclass name="datos.PuestoDesarmable" table="puestodesarmable">
+            <key column="idUnidadVenta"/>
+            <property name="cantidadCarpas" column="cantidadCarpas" type="integer" not-null="true"/>
+            <property name="tiempoMontajeMin" column="tiempoMontajeMin" type="integer" not-null="true"/>
+        </joined-subclass>
+    </class>
+</hibernate-mapping>

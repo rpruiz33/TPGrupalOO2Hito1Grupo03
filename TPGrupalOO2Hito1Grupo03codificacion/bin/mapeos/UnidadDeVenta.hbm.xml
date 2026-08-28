@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+    <class name="datos.Staff" table="staff" abstract="true">
+        
+        <id name="id" column="idStaff">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="nombre" column="nombre" type="string" not-null="true"/>
+        <property name="apellido" column="apellido" type="string" not-null="true"/>
+        <property name="dni" column="dni" type="string" unique="true" not-null="true"/>
+        <property name="fechaNacimiento" column="fechaNacimiento" type="java.time.LocalDate" not-null="true"/>
+        <property name="fechaIngreso" column="fechaIngreso" type="java.time.LocalDate" not-null="true"/>
+        <property name="sueldoBase" column="sueldoBase" type="double" not-null="true"/>
+
+        <joined-subclass name="datos.Cocinero" table="cocinero">
+            <key column="idStaff"/>
+            <property name="especialidad" column="especialidad" type="string" not-null="true"/>
+        </joined-subclass>
+
+        <joined-subclass name="datos.Cajero" table="cajero">
+            <key column="idStaff"/>
+            <property name="turno" column="turno" type="string" not-null="true"/>
+        </joined-subclass>
+    </class>
+</hibernate-mapping>
