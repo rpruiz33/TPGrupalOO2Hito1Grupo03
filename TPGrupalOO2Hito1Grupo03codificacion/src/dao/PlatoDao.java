@@ -88,5 +88,16 @@ public class PlatoDao {
 		}
 		return objeto;
 	}
+	public Plato traerPlato(String nombre) {
+		Plato objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Plato) session.createQuery("from Plato p where p.nombre =:nombre")
+					.setParameter("nombre", nombre).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
 
 }

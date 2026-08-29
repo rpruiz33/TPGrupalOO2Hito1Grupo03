@@ -90,5 +90,18 @@ public class StaffDao {
 		}
 		return objeto;
 	}
+	public Staff traerStaff(String dni) {
+		Staff objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Staff) session.createQuery("from Staff s where s.dni =:dni")
+					.setParameter("dni", dni).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+
 }
+
 	
