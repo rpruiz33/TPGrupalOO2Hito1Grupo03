@@ -2,18 +2,18 @@
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping default-access="field">
-    <class name="datos.Pedido" table="pedido">
-        <id name="id" column="idPedido">
+<hibernate-mapping package="datos">
+    <class name="Pedido" table="pedido">
+        <id name="id" column="id_Pedido" type="java.lang.Long">
             <generator class="identity"/>
         </id>
         <property name="fecha" column="fecha" type="java.time.LocalDate" not-null="true"/>
-        <many-to-one name="festival" column="idFestival" class="datos.Festival" not-null="true"/>
-        <many-to-one name="unidadVenta" column="idUnidadVenta" class="datos.UnidadVenta" not-null="true"/>
+        <many-to-one name="festival" column="id_Festival" class="Festival" not-null="true"/>
+        <many-to-one name="unidadVenta" column="id_UnidadVenta" class="UnidadVenta" not-null="true"/>
 
         <set name="items" cascade="all-delete-orphan">
-            <key column="idPedido"/>
-            <one-to-many class="datos.ItemPedido"/>
+            <key column="id_Pedido" not-null="true" />
+            <one-to-many class="ItemPedido"/>
         </set>
     </class>
 </hibernate-mapping>

@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping default-access="field">
-	<class name="datos.ItemPedido" table="itempedido">
+<hibernate-mapping package="datos">
+	<class name="ItemPedido" table="item_pedido" >
 
-		<id name="id" column="idItemPedido">
+		<id name="id" column="id_ItemPedido" type="java.lang.Long" >
 			<generator class="identity" />
 		</id>
 
 		<property name="cantidad" column="cantidad" type="long" not-null="true" />
-		<property name="precioUnidad" column="precioUnidad" type="double"
-			not-null="true" />
+		<property name="precioUnidad" column="precioUnidad" type="double" not-null="true" />
 
-		<many-to-one name="plato" column="idPlato" class="datos.Plato"
-			not-null="true" />
+		<many-to-one name="plato" class="Plato" column="id_Plato" not-null="true" />
 	</class>
 </hibernate-mapping>

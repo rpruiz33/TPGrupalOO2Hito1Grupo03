@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="TPGrupalOO2Hito1Grupo03codificacion/src"/>
+	<classpathentry kind="output" path="TPGrupalOO2Hito1Grupo03codificacion/bin"/>
+</classpath>

@@ -2,9 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping default-access="field">
-    <class name="datos.Festival" table="festival">
-        <id name="id" column="idFestival">
+<hibernate-mapping package="datos">
+    <class name="Festival" table="festival">
+        <id name="id" column="id_Festival" type="java.lang.Long">
             <generator class="identity"/>
         </id>
         <property name="nombre" column="nombre" type="string" not-null="true"/>
@@ -12,19 +12,13 @@
         <property name="fechaInicio" column="fechaInicio" type="java.time.LocalDate" not-null="true"/>
         <property name="fechaFin" column="fechaFin" type="java.time.LocalDate" not-null="true"/>
 
-        <set name="costos" cascade="all-delete-orphan">
-            <key column="idFestival"/>
-            <one-to-many class="datos.CostoAdicional"/>
-        </set>
-
         <set name="unidadesHabilitadas" table="festival_unidadventa">
-            <key column="idFestival"/>
-            <many-to-many column="idUnidadVenta" class="datos.UnidadVenta"/>
-        </set>
-
-        <set name="staffGeneral" table="festival_staff">
-            <key column="idFestival"/>
-            <many-to-many column="idStaff" class="datos.Staff"/>
-        </set>
-    </class>
+   			 <key column="id_Festival"/>
+    			<many-to-many column="id_UnidadVenta" class="UnidadVenta"/>
+			</set>
+		<set name="staffGeneral" table="festival_staff">
+    			<key column="id_Festival"/>
+    			<many-to-many column="id_Staff"  class="Staff"/>
+			</set>
+          </class>
 </hibernate-mapping>
