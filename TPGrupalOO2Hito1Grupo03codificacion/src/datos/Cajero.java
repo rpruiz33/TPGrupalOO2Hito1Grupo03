@@ -40,7 +40,6 @@ public class Cajero extends Staff {
 
     @Override
     public String toString() {
-        return "Cajero{" + "turno='" + turno + '\'' +
-                "} " + super.toString();
+        return "Cajero{" + "turno='" + turno + '\'' + "} " + super.toString();
     }
 }

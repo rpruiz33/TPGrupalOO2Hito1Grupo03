@@ -1,49 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-
 <hibernate-mapping package="datos">
-	<class name="UnidadVenta" table="unidadventa" abstract="true">
-		<id name="id" column="id_UnidadVenta" type="java.lang.Long">
-    		<generator class="identity" />
-		</id>
-		<property name="codigo" column="codigo" type="string" unique="true"
-			not-null="true" />
-		<property name="nombreComercial" column="nombreComercial" type="string"
-			not-null="true" />
-		<property name="superficieM2" column="superficieM2" type="double"
-			not-null="true" />
-		<many-to-one name="responsable" column="id_Responsable"
-			class="Staff" not-null="false" />
-		<set name="pedidos" inverse="true" cascade="all">
-			<key column="id_UnidadVenta" />
-			<one-to-many class="Pedido" />
-		</set>
-		<set name="platosOfrecidos" table="unidadventa_plato">
-			<key column="id_UnidadVenta" />
-			<many-to-many column="idPlato" class="Plato" />
-		</set>
-		<set name="staffPuesto" table="unidadventa_staff">
-    <key column="id_UnidadVenta" />
-    <many-to-many column="id_Staff" class="Staff" />
-			</set>
+    <class name="UnidadVenta" table="unidadventa" abstract="true">
+        <id name="id" column="id_UnidadVenta" type="java.lang.Long">
+            <generator class="identity" />
+        </id>
+        <property name="codigo" column="codigo" type="string" unique="true" not-null="true" />
+        <property name="nombreComercial" column="nombreComercial" type="string" not-null="true" />
+        <property name="superficieM2" column="superficieM2" type="double" not-null="true" />
 
-		<!-- Herencia: tabla por subclase -->
-		<joined-subclass name="FoodTrack" table="foodtrack">
-			<key column="id_UnidadVenta" />
-			<property name="patente" column="patente" type="string"
-				not-null="true" />
-			<property name="requiereElectricidad" column="requiereElectricidad"
-				type="boolean" not-null="true" />
-		</joined-subclass>
-		
-		<joined-subclass name="PuestoDesarmable" table="puestodesarmable">
-			<key column="id_UnidadVenta" />
-			<property name="cantidadCarpas" column="cantidadCarpas"
-				type="integer" not-null="true" />
-			<property name="tiempoMontajeMin" column="tiempoMontajeMin"
-				type="integer" not-null="true" />
-		</joined-subclass>
-		
-	</class>
-</hibernate-mapping>        
+       
+        <many-to-one name="responsable" column="id_Responsable" class="Staff" not-null="false" outer-join="true" />
+
+        
+        <set name="pedidos" inverse="true" cascade="all" outer-join="true">
+            <key column="id_UnidadVenta" />
+            <one-to-many class="Pedido" />
+        </set>
+
+        <set name="platosOfrecidos" table="unidadventa_plato" outer-join="true">
+            <key column="id_UnidadVenta" />
+            <many-to-many column="idPlato" class="Plato" outer-join="true" />
+        </set>
+
+        <set name="staffPuesto" table="unidadventa_staff" outer-join="true">
+            <key column="id_UnidadVenta" />
+            <many-to-many column="id_Staff" class="Staff" outer-join="true" />
+        </set>
+
+
+        <joined-subclass name="FoodTrack" table="foodtrack">
+            <key column="id_UnidadVenta" />
+            <property name="patente" column="patente" type="string" not-null="true" />
+            <property name="requiereElectricidad" column="requiereElectricidad" type="boolean" not-null="true" />
+        </joined-subclass>
+        
+        <joined-subclass name="PuestoDesarmable" table="puestodesarmable">
+            <key column="id_UnidadVenta" />
+            <property name="cantidadCarpas" column="cantidadCarpas" type="integer" not-null="true" />
+            <property name="tiempoMontajeMin" column="tiempoMontajeMin" type="integer" not-null="true" />
+        </joined-subclass>
+        
+    </class>
+</hibernate-mapping>

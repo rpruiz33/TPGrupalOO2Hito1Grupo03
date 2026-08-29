@@ -107,13 +107,8 @@ public class Festival {
 
     @Override
     public String toString() {
-        return "Festival{" +
-                "nombre='" + nombre + '\'' +
-                ", temporada='" + temporada + '\'' +
-                ", fechaInicio=" + fechaInicio +
-                ", fechaFin=" + fechaFin +
-                ", unidadesHabilitadas=" + unidadesHabilitadas +
-                ", staffGeneral=" + staffGeneral +
-                '}';
+        return "Festival{" + "nombre='" + nombre + '\'' + ", temporada='" + temporada + '\'' +
+                ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", unidadesHabilitadas=" + unidadesHabilitadas +
+                ", staffGeneral=" + staffGeneral + '}';
     }
 }

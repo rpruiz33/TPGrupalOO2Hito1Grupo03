@@ -8,10 +8,13 @@
             <generator class="identity"/>
         </id>
         <property name="fecha" column="fecha" type="java.time.LocalDate" not-null="true"/>
-        <many-to-one name="festival" column="id_Festival" class="Festival" not-null="true"/>
-        <many-to-one name="unidadVenta" column="id_UnidadVenta" class="UnidadVenta" not-null="true"/>
+        
 
-        <set name="items" cascade="all-delete-orphan">
+        <many-to-one name="festival" column="id_Festival" class="Festival" not-null="true" outer-join="true"/>
+        <many-to-one name="unidadVenta" column="id_UnidadVenta" class="UnidadVenta" not-null="true" outer-join="true"/>
+
+
+        <set name="items" cascade="all-delete-orphan" outer-join="true">
             <key column="id_Pedido" not-null="true" />
             <one-to-many class="ItemPedido"/>
         </set>

@@ -12,13 +12,16 @@
         <property name="fechaInicio" column="fechaInicio" type="java.time.LocalDate" not-null="true"/>
         <property name="fechaFin" column="fechaFin" type="java.time.LocalDate" not-null="true"/>
 
-        <set name="unidadesHabilitadas" table="festival_unidadventa">
-   			 <key column="id_Festival"/>
-    			<many-to-many column="id_UnidadVenta" class="UnidadVenta"/>
-			</set>
-		<set name="staffGeneral" table="festival_staff">
-    			<key column="id_Festival"/>
-    			<many-to-many column="id_Staff"  class="Staff"/>
-			</set>
-          </class>
+
+        <set name="unidadesHabilitadas" table="festival_unidadventa" outer-join="true">
+            <key column="id_Festival"/>
+            <many-to-many column="id_UnidadVenta" class="UnidadVenta" outer-join="true"/>
+        </set>
+
+
+        <set name="staffGeneral" table="festival_staff" outer-join="true">
+            <key column="id_Festival"/>
+            <many-to-many column="id_Staff" class="Staff" outer-join="true"/>
+        </set>
+    </class>
 </hibernate-mapping>

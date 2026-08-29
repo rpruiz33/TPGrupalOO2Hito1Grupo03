@@ -40,17 +40,15 @@ public class ItemPedido {
         return Objects.hash(id, plato, cantidad, precioUnidad);
     }
 
-    @Override
-    public String toString() {
-        return "ItemPedido{" +
-                "id=" + id +
-                ", plato=" + plato +
-                ", cantidad=" + cantidad +
-                ", precioUnidad=" + precioUnidad +
-                '}';
-    }
+    
 
-    public Long getId() {
+    @Override
+	public String toString() {
+		return "ItemPedido [id=" + id + ", plato=" + plato + ", cantidad=" + cantidad + ", precioUnidad=" + precioUnidad
+				+ "]";
+	}
+
+	public Long getId() {
         return id;
     }
 
