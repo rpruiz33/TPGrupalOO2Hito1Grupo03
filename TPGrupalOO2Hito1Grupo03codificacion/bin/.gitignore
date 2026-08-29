@@ -1,5 +1,4 @@
-/datos/
-/mapeos/
-/negocio/
-/dao/
 /test/
+/negocio/
+/datos/
+/dao/

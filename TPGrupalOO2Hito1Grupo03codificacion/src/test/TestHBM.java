@@ -12,4 +12,5 @@ public class TestHBM {
 	    session.close();
 	    System.out.println("OK");
 	}
+	
 }

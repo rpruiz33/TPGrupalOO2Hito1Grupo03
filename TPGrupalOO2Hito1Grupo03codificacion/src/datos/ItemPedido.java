@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class ItemPedido {
 
-    private Long id;
+    
     private Plato plato;
     private long cantidad;
     private double precioUnidad;
     public ItemPedido() {
     }
 
-    public ItemPedido(Long id, Plato plato, long cantidad, double precioUnidad) {
-        this.id = id;
+    public ItemPedido( Plato plato, long cantidad, double precioUnidad) {
+        
         this.plato = plato;
         this.cantidad = cantidad;
         this.precioUnidad = precioUnidad;
@@ -31,30 +31,26 @@ public class ItemPedido {
 
         return cantidad == that.cantidad
                 && Double.compare(precioUnidad, that.precioUnidad) == 0
-                && Objects.equals(id, that.id)
+            
                 && Objects.equals(plato, that.plato);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, plato, cantidad, precioUnidad);
+        return Objects.hash( plato, cantidad, precioUnidad);
     }
 
     
 
     @Override
 	public String toString() {
-		return "ItemPedido [id=" + id + ", plato=" + plato + ", cantidad=" + cantidad + ", precioUnidad=" + precioUnidad
+		return "ItemPedido [id=" +  ", plato=" + plato + ", cantidad=" + cantidad + ", precioUnidad=" + precioUnidad
 				+ "]";
 	}
 
-	public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+
+   
 
     public Plato getPlato() {
         return plato;
