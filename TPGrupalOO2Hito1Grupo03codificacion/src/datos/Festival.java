@@ -14,10 +14,7 @@ public class Festival {
     private Set<UnidadVenta> unidadesHabilitadas;
     private Set<Staff> staffGeneral;
 
-    public Festival() {
-        this.unidadesHabilitadas = new HashSet<>();
-        this.staffGeneral = new HashSet<>();
-    }
+    public Festival() {}
 
     public Festival(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin,
                     Set<UnidadVenta> unidadesHabilitadas, Set<Staff> staffGeneral) {
