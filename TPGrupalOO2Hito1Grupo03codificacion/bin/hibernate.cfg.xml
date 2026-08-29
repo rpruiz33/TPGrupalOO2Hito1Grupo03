@@ -6,7 +6,7 @@
 		<property name="connection.url">
 			jdbc:mysql://localhost/epicentro_gourmet?serverTimezone=UTC</property> <!-- Se cambio el nombre por la base que tengo, deberíamos ponernos de acuerdo en el nombre   -->
 		<property name="connection.username">root</property>
-		<property name="connection.password"> </property><!-- tratar de unificar la clave para todos   -->
+		<property name="connection.password">root</property><!-- tratar de unificar la clave para todos   -->
 		<property name="connection.pool_size">1</property>
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">false</property><!-- en true muestra hql en consola-->
