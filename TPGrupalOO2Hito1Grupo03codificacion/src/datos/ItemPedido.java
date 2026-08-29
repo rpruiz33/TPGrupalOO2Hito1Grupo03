@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class ItemPedido {
 
-    
+    private Long id;
     private Plato plato;
     private long cantidad;
     private double precioUnidad;
@@ -75,4 +75,12 @@ public class ItemPedido {
     public void setPrecioUnidad(double precioUnidad) {
         this.precioUnidad = precioUnidad;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }
