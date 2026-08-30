@@ -21,6 +21,7 @@ import negocio.ItemPedidoABM;
 import negocio.PedidoABM;
 import negocio.PlatoABM;
 import negocio.PuestoDesarmableABM;
+import negocio.UnidadVentaABM;
 
 public class TestFestival {
 
@@ -34,7 +35,7 @@ public class TestFestival {
             FestivalABM festivalABM = new FestivalABM();
             PedidoABM pedidoABM = new PedidoABM();
             ItemPedidoABM itemPedidoABM = new ItemPedidoABM();
-
+            UnidadVentaABM unidadVentaABM = new UnidadVentaABM();
             // ---------- Staff ----------
             long idCocinero1 = cocineroABM.agregar("Lucia", "Fernandez", "40111222",
                     LocalDate.of(1990, 4, 12), LocalDate.of(2023, 10, 1), 450000.0, "Parrilla");
@@ -234,7 +235,7 @@ public class TestFestival {
         
         LocalDate fechaInicioBusqueda = LocalDate.of(2026, 9, 15);
         LocalDate fechaFinBusqueda = LocalDate.of(2026, 9, 20);
-        Long idFestival = 16L; // PONER EL ID DEL FESTIVAL SEGUN LA LIMPEZA DE LA BASE EL EVENTO ES EL 1RO (Consulta de Fede)
+        Long idFestival = 1L; // PONER EL ID DEL FESTIVAL SEGUN LA LIMPEZA DE LA BASE EL EVENTO ES EL 1RO (Consulta de Fede)
 
         System.out.println("\n--- CONSULTA: FESTIVAL ID " + idFestival + " ENTRE " + fechaInicioBusqueda + " Y " + fechaFinBusqueda + " ---");
         
@@ -247,6 +248,25 @@ public class TestFestival {
         for (Cocinero c : cocinerosPorFecha) {
             System.out.println("-> " + c.getNombre() + " " + c.getApellido() + " | Especialidad: " + c.getEspecialidad()); 
         }
+
+        System.out.println("\n=== PRUEBA DE UNIDADES DE VENTA FILTRADAS POR DNI, NACIMIENTO E INGRESO ===");
+
+                   String dniBusqueda = "68555666";
+                   LocalDate nacBusqueda = LocalDate.of(1985, 3, 9);
+                   LocalDate ingBusqueda = LocalDate.of(2022, 3, 15);
+
+                   System.out.println("\n--- CONSULTA: BUSCANDO UNIDADES DEL STAFF CON DNI " + dniBusqueda + " ---");        
+                   Set<UnidadVenta> unidadesPorStaff = unidadVentaABM.traerUnidadesVentaPorDatosStaff(dniBusqueda, nacBusqueda, ingBusqueda);
+                   
+                   System.out.println("Cantidad de unidades encontradas: " + unidadesPorStaff.size());
+                   
+                   for (UnidadVenta u : unidadesPorStaff) {
+                       System.out.println("-> " + u.getNombreComercial() 
+                                        + " | Codigo: " + u.getCodigo() 
+                                        + " | Superficie: " + u.getSuperficieM2() + "m2");          
+                   }
+
+        
         }catch (Exception e) {
             e.printStackTrace();
         }

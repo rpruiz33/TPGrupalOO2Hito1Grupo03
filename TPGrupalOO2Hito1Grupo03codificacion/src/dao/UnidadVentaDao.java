@@ -1,6 +1,8 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -89,11 +91,77 @@ public class UnidadVentaDao {
 	    return objeto;
 	}
 
-	public UnidadVenta traerUnidadVentaConStaff(long idUnidadVenta) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Set<UnidadVenta> traerUnidadesVentaPorDatosStaff(String dni, LocalDate fechaNacimiento, LocalDate fechaIngreso) throws HibernateException {
+	    Set<UnidadVenta> lista = null;
+	    try {
+	        iniciaOperacion();
+	        String hql = "select distinct u from UnidadVenta u "
+	                   + "left join u.staffPuesto sp "
+	                   + "left join u.responsable r "
+	                   + "where (sp.dni = :dni and sp.fechaNacimiento = :fechaNacimiento and sp.fechaIngreso = :fechaIngreso) "
+	                   + "or (r.dni = :dni and r.fechaNacimiento = :fechaNacimiento and r.fechaIngreso = :fechaIngreso)";
 
+	        lista = new java.util.HashSet<>(
+	            session.createQuery(hql, UnidadVenta.class)
+	                   .setParameter("dni", dni)
+	                   .setParameter("fechaNacimiento", fechaNacimiento)
+	                   .setParameter("fechaIngreso", fechaIngreso)
+	                   .getResultList()
+	        );
+
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	        throw he;
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
+	}
+	public UnidadVenta traerUnidadVenta(long id) {
+		UnidadVenta objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (UnidadVenta) session.get(UnidadVenta.class, id);
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+	public List<UnidadVenta> traerUnidadVentas() throws HibernateException {
+		List<UnidadVenta> lista = null;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from UnidadVenta u order by u.nombreComercial asc", UnidadVenta.class).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	public List<UnidadVenta> traerUnidadVentasPorResponsable(long idStaff) throws HibernateException {
+		List<UnidadVenta> lista = null;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from UnidadVenta u where u.responsable.id =:idStaff", UnidadVenta.class)
+					.setParameter("idStaff", idStaff).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	public UnidadVenta traerUnidadVentaConStaff(long id) {
+		UnidadVenta objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (UnidadVenta) session.get(UnidadVenta.class, id);
+			if (objeto != null) {
+				Hibernate.initialize(objeto.getStaffPuesto());
+			}
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
 
 }
 
