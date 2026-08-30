@@ -78,6 +78,13 @@ public class UnidadVentaDao {
 			session.close();
 		}
 	}
+
+	public UnidadVenta traerUnidadVentaConStaff(long idUnidadVenta) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
 
 	
