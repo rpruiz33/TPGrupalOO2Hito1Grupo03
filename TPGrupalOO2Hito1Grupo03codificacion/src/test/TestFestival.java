@@ -36,6 +36,7 @@ public class TestFestival {
             PedidoABM pedidoABM = new PedidoABM();
             ItemPedidoABM itemPedidoABM = new ItemPedidoABM();
             UnidadVentaABM unidadVentaABM = new UnidadVentaABM();
+
             // ---------- Staff ----------
             long idCocinero1 = cocineroABM.agregar("Lucia", "Fernandez", "40111222",
                     LocalDate.of(1990, 4, 12), LocalDate.of(2023, 10, 1), 450000.0, "Parrilla");
@@ -58,7 +59,7 @@ public class TestFestival {
             Cajero cajero2 = cajeroABM.traer(idCajero2);
             Cajero cajero3 = cajeroABM.traer(idCajero3);
 
-            System.out.println("Staff creado: " + cocinero1 + " | " + cocinero2 + " | " + cocinero3 + " | " 
+            System.out.println("Staff creado: " + cocinero1 + " | " + cocinero2 + " | " + cocinero3 + " | "
                     + cajero1 + " | " + cajero2 + " | " + cajero3);
 
             // ---------- Platos ----------
@@ -117,8 +118,6 @@ public class TestFestival {
             System.out.println("Unidades creadas: " + foodTrack1 + " | " + puesto1 + " | " + foodTrack2 + " | " + puesto2 + " | " + puesto3);
 
             // ---------- Festivales ----------
-            
-            // Festival 1: 3 integrantes de Staff
             Set<UnidadVenta> unidadesFestival1 = new HashSet<>();
             unidadesFestival1.add(foodTrack1);
             unidadesFestival1.add(puesto1);
@@ -132,7 +131,6 @@ public class TestFestival {
                     LocalDate.of(2026, 9, 15), LocalDate.of(2026, 9, 20),
                     unidadesFestival1, staffFestival1);
 
-            // Festival 2: 2 integrantes de Staff
             Set<UnidadVenta> unidadesFestival2 = new HashSet<>();
             unidadesFestival2.add(puesto2);
             unidadesFestival2.add(foodTrack2);
@@ -144,7 +142,6 @@ public class TestFestival {
                     LocalDate.of(2026, 1, 10), LocalDate.of(2026, 1, 20),
                     unidadesFestival2, staffFestival2);
 
-            // Festival 3: 1 integrante de Staff
             Set<UnidadVenta> unidadesFestival3 = new HashSet<>();
             unidadesFestival3.add(foodTrack1);
             Set<Staff> staffFestival3 = new HashSet<>();
@@ -174,7 +171,6 @@ public class TestFestival {
             System.out.println("Pedido 2 con items: " + pedidoABM.traerConItems(idPedido2));
 
             System.out.println("\nCARGA DE DATOS FINALIZADA CORRECTAMENTE\n");
-            
 
             System.out.println("// =========================================================================");
             System.out.println("// ---------- ESTUDIANTE RUIZ PEREIRA, ROBERTO ANDRES  ----------");
@@ -184,13 +180,13 @@ public class TestFestival {
             System.out.println("// ---------- PRUEBA 1: CONSULTA (traerPuestosComplejos) ----------");
             System.out.println("// =========================================================================");
             System.out.println("=== PRUEBA DE CONSULTA  EN PUESTODESARMABLE ===");
-            
+
             Set<PuestoDesarmable> puestosFiltrados = puestoABM.traerPuestosComplejos(1, 60, 5.0, 1);
-            
+
             System.out.println("Cantidad de puestos encontrados: " + puestosFiltrados.size());
             for (PuestoDesarmable p : puestosFiltrados) {
-                System.out.println("-> " + p.getNombreComercial() 
-                        + " | Carpas: " + p.getCantidadCarpas() 
+                System.out.println("-> " + p.getNombreComercial()
+                        + " | Carpas: " + p.getCantidadCarpas()
                         + " | Montaje: " + p.getTiempoMontajeMin() + " min"
                         + " | Superficie: " + p.getSuperficieM2() + " m2");
             }
@@ -220,56 +216,52 @@ public class TestFestival {
             for (UnidadVenta u : minStaff3) {
                 System.out.println("-> " + u.getNombreComercial() + " | Codigo: " + u.getCodigo());
             }
-            
-       System.out.println("// =========================================================================");
-        System.out.println("// ---------- ESTUDIANTE Salvatierra, Federico Matias  ----------");
-        System.out.println("// =========================================================================");
-        System.out.println();
-        System.out.println("// =========================================================================");
-        System.out.println("// ---------- PRUEBA 2: CONSULTA (Cocineros por eventos) ----------");
-        System.out.println("// =========================================================================");
-        System.out.println("=== PRUEBA DE CONSULTA  EN  CocineroDao ===");
-        
-        System.out.println("\n=== PRUEBA DE COCINEROS ASIGNADOS A UN FESTIVAL POR RANGO DE FECHAS ===");
 
-        
-        LocalDate fechaInicioBusqueda = LocalDate.of(2026, 9, 15);
-        LocalDate fechaFinBusqueda = LocalDate.of(2026, 9, 20);
-        Long idFestival = 1L; // PONER EL ID DEL FESTIVAL SEGUN LA LIMPEZA DE LA BASE EL EVENTO ES EL 1RO (Consulta de Fede)
+            System.out.println("// =========================================================================");
+            System.out.println("// ---------- ESTUDIANTE Salvatierra, Federico Matias  ----------");
+            System.out.println("// =========================================================================");
+            System.out.println();
+            System.out.println("// =========================================================================");
+            System.out.println("// ---------- PRUEBA 2: CONSULTA (Cocineros por eventos) ----------");
+            System.out.println("// =========================================================================");
+            System.out.println("=== PRUEBA DE CONSULTA  EN  CocineroDao ===");
 
-        System.out.println("\n--- CONSULTA: FESTIVAL ID " + idFestival + " ENTRE " + fechaInicioBusqueda + " Y " + fechaFinBusqueda + " ---");
-        
-   
-        Set<Cocinero> cocinerosPorFecha = cocineroABM.traerCocinerosPorFestivalYFechas(idFestival, fechaInicioBusqueda, fechaFinBusqueda);
-        
-        System.out.println("Cantidad de cocineros encontrados: " + cocinerosPorFecha.size());
-        
-       
-        for (Cocinero c : cocinerosPorFecha) {
-            System.out.println("-> " + c.getNombre() + " " + c.getApellido() + " | Especialidad: " + c.getEspecialidad()); 
-        }
+            System.out.println("\n=== PRUEBA DE COCINEROS ASIGNADOS A UN FESTIVAL POR RANGO DE FECHAS ===");
 
-        System.out.println("\n=== PRUEBA DE UNIDADES DE VENTA FILTRADAS POR DNI, NACIMIENTO E INGRESO ===");
+            LocalDate fechaInicioBusqueda = LocalDate.of(1900, 5, 1);
+            LocalDate fechaFinBusqueda = LocalDate.of(2026, 9, 20);
+            Long idFestival = idFestival1; // Usa la variable de festival ya generada en la carga
 
-                   String dniBusqueda = "68555666";
-                   LocalDate nacBusqueda = LocalDate.of(1985, 3, 9);
-                   LocalDate ingBusqueda = LocalDate.of(2022, 3, 15);
+            System.out.println("\n--- CONSULTA: FESTIVAL ID " + idFestival + " ENTRE " + fechaInicioBusqueda + " Y " + fechaFinBusqueda + " ---");
 
-                   System.out.println("\n--- CONSULTA: BUSCANDO UNIDADES DEL STAFF CON DNI " + dniBusqueda + " ---");        
-                   Set<UnidadVenta> unidadesPorStaff = unidadVentaABM.traerUnidadesVentaPorDatosStaff(dniBusqueda, nacBusqueda, ingBusqueda);
-                   
-                   System.out.println("Cantidad de unidades encontradas: " + unidadesPorStaff.size());
-                   
-                   for (UnidadVenta u : unidadesPorStaff) {
-                       System.out.println("-> " + u.getNombreComercial() 
-                                        + " | Codigo: " + u.getCodigo() 
-                                        + " | Superficie: " + u.getSuperficieM2() + "m2");          
-                   }
+            Set<Cocinero> cocinerosPorFecha = cocineroABM.traerCocinerosPorFestivalYFechas(idFestival, fechaInicioBusqueda, fechaFinBusqueda);
 
-        
-        }catch (Exception e) {
+            System.out.println("Cantidad de cocineros encontrados: " + cocinerosPorFecha.size());
+
+            for (Cocinero c : cocinerosPorFecha) {
+                System.out.println("-> " + c.getNombre() + " " + c.getApellido() + " | Especialidad: " + c.getEspecialidad());
+            }
+
+            System.out.println("\n=== PRUEBA DE UNIDADES DE VENTA FILTRADAS POR DNI, NACIMIENTO E INGRESO ===");
+
+            String dniBusqueda = "68555666";
+            LocalDate nacBusqueda = LocalDate.of(1985, 9, 3); // Fecha ajustada al valor insertado arriba (idCocinero2)
+            LocalDate ingBusqueda = LocalDate.of(2022, 3, 15);
+
+            System.out.println("\n--- CONSULTA: BUSCANDO UNIDADES DEL STAFF CON DNI " + dniBusqueda + " ---");
+            Set<UnidadVenta> unidadesPorStaff = unidadVentaABM.traerUnidadesVentaPorDatosStaff(dniBusqueda, nacBusqueda, ingBusqueda);
+
+            System.out.println("Cantidad de unidades encontradas: " + unidadesPorStaff.size());
+
+            for (UnidadVenta u : unidadesPorStaff) {
+                System.out.println("-> " + u.getNombreComercial()
+                                 + " | Codigo: " + u.getCodigo()
+                                 + " | Superficie: " + u.getSuperficieM2() + "m2");
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-}    
-        
+}
+
