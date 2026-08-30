@@ -2,11 +2,13 @@ package dao;
 
 import java.util.List;
 
+import java.util.Set;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import datos.PuestoDesarmable;
+
 
 public class PuestoDesarmableDao {
 
@@ -120,4 +122,41 @@ public class PuestoDesarmableDao {
 		}
 		return lista;
 	}
+	public Set<PuestoDesarmable> traerPuestosComplejos(int minCarpas, int maxTiempoMontaje, double minSuperficie, long minStaff) throws HibernateException {
+	    Set<PuestoDesarmable> lista = null;
+	    try {
+	        iniciaOperacion();
+	        
+	        String hql = "from PuestoDesarmable p "
+	                   + "where p.cantidadCarpas >= :minCarpas "
+	                   + "and p.tiempoMontajeMin <= :maxTiempoMontaje "
+	                   + "and p.superficieM2 >= :minSuperficie "
+	                   + "and exists ("
+	                   + "    from Festival f "
+	                   + "    join f.unidadesHabilitadas u "
+	                   + "    join f.staffGeneral sg "
+	                   + "    where u = p "
+	                   + "    group by f.id "
+	                   + "    having count(sg) >= :minStaff"
+	                   + ") "
+	                   + "order by p.nombreComercial asc";
+
+	        lista = new java.util.HashSet<>(
+	            session.createQuery(hql, PuestoDesarmable.class)
+	                   .setParameter("minCarpas", minCarpas)
+	                   .setParameter("maxTiempoMontaje", maxTiempoMontaje)
+	                   .setParameter("minSuperficie", minSuperficie)
+	                   .setParameter("minStaff", minStaff)
+	                   .getResultList()
+	        );
+
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	        throw he;
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
+	}
+	
 }

@@ -62,17 +62,17 @@ public class FoodTrackABM {
         // 1. Intentar traer con fetch si tenés el método especializado
         UnidadVenta u = unidadVentaDao.traerUnidadVentaConStaff(idUnidadVenta);
         
-        // 2. Si devuelve null (común cuando la colección está vacía), traer la entidad directamente
+        
         if (u == null) {
             u = unidadVentaDao.traer(idUnidadVenta);
         }
         
-        // 3. Validar si realmente no existe la unidad
+ 
         if (u == null) {
             throw new RuntimeException("ERROR: No existe unidad con ID: " + idUnidadVenta);
         }
         
-        // 4. Asignar el staff y persistir los cambios
+        
         u.asignarStaff(staff);
         unidadVentaDao.actualizar(u);
     }

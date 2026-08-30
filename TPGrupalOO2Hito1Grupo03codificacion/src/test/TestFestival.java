@@ -40,85 +40,185 @@ public class TestFestival {
                     LocalDate.of(1990, 4, 12), LocalDate.of(2023, 10, 1), 450000.0, "Parrilla");
             long idCocinero2 = cocineroABM.agregar("Martin", "Gomez", "68555666",
                     LocalDate.of(1985, 9, 3), LocalDate.of(2022, 3, 15), 470000.0, "Reposteria");
+            long idCocinero3 = cocineroABM.agregar("Roberto", "Sanchez", "32999888",
+                    LocalDate.of(1988, 11, 5), LocalDate.of(2021, 5, 10), 500000.0, "Comida Minuta");
+
             long idCajero1 = cajeroABM.agregar("Ana", "Lopez", "65222111",
                     LocalDate.of(1998, 1, 20), LocalDate.of(2024, 6, 1), 380000.0, "manana");
             long idCajero2 = cajeroABM.agregar("Diego", "Perez", "82444333",
                     LocalDate.of(1995, 7, 8), LocalDate.of(2023, 11, 20), 390000.0, "noche");
+            long idCajero3 = cajeroABM.agregar("Sofia", "Ramirez", "71333444",
+                    LocalDate.of(2000, 3, 14), LocalDate.of(2024, 2, 1), 370000.0, "tarde");
 
             Cocinero cocinero1 = cocineroABM.traer(idCocinero1);
             Cocinero cocinero2 = cocineroABM.traer(idCocinero2);
+            Cocinero cocinero3 = cocineroABM.traer(idCocinero3);
             Cajero cajero1 = cajeroABM.traer(idCajero1);
             Cajero cajero2 = cajeroABM.traer(idCajero2);
-            System.out.println("Staff creado: " + cocinero1 + " | " + cocinero2 + " | " + cajero1 + " | " + cajero2);
+            Cajero cajero3 = cajeroABM.traer(idCajero3);
+
+            System.out.println("Staff creado: " + cocinero1 + " | " + cocinero2 + " | " + cocinero3 + " | " 
+                    + cajero1 + " | " + cajero2 + " | " + cajero3);
 
             // ---------- Platos ----------
             long idPlato1 = platoABM.agregar("Choripan", 3500.0, 1200.0);
             long idPlato2 = platoABM.agregar("Hamburguesa Completa", 6800.0, 2600.0);
             long idPlato3 = platoABM.agregar("Torta Frita", 2000.0, 600.0);
+            long idPlato4 = platoABM.agregar("Papas Rusticas", 3000.0, 900.0);
+            long idPlato5 = platoABM.agregar("Emponadas de Carne", 2500.0, 800.0);
 
             Plato plato1 = platoABM.traer(idPlato1);
             Plato plato2 = platoABM.traer(idPlato2);
             Plato plato3 = platoABM.traer(idPlato3);
-            System.out.println("Platos creados: " + plato1 + " | " + plato2 + " | " + plato3);
+            Plato plato4 = platoABM.traer(idPlato4);
+            Plato plato5 = platoABM.traer(idPlato5);
+
+            System.out.println("Platos creados: " + plato1 + " | " + plato2 + " | " + plato3 + " | " + plato4 + " | " + plato5);
 
             // ---------- Unidades de venta ----------
-            long idFoodTrack = foodTrackABM.agregar("FT00000001", "El Rincon del Choripan", 18.5,
+            long idFoodTrack1 = foodTrackABM.agregar("FT00000001", "El Rincon del Choripan", 18.5,
                     cocinero1, "AB123CD", true);
-            long idPuesto = puestoABM.agregar("PD00000001", "Dulces de la Feria", 9.0,
+            long idPuesto1 = puestoABM.agregar("PD00000001", "Dulces de la Feria", 9.0,
                     cajero1, 2, 45);
+            long idFoodTrack2 = foodTrackABM.agregar("FT00000002", "Papas Y Bebidas", 12.0,
+                    cocinero3, "CD456EF", false);
+            long idPuesto2 = puestoABM.agregar("PD00000002", "Puesto de Jugos Naturales", 15.0,
+                    cajero3, 3, 30);
+            long idPuesto3 = puestoABM.agregar("PD00000003", "Empanadas Artesanales", 8.0,
+                    cajero2, 1, 25);
 
-            // Asignaciones de Staff y Platos utilizando los IDs persistidos
-            foodTrackABM.asignarStaff(idFoodTrack, cocinero1);
-            foodTrackABM.asignarStaff(idFoodTrack, cajero2);
-            foodTrackABM.ofrecerPlato(idFoodTrack, plato1);
-            foodTrackABM.ofrecerPlato(idFoodTrack, plato2);
+            // Asignaciones de Staff y Platos
+            foodTrackABM.asignarStaff(idFoodTrack1, cocinero1);
+            foodTrackABM.asignarStaff(idFoodTrack1, cajero2);
+            foodTrackABM.ofrecerPlato(idFoodTrack1, plato1);
+            foodTrackABM.ofrecerPlato(idFoodTrack1, plato2);
 
-            puestoABM.asignarStaff(idPuesto, cajero1);
-            puestoABM.asignarStaff(idPuesto, cocinero2);
-            puestoABM.ofrecerPlato(idPuesto, plato3);
+            puestoABM.asignarStaff(idPuesto1, cajero1);
+            puestoABM.asignarStaff(idPuesto1, cocinero2);
+            puestoABM.ofrecerPlato(idPuesto1, plato3);
 
-            // Traer las unidades actualizadas luego de modificar sus relaciones
-            FoodTrack foodTrack = foodTrackABM.traer(idFoodTrack);
-            PuestoDesarmable puesto = puestoABM.traer(idPuesto);
-            System.out.println("Unidades creadas: " + foodTrack + " | " + puesto);
+            foodTrackABM.asignarStaff(idFoodTrack2, cocinero3);
+            foodTrackABM.asignarStaff(idFoodTrack2, cajero3);
+            foodTrackABM.ofrecerPlato(idFoodTrack2, plato4);
+
+            puestoABM.asignarStaff(idPuesto2, cajero3);
+            puestoABM.ofrecerPlato(idPuesto2, plato2);
+
+            puestoABM.asignarStaff(idPuesto3, cajero2);
+            puestoABM.ofrecerPlato(idPuesto3, plato5);
+
+            FoodTrack foodTrack1 = foodTrackABM.traer(idFoodTrack1);
+            PuestoDesarmable puesto1 = puestoABM.traer(idPuesto1);
+            FoodTrack foodTrack2 = foodTrackABM.traer(idFoodTrack2);
+            PuestoDesarmable puesto2 = puestoABM.traer(idPuesto2);
+            PuestoDesarmable puesto3 = puestoABM.traer(idPuesto3);
+
+            System.out.println("Unidades creadas: " + foodTrack1 + " | " + puesto1 + " | " + foodTrack2 + " | " + puesto2 + " | " + puesto3);
 
             // ---------- Festivales ----------
+            
+            // Festival 1: 3 integrantes de Staff
             Set<UnidadVenta> unidadesFestival1 = new HashSet<>();
-            unidadesFestival1.add(foodTrack);
-            unidadesFestival1.add(puesto);
-            Set<Staff> staffDirectoFestival1 = new HashSet<>();
-            staffDirectoFestival1.add(cajero2);
+            unidadesFestival1.add(foodTrack1);
+            unidadesFestival1.add(puesto1);
+            unidadesFestival1.add(puesto3);
+            Set<Staff> staffFestival1 = new HashSet<>();
+            staffFestival1.add(cajero1);
+            staffFestival1.add(cajero2);
+            staffFestival1.add(cocinero3);
 
-            long idFestival1 = festivalABM.agregar("Feria de Verano", "Verano",
-                    LocalDate.of(2026, 1, 10), LocalDate.of(2026, 1, 20),
-                    unidadesFestival1, staffDirectoFestival1);
+            long idFestival1 = festivalABM.agregar("Mega Rock Festival", "Primavera",
+                    LocalDate.of(2026, 9, 15), LocalDate.of(2026, 9, 20),
+                    unidadesFestival1, staffFestival1);
 
+            // Festival 2: 2 integrantes de Staff
             Set<UnidadVenta> unidadesFestival2 = new HashSet<>();
-            unidadesFestival2.add(foodTrack);
-            long idFestival2 = festivalABM.agregar("Festival de Otono", "Otono",
+            unidadesFestival2.add(puesto2);
+            unidadesFestival2.add(foodTrack2);
+            Set<Staff> staffFestival2 = new HashSet<>();
+            staffFestival2.add(cajero2);
+            staffFestival2.add(cajero3);
+
+            long idFestival2 = festivalABM.agregar("Feria de Verano", "Verano",
+                    LocalDate.of(2026, 1, 10), LocalDate.of(2026, 1, 20),
+                    unidadesFestival2, staffFestival2);
+
+            // Festival 3: 1 integrante de Staff
+            Set<UnidadVenta> unidadesFestival3 = new HashSet<>();
+            unidadesFestival3.add(foodTrack1);
+            Set<Staff> staffFestival3 = new HashSet<>();
+            staffFestival3.add(cocinero1);
+
+            long idFestival3 = festivalABM.agregar("Festival Gastronomico", "Otono",
                     LocalDate.of(2026, 4, 5), LocalDate.of(2026, 4, 12),
-                    unidadesFestival2, new HashSet<>());
+                    unidadesFestival3, staffFestival3);
 
             Festival festival1 = festivalABM.traer(idFestival1);
             Festival festival2 = festivalABM.traer(idFestival2);
-            System.out.println("Festivales creados: " + festival1 + " | " + festival2);
+            Festival festival3 = festivalABM.traer(idFestival3);
+
+            System.out.println("Festivales creados: " + festival1 + " | " + festival2 + " | " + festival3);
 
             // ---------- Pedidos + Items ----------
-            long idPedido1 = pedidoABM.agregar(LocalDate.of(2026, 1, 11), festival1, foodTrack);
+            long idPedido1 = pedidoABM.agregar(LocalDate.of(2026, 9, 16), festival1, foodTrack1);
             Pedido pedido1 = pedidoABM.traer(idPedido1);
             itemPedidoABM.agregar(pedido1, plato1, 3, plato1.getPrecioVenta());
             itemPedidoABM.agregar(pedido1, plato2, 1, plato2.getPrecioVenta());
 
-            long idPedido2 = pedidoABM.agregar(LocalDate.of(2026, 1, 12), festival1, puesto);
+            long idPedido2 = pedidoABM.agregar(LocalDate.of(2026, 1, 12), festival2, puesto1);
             Pedido pedido2 = pedidoABM.traer(idPedido2);
-            
-            // CORREGIDO: Se pasó la cantidad deseada (ejemplo: 2) en lugar de pasar idPedido2
             itemPedidoABM.agregar(pedido2, plato3, 2, plato3.getPrecioVenta());
 
             System.out.println("Pedido 1 con items: " + pedidoABM.traerConItems(idPedido1));
             System.out.println("Pedido 2 con items: " + pedidoABM.traerConItems(idPedido2));
 
-            System.out.println("CARGA DE DATOS FINALIZADA CORRECTAMENTE");
+            System.out.println("\nCARGA DE DATOS FINALIZADA CORRECTAMENTE\n");
+            
+
+            System.out.println("// =========================================================================");
+            System.out.println("// ---------- ESTUDIANTE RUIZ PEREIRA, ROBERTO ANDRES  ----------");
+            System.out.println("// =========================================================================");
+            System.out.println();
+            System.out.println("// =========================================================================");
+            System.out.println("// ---------- PRUEBA 1: CONSULTA (traerPuestosComplejos) ----------");
+            System.out.println("// =========================================================================");
+            System.out.println("=== PRUEBA DE CONSULTA  EN PUESTODESARMABLE ===");
+            
+            Set<PuestoDesarmable> puestosFiltrados = puestoABM.traerPuestosComplejos(1, 60, 5.0, 1);
+            
+            System.out.println("Cantidad de puestos encontrados: " + puestosFiltrados.size());
+            for (PuestoDesarmable p : puestosFiltrados) {
+                System.out.println("-> " + p.getNombreComercial() 
+                        + " | Carpas: " + p.getCantidadCarpas() 
+                        + " | Montaje: " + p.getTiempoMontajeMin() + " min"
+                        + " | Superficie: " + p.getSuperficieM2() + " m2");
+            }
+
+            // =========================================================================
+            // ---------- PRUEBA 2: CONSULTA POR STAFF DE FESTIVAL --------------------
+            // =========================================================================
+            System.out.println("\n=== PRUEBA DE UNIDADES DE VENTA POR STAFF DE FESTIVAL ===");
+
+            System.out.println("\n--- CONSULTA: MÍNIMO 1 DE STAFF ---");
+            Set<UnidadVenta> minStaff1 = festivalABM.traerUnidadesVentaPorStaffDeFestival(1);
+            System.out.println("Cantidad de unidades encontradas: " + minStaff1.size());
+            for (UnidadVenta u : minStaff1) {
+                System.out.println("-> " + u.getNombreComercial() + " | Codigo: " + u.getCodigo());
+            }
+
+            System.out.println("\n--- CONSULTA: MÍNIMO 2 DE STAFF ---");
+            Set<UnidadVenta> minStaff2 = festivalABM.traerUnidadesVentaPorStaffDeFestival(2);
+            System.out.println("Cantidad de unidades encontradas: " + minStaff2.size());
+            for (UnidadVenta u : minStaff2) {
+                System.out.println("-> " + u.getNombreComercial() + " | Codigo: " + u.getCodigo());
+            }
+
+            System.out.println("\n--- CONSULTA: MÍNIMO 3 DE STAFF ---");
+            Set<UnidadVenta> minStaff3 = festivalABM.traerUnidadesVentaPorStaffDeFestival(3);
+            System.out.println("Cantidad de unidades encontradas: " + minStaff3.size());
+            for (UnidadVenta u : minStaff3) {
+                System.out.println("-> " + u.getNombreComercial() + " | Codigo: " + u.getCodigo());
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,13 +1,17 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+
 import datos.Festival;
+import datos.UnidadVenta;
 
 public class FestivalDao {
 
@@ -97,6 +101,36 @@ public class FestivalDao {
 			session.close();
 		}
 		return objeto;
+	}
+	
+	public Set<UnidadVenta> traerUnidadesVentaPorStaffDeFestival(long minStaff) {
+	    Set<UnidadVenta> lista = null;
+	    try {
+	        iniciaOperacion();
+	        
+	        String hql = "from UnidadVenta u "
+	                   + "where exists ("
+	                   + "    from Festival f "
+	                   + "    join f.unidadesHabilitadas u2 "
+	                   + "    join f.staffGeneral s "
+	                   + "    where u2 = u "
+	                   + "    group by f.id "
+	                   + "    having count(s) >= :minStaff"
+	                   + ")";
+
+	        lista = new java.util.HashSet<>(
+	            session.createQuery(hql, UnidadVenta.class)
+	                   .setParameter("minStaff", minStaff)
+	                   .getResultList()
+	        );
+
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	        throw he;
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 }
 

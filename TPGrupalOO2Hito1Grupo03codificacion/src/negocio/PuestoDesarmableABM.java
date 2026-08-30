@@ -2,6 +2,7 @@ package negocio;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import dao.PuestoDesarmableDao;
 import dao.UnidadVentaDao;
@@ -55,7 +56,6 @@ public class PuestoDesarmableABM {
 	public void asignarStaff(long idUnidadVenta, Staff staff) throws Exception {
 	    UnidadVenta u = unidadVentaDao.traerUnidadVentaConStaff(idUnidadVenta);
 	    
-	    // Fallback: Si no recupera por la consulta con Fetch, trae la entidad directa
 	    if (u == null) {
 	        u = unidadVentaDao.traer(idUnidadVenta);
 	    }
@@ -73,4 +73,8 @@ public class PuestoDesarmableABM {
 		p.getPlatosOfrecidos().add(plato);
 		unidadVentaDao.actualizar(p);
 	}
+	
+	public Set<PuestoDesarmable> traerPuestosComplejos(int minCarpas, int maxTiempoMontaje, double minSuperficie, long minStaff) {
+        return dao.traerPuestosComplejos(minCarpas, maxTiempoMontaje, minSuperficie, minStaff);
+    }
 }
