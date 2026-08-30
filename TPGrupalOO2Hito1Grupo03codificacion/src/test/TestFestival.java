@@ -265,7 +265,7 @@ public class TestFestival {
             System.out.println("// ----------    ESTUDIANTE SOLOAGA LEONEL     ----------");
             System.out.println("// =========================================================================");
             System.out.println("// =========================================================================");
-            System.out.println("// ---------- PRUEBA 1: CONSULTA (PLATOS POR UNIDAD DE VENTA) ----------");
+            System.out.println("// ---------- PRUEBA 3: CONSULTA (PLATOS POR UNIDAD DE VENTA e ITEM PEDIDO) ----------");
             System.out.println("// =========================================================================\n");
 
             long idUnidadVenta = idFoodTrack1;
@@ -282,9 +282,10 @@ public class TestFestival {
                             + " | Costo producción: $" + p.getCostoProduccion());
                 }
             }
-            System.out.println("\n// =========================================================================");
+           /* System.out.println("\n// =========================================================================");
             System.out.println("// ---------- PRUEBA 2: CONSULTA (ITEMS POR PEDIDO ) ----------");
-            System.out.println("// =========================================================================");
+            System.out.println("// =========================================================================");*/
+            System.out.println("\n// ----------  CONSULTA ITEMS POR PEDIDO  ----------");
             long idPedido = 1;
             Pedido pedidoConsulta = pedidoABM.traerPedidoConItems(idPedido);
             if (pedidoConsulta == null) {
