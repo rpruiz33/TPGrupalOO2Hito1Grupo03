@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import dao.ResetBaseDao;
 import datos.Cajero;
 import datos.Cocinero;
 import datos.Festival;
@@ -27,6 +28,7 @@ public class TestFestival {
 
     public static void main(String[] args) {
         try {
+        	ResetBaseDao.resetearBase();
             CocineroABM cocineroABM = new CocineroABM();
             CajeroABM cajeroABM = new CajeroABM();
             PlatoABM platoABM = new PlatoABM();
