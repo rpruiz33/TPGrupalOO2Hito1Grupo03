@@ -163,6 +163,22 @@ public class UnidadVentaDao {
 		return objeto;
 	}
 
+	public UnidadVenta traerUnidadVentaConPlatos(long idUnidadVenta) throws HibernateException {
+	    UnidadVenta objeto = null;
+	    try {
+	        iniciaOperacion();
+	        String hql = "from UnidadVenta u left join fetch u.platosOfrecidos where u.id = :id";
+	        objeto = (UnidadVenta) session.createQuery(hql)
+	                .setParameter("id", idUnidadVenta)
+	                .uniqueResult();
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	        throw he;
+	    } finally {
+	        session.close();
+	    }
+	    return objeto;
+	}
 }
 
 	

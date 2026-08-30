@@ -31,4 +31,7 @@ public class UnidadVentaABM {
 	public Set<UnidadVenta> traerUnidadesVentaPorDatosStaff(String dni, LocalDate fechaNacimiento, LocalDate fechaIngreso){
 		return dao.traerUnidadesVentaPorDatosStaff(dni, fechaNacimiento, fechaIngreso);
 	}
+	public UnidadVenta traerUnidadVentaConPlatos(long idUnidadVenta) {
+	    return dao.traerUnidadVentaConPlatos(idUnidadVenta);
+	}
 }

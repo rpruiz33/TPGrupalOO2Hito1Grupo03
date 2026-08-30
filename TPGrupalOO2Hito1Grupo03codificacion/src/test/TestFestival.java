@@ -9,6 +9,7 @@ import datos.Cajero;
 import datos.Cocinero;
 import datos.Festival;
 import datos.FoodTrack;
+import datos.ItemPedido;
 import datos.Pedido;
 import datos.Plato;
 import datos.PuestoDesarmable;
@@ -28,7 +29,7 @@ public class TestFestival {
 
     public static void main(String[] args) {
         try {
-        	ResetBaseDao.resetearBase();
+        	ResetBaseDao.resetearBase(); 
             CocineroABM cocineroABM = new CocineroABM();
             CajeroABM cajeroABM = new CajeroABM();
             PlatoABM platoABM = new PlatoABM();
@@ -260,7 +261,44 @@ public class TestFestival {
                                  + " | Codigo: " + u.getCodigo()
                                  + " | Superficie: " + u.getSuperficieM2() + "m2");
             }
+            System.out.println("\n\n// =========================================================================");
+            System.out.println("// ----------    ESTUDIANTE SOLOAGA LEONEL     ----------");
+            System.out.println("// =========================================================================");
+            System.out.println("// =========================================================================");
+            System.out.println("// ---------- PRUEBA 1: CONSULTA (PLATOS POR UNIDAD DE VENTA) ----------");
+            System.out.println("// =========================================================================\n");
 
+            long idUnidadVenta = idFoodTrack1;
+            UnidadVenta unidad = unidadVentaABM.traerUnidadVentaConPlatos(idUnidadVenta);
+            if (unidad == null) {
+                System.out.println("No existe la unidad de venta con ID: " + idUnidadVenta);
+            } else {
+                System.out.println("Unidad: " + unidad.getNombreComercial());
+                System.out.println("Código: " + unidad.getCodigo());
+                System.out.println("Cantidad de platos encontrados: " + unidad.getPlatosOfrecidos().size());
+                for (Plato p : unidad.getPlatosOfrecidos()) {
+                    System.out.println("-> " + p.getNombre()
+                            + " | Precio venta: $" + p.getPrecioVenta()
+                            + " | Costo producción: $" + p.getCostoProduccion());
+                }
+            }
+            System.out.println("\n// =========================================================================");
+            System.out.println("// ---------- PRUEBA 2: CONSULTA (ITEMS POR PEDIDO ) ----------");
+            System.out.println("// =========================================================================");
+            long idPedido = 1;
+            Pedido pedidoConsulta = pedidoABM.traerPedidoConItems(idPedido);
+            if (pedidoConsulta == null) {
+             System.out.println("No existe el pedido con ID: " + idPedido);
+            } else {
+            	System.out.println("\n--- CONSULTA: ITEMS DEL PEDIDO ID " + idPedido + " ---");
+            	System.out.println("Fecha: " + pedidoConsulta.getFecha());
+            	System.out.println("\nCantidad de items encontrados: " + pedidoConsulta.getItems().size());
+             for (ItemPedido item : pedidoConsulta.getItems()) {
+                 System.out.println("-> " + item.getPlato().getNombre()
+                         + " | Cantidad: " + item.getCantidad()
+                         + " | Precio unidad: $" + item.getPrecioUnidad());
+             }
+         }
         } catch (Exception e) {
             e.printStackTrace();
         }

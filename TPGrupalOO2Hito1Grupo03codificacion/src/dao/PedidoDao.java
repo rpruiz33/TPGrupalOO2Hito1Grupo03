@@ -121,15 +121,36 @@ public class PedidoDao {
 		}
 		return objeto;
 	}
-	public List<Pedido> traerPedidoPorUnidadVenta(long idunidadVenta) {
-		List<Pedido> lista = null;
-		try {
-			iniciaOperacion();
-			String hql = "from Pedido p where p.unidadVenta = :unidadVenta";
-			lista = session.createQuery(hql).setParameter("unidadVenta", idunidadVenta).list();
-		} finally {
-			session.close();
-		}
-		return lista;
+	public List<Pedido> traerPedidoPorUnidadVenta(long idUnidadVenta) {
+	    List<Pedido> lista = null;
+	    try {
+	        iniciaOperacion();
+	        String hql = "from Pedido p where p.unidadVenta.id = :idUnidadVenta";
+	        lista = session.createQuery(hql, Pedido.class)
+	                .setParameter("idUnidadVenta", idUnidadVenta)
+	                .list();
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
+	}
+	public Pedido traerPedidoConItems(long idPedido) throws HibernateException {
+
+	    Pedido objeto = null;
+	    try {
+	        iniciaOperacion();
+	        String hql = "from Pedido p  left join fetch p.items where p.id = :id";
+
+	        objeto = (Pedido) session.createQuery(hql)
+	                .setParameter("id", idPedido)
+	                .uniqueResult();
+
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	        throw he;
+	    } finally {
+	        session.close();
+	    }
+	    return objeto;
 	}
 }
