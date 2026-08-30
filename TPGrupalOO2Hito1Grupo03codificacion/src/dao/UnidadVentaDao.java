@@ -37,20 +37,19 @@ public class UnidadVentaDao {
 	}
 
 
-
-	public int agregar(UnidadVenta objeto) {
-		int id = 0;
-		try {
-			iniciaOperacion();
-			id = Integer.parseInt(session.save(objeto).toString());
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			session.close();
-		}
-		return id;
+	public long agregar(UnidadVenta objeto) {
+	    long id = 0;
+	    try {
+	        iniciaOperacion();
+	        id = (long) session.save(objeto);
+	        tx.commit();
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	        throw he;
+	    } finally {
+	        session.close();
+	    }
+	    return id;
 	}
 
 	public void actualizar(UnidadVenta objeto) {
@@ -77,6 +76,17 @@ public class UnidadVentaDao {
 		} finally {
 			session.close();
 		}
+	}
+	
+	public UnidadVenta traer(long idUnidadVenta) {
+	    UnidadVenta objeto = null;
+	    try {
+	        iniciaOperacion();
+	        objeto = session.get(UnidadVenta.class, idUnidadVenta);
+	    } finally {
+	        session.close();
+	    }
+	    return objeto;
 	}
 
 	public UnidadVenta traerUnidadVentaConStaff(long idUnidadVenta) {

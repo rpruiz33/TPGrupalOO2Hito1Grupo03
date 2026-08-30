@@ -108,29 +108,15 @@ public abstract class UnidadVenta {
 
     @Override
     public boolean equals(Object o) {
-
-        if (this == o)
-            return true;
-
-        if (o == null || getClass() != o.getClass())
-            return false;
-
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         UnidadVenta that = (UnidadVenta) o;
-
-        return Double.compare(superficieM2, that.superficieM2) == 0
-                && Objects.equals(id, that.id)
-                && Objects.equals(codigo, that.codigo)
-                && Objects.equals(nombreComercial, that.nombreComercial)
-                && Objects.equals(pedidos, that.pedidos)
-                && Objects.equals(platosOfrecidos, that.platosOfrecidos)
-                && Objects.equals(staffPuesto, that.staffPuesto)
-                && Objects.equals(responsable, that.responsable);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, codigo, nombreComercial, superficieM2,
-                pedidos, platosOfrecidos, staffPuesto, responsable);
+        return Objects.hash(id);
     }
 
     @Override
@@ -140,10 +126,6 @@ public abstract class UnidadVenta {
                 ", codigo='" + codigo + '\'' +
                 ", nombreComercial='" + nombreComercial + '\'' +
                 ", superficieM2=" + superficieM2 +
-                ", pedidos=" + pedidos +
-                ", platosOfrecidos=" + platosOfrecidos +
-                ", staffPuesto=" + staffPuesto +
-                ", responsable=" + responsable +
                 '}';
     }
 }

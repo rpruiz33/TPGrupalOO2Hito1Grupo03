@@ -34,19 +34,19 @@ public class FoodTrackDao {
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}
 
-	public int agregar(FoodTrack objeto) {
-		int id = 0;
-		try {
-			iniciaOperacion();
-			id = Integer.parseInt(session.save(objeto).toString());
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			session.close();
-		}
-		return id;
+	public long agregar(FoodTrack objeto) {
+	    long id = 0;
+	    try {
+	        iniciaOperacion();
+	        id = (long) session.save(objeto);
+	        tx.commit();
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	        throw he;
+	    } finally {
+	        session.close();
+	    }
+	    return id;
 	}
 
 	public void actualizar(FoodTrack objeto) {

@@ -53,12 +53,20 @@ public class PuestoDesarmableABM {
 	}
 
 	public void asignarStaff(long idUnidadVenta, Staff staff) throws Exception {
-		UnidadVenta u = unidadVentaDao.traerUnidadVentaConStaff(idUnidadVenta);
-		if (u == null) throw new RuntimeException("ERROR: No existe unidad con ID: " + idUnidadVenta);
-		u.asignarStaff(staff);
-		unidadVentaDao.actualizar(u);
+	    UnidadVenta u = unidadVentaDao.traerUnidadVentaConStaff(idUnidadVenta);
+	    
+	    // Fallback: Si no recupera por la consulta con Fetch, trae la entidad directa
+	    if (u == null) {
+	        u = unidadVentaDao.traer(idUnidadVenta);
+	    }
+	    
+	    if (u == null) {
+	        throw new RuntimeException("ERROR: No existe unidad con ID: " + idUnidadVenta);
+	    }
+	    
+	    u.asignarStaff(staff);
+	    unidadVentaDao.actualizar(u);
 	}
-
 	public void ofrecerPlato(long idUnidadVenta, Plato plato) throws Exception {
 		PuestoDesarmable p = dao.traerPuestoDesarmable(idUnidadVenta);
 		if (p == null) throw new RuntimeException("ERROR: No existe unidad con ID: " + idUnidadVenta);

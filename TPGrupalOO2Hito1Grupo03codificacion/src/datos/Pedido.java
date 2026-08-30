@@ -18,7 +18,6 @@ public class Pedido {
 
     public Pedido(Long id, Set<ItemPedido> items, LocalDate fecha,
                   Festival festival, UnidadVenta unidadVenta) {
-
         this.id = id;
         this.items = items;
         this.fecha = fecha;
@@ -28,35 +27,22 @@ public class Pedido {
 
     @Override
     public boolean equals(Object o) {
-
-        if (this == o)
-            return true;
-
-        if (o == null || getClass() != o.getClass())
-            return false;
-
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Pedido pedido = (Pedido) o;
-
-        return Objects.equals(id, pedido.id)
-                && Objects.equals(items, pedido.items)
-                && Objects.equals(fecha, pedido.fecha)
-                && Objects.equals(festival, pedido.festival)
-                && Objects.equals(unidadVenta, pedido.unidadVenta);
+        return Objects.equals(id, pedido.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, items, fecha, festival, unidadVenta);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
         return "Pedido{" +
                 "id=" + id +
-                ", items=" + items +
                 ", fecha=" + fecha +
-                ", festival=" + festival +
-                ", unidadVenta=" + unidadVenta +
                 '}';
     }
 
