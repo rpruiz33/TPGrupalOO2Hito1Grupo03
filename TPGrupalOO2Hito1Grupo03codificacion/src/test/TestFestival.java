@@ -219,9 +219,37 @@ public class TestFestival {
             for (UnidadVenta u : minStaff3) {
                 System.out.println("-> " + u.getNombreComercial() + " | Codigo: " + u.getCodigo());
             }
+            
+       System.out.println("// =========================================================================");
+        System.out.println("// ---------- ESTUDIANTE Salvatierra, Federico Matias  ----------");
+        System.out.println("// =========================================================================");
+        System.out.println();
+        System.out.println("// =========================================================================");
+        System.out.println("// ---------- PRUEBA 2: CONSULTA (Cocineros por eventos) ----------");
+        System.out.println("// =========================================================================");
+        System.out.println("=== PRUEBA DE CONSULTA  EN  CocineroDao ===");
+        
+        System.out.println("\n=== PRUEBA DE COCINEROS ASIGNADOS A UN FESTIVAL POR RANGO DE FECHAS ===");
 
-        } catch (Exception e) {
+        
+        LocalDate fechaInicioBusqueda = LocalDate.of(2026, 9, 15);
+        LocalDate fechaFinBusqueda = LocalDate.of(2026, 9, 20);
+        Long idFestival = 16L; // PONER EL ID DEL FESTIVAL SEGUN LA LIMPEZA DE LA BASE EL EVENTO ES EL 1RO (Consulta de Fede)
+
+        System.out.println("\n--- CONSULTA: FESTIVAL ID " + idFestival + " ENTRE " + fechaInicioBusqueda + " Y " + fechaFinBusqueda + " ---");
+        
+   
+        Set<Cocinero> cocinerosPorFecha = cocineroABM.traerCocinerosPorFestivalYFechas(idFestival, fechaInicioBusqueda, fechaFinBusqueda);
+        
+        System.out.println("Cantidad de cocineros encontrados: " + cocinerosPorFecha.size());
+        
+       
+        for (Cocinero c : cocinerosPorFecha) {
+            System.out.println("-> " + c.getNombre() + " " + c.getApellido() + " | Especialidad: " + c.getEspecialidad()); 
+        }
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }
-}
+}    
+        

@@ -1,5 +1,7 @@
 package dao;
 import java.util.List;
+import java.util.Set;
+import java.time.LocalDate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -91,5 +93,45 @@ public class CocineroDao {
 			session.close();
 		}
 		return lista;
+	}
+
+	public Set<Cocinero> traerCocinerosPorFestivalYFechas(Long idFestival, LocalDate fechaInicio, LocalDate fechaFin) throws HibernateException {
+	    Set<Cocinero> lista = null;
+	    try {
+	        iniciaOperacion();
+	        
+	        String hql = "select distinct c from Cocinero c "
+	                   + "where exists ("
+	                   + "    from Festival f "
+	                   + "    join f.staffGeneral sg "
+	                   + "    where sg = c "
+	                   + "    and f.id = :idFestival "
+	                   + "    and f.fechaInicio >= :fechaInicioBuscada "
+	                   + "    and f.fechaFin <= :fechaFinBuscada"
+	                   + ") or exists ("
+	                   + "    from Festival f "
+	                   + "    join f.unidadesHabilitadas u "
+	                   + "    join u.staffPuesto sp "
+	                   + "    where sp = c "
+	                   + "    and f.id = :idFestival "
+	                   + "    and f.fechaInicio >= :fechaInicioBuscada "
+	                   + "    and f.fechaFin <= :fechaFinBuscada"
+	                   + ")";
+
+	        lista = new java.util.HashSet<>(
+	            session.createQuery(hql, Cocinero.class)
+	                   .setParameter("idFestival", idFestival)
+	                   .setParameter("fechaInicioBuscada", fechaInicio)
+	                   .setParameter("fechaFinBuscada", fechaFin)
+	                   .getResultList()
+	        );
+
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	        throw he;
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 }

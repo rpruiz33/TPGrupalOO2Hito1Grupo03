@@ -1,6 +1,8 @@
 package negocio;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+
 import dao.CocineroDao;
 import dao.StaffDao;
 import datos.Cocinero;
@@ -37,5 +39,10 @@ public class CocineroABM {
 	}
 	public List<Cocinero> traerPorEspecialidad(String especialidad) {
 		return dao.traerCocinerosPorEspecialidad(especialidad);
+	}
+	
+
+	public Set<Cocinero> traerCocinerosPorFestivalYFechas(Long idFestival, LocalDate fechaInicio, LocalDate fechaFin) {
+	    return dao.traerCocinerosPorFestivalYFechas(idFestival, fechaInicio, fechaFin);
 	}
 }
