@@ -63,6 +63,23 @@ Proyecto de persistencia y consultas avanzadas sobre el modelo ORM (Hibernate ) 
 * **Relación ORM:** **Herencia (`UnidadVenta` $\leftarrow$ `FoodTrack`)**.
 * **Descripción:** Filtra directamente sobre la subclase `FoodTrack` los registros que requieren conexión eléctrica (`requiereElectricidad = true/false`), permitiendo la correcta zonificación dentro del plano del evento.
 
+### 4. Vazquez, Ana 
+
+* **Caso de Uso 1 (Herencia): Consulta de FoodTracks por superficie mínima**
+
+* **Método:** `UnidadVentaABM.traerFoodTracksPorSuperficieMinima(double minSuperficie)`
+
+* **Relación ORM:** **Herencia (`UnidadVenta` ← `FoodTrack`)**.
+
+* **Descripción:** Realiza una consulta sobre la subclase `FoodTrack`, heredada de `UnidadVenta`, filtrando los FoodTracks cuya superficie sea mayor o igual a la superficie mínima indicada. Los resultados se ordenan de mayor a menor superficie.
+
+* **Caso de Uso 2 (Uno a Muchos): Consulta de Unidades de Venta con una cantidad mínima de pedidos**
+
+* **Método:** `UnidadVentaABM.traerUnidadesVentaConMinimoPedidos(long minPedidos)`
+
+* **Relación ORM:** **Uno a Muchos (`UnidadVenta` → `Pedido`)**.
+
+* **Descripción:** Devuelve las unidades de venta que poseen una cantidad de pedidos mayor o igual al mínimo indicado. La consulta utiliza `JOIN`, `GROUP BY` y `HAVING COUNT` para agrupar los pedidos correspondientes a cada unidad de venta y filtrar aquellas que cumplen con la cantidad mínima solicitada.
 
 
 ## Tecnologías Utilizadas
