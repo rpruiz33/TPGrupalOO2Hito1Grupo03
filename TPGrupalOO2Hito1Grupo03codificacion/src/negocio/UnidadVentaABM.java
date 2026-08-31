@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import dao.UnidadVentaDao;
+import datos.FoodTrack;
 import datos.UnidadVenta;
 
 public class UnidadVentaABM {
@@ -33,5 +34,8 @@ public class UnidadVentaABM {
 	}
 	public UnidadVenta traerUnidadVentaConPlatos(long idUnidadVenta) {
 	    return dao.traerUnidadVentaConPlatos(idUnidadVenta);
+	}
+	public List<FoodTrack> traerFoodTracksConElectricidad(boolean requiereElectricidad) {
+	    return dao.traerFoodTracksConElectricidad(requiereElectricidad);
 	}
 }

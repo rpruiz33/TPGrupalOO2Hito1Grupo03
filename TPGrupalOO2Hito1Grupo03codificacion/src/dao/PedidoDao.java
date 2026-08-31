@@ -134,23 +134,5 @@ public class PedidoDao {
 	    }
 	    return lista;
 	}
-	public Pedido traerPedidoConItems(long idPedido) throws HibernateException {
-
-	    Pedido objeto = null;
-	    try {
-	        iniciaOperacion();
-	        String hql = "from Pedido p  left join fetch p.items where p.id = :id";
-
-	        objeto = (Pedido) session.createQuery(hql)
-	                .setParameter("id", idPedido)
-	                .uniqueResult();
-
-	    } catch (HibernateException he) {
-	        manejaExcepcion(he);
-	        throw he;
-	    } finally {
-	        session.close();
-	    }
-	    return objeto;
-	}
+	
 }

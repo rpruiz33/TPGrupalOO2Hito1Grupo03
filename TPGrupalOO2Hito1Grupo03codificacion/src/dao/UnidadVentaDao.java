@@ -9,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import datos.FoodTrack;
 import datos.UnidadVenta;
 
 public class UnidadVentaDao {
@@ -164,11 +165,11 @@ public class UnidadVentaDao {
 	}
 
 	public UnidadVenta traerUnidadVentaConPlatos(long idUnidadVenta) throws HibernateException {
-	    UnidadVenta objeto = null;
+	    UnidadVenta unidad = null;
 	    try {
 	        iniciaOperacion();
 	        String hql = "from UnidadVenta u left join fetch u.platosOfrecidos where u.id = :id";
-	        objeto = (UnidadVenta) session.createQuery(hql)
+	        unidad = (UnidadVenta) session.createQuery(hql)
 	                .setParameter("id", idUnidadVenta)
 	                .uniqueResult();
 	    } catch (HibernateException he) {
@@ -177,7 +178,24 @@ public class UnidadVentaDao {
 	    } finally {
 	        session.close();
 	    }
-	    return objeto;
+	    return unidad;
+	}
+	
+	public List<FoodTrack> traerFoodTracksConElectricidad(boolean requiereElectricidad) throws HibernateException {
+	    List<FoodTrack> lista = null;
+	    try {
+	        iniciaOperacion();
+	        String hql = "from FoodTrack f where f.requiereElectricidad = :requiere";
+	        lista = session.createQuery(hql, FoodTrack.class)
+	                .setParameter("requiere", requiereElectricidad)
+	                .getResultList();
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	        throw he;
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 }
 

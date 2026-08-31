@@ -2,6 +2,7 @@ package test;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import dao.ResetBaseDao;
@@ -261,12 +262,12 @@ public class TestFestival {
                                  + " | Codigo: " + u.getCodigo()
                                  + " | Superficie: " + u.getSuperficieM2() + "m2");
             }
-            System.out.println("\n\n// =========================================================================");
+            System.out.println("\n\n// ===============================================================================");
             System.out.println("// ----------    ESTUDIANTE SOLOAGA LEONEL     ----------");
-            System.out.println("// =========================================================================");
-            System.out.println("// =========================================================================");
-            System.out.println("// ---------- PRUEBA 3: CONSULTA (PLATOS POR UNIDAD DE VENTA e ITEM PEDIDO) ----------");
-            System.out.println("// =========================================================================\n");
+            System.out.println("// =====================================================================================");
+            System.out.println("// =====================================================================================");
+            System.out.println("// -- PRUEBA 3: CONSULTA (PLATOS POR UNIDAD DE VENTA Y FOODTRACK CON ELECTRICIDAD) --");
+            System.out.println("// =====================================================================================\n");
 
             long idUnidadVenta = idFoodTrack1;
             UnidadVenta unidad = unidadVentaABM.traerUnidadVentaConPlatos(idUnidadVenta);
@@ -283,23 +284,19 @@ public class TestFestival {
                 }
             }
            /* System.out.println("\n// =========================================================================");
-            System.out.println("// ---------- PRUEBA 2: CONSULTA (ITEMS POR PEDIDO ) ----------");
+            System.out.println("// ---------- PRUEBA 2: CONSULTA (FOODTRACKS CON ELECTRICIDAD) ----------");
             System.out.println("// =========================================================================");*/
-            System.out.println("\n// ----------  CONSULTA ITEMS POR PEDIDO  ----------");
-            long idPedido = 1;
-            Pedido pedidoConsulta = pedidoABM.traerPedidoConItems(idPedido);
-            if (pedidoConsulta == null) {
-             System.out.println("No existe el pedido con ID: " + idPedido);
-            } else {
-            	System.out.println("\n--- CONSULTA: ITEMS DEL PEDIDO ID " + idPedido + " ---");
-            	System.out.println("Fecha: " + pedidoConsulta.getFecha());
-            	System.out.println("\nCantidad de items encontrados: " + pedidoConsulta.getItems().size());
-             for (ItemPedido item : pedidoConsulta.getItems()) {
-                 System.out.println("-> " + item.getPlato().getNombre()
-                         + " | Cantidad: " + item.getCantidad()
-                         + " | Precio unidad: $" + item.getPrecioUnidad());
-             }
-         }
+            System.out.println("\n=== CONSULTA DE FOODTRACKS QUE REQUIEREN ELECTRICIDAD ===");
+            List<FoodTrack> foodTracks =   unidadVentaABM.traerFoodTracksConElectricidad(true);
+            System.out.println("\nCantidad de FoodTracks encontrados: " + foodTracks.size());
+            for (FoodTrack f : foodTracks) {
+                System.out.println("-> ID: " + f.getId()
+                        + " | Código: " + f.getCodigo()
+                        + " | Nombre: " + f.getNombreComercial()
+                        + " | Superficie: " + f.getSuperficieM2() + "m2"
+                        + " | Patente: " + f.getPatente()
+                        + " | Requiere electricidad: " + f.isRequiereElectricidad());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
