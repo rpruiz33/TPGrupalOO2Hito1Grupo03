@@ -181,11 +181,11 @@ public class TestFestival {
             System.out.println("// =========================================================================");
             System.out.println();
             System.out.println("// =========================================================================");
-            System.out.println("// ---------- PRUEBA 1: CONSULTA (traerPuestosComplejos) ----------");
+            System.out.println("// ---------- PRUEBA 1: CONSULTA (traerPuestos) ----------");
             System.out.println("// =========================================================================");
             System.out.println("=== PRUEBA DE CONSULTA  EN PUESTODESARMABLE ===");
 
-            Set<PuestoDesarmable> puestosFiltrados = puestoABM.traerPuestosComplejos(1, 60, 5.0, 1);
+            Set<PuestoDesarmable> puestosFiltrados = puestoABM.traerPuestos(1, 60, 5.0, 1);
 
             System.out.println("Cantidad de puestos encontrados: " + puestosFiltrados.size());
             for (PuestoDesarmable p : puestosFiltrados) {

@@ -74,7 +74,7 @@ public class PuestoDesarmableABM {
 		unidadVentaDao.actualizar(p);
 	}
 	
-	public Set<PuestoDesarmable> traerPuestosComplejos(int minCarpas, int maxTiempoMontaje, double minSuperficie, long minStaff) {
-        return dao.traerPuestosComplejos(minCarpas, maxTiempoMontaje, minSuperficie, minStaff);
+	public Set<PuestoDesarmable> traerPuestos(int minCarpas, int maxTiempoMontaje, double minSuperficie, long minStaff) {
+        return dao.traerPuestos(minCarpas, maxTiempoMontaje, minSuperficie, minStaff);
     }
 }

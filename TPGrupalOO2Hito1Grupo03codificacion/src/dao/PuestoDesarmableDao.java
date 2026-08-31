@@ -122,7 +122,7 @@ public class PuestoDesarmableDao {
 		}
 		return lista;
 	}
-	public Set<PuestoDesarmable> traerPuestosComplejos(int minCarpas, int maxTiempoMontaje, double minSuperficie, long minStaff) throws HibernateException {
+	public Set<PuestoDesarmable> traerPuestos(int minCarpas, int maxTiempoMontaje, double minSuperficie, long minStaff) throws HibernateException {
 	    Set<PuestoDesarmable> lista = null;
 	    try {
 	        iniciaOperacion();
