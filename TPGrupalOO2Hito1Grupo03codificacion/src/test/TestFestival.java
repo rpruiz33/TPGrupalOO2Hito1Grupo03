@@ -297,6 +297,39 @@ public class TestFestival {
                         + " | Patente: " + f.getPatente()
                         + " | Requiere electricidad: " + f.isRequiereElectricidad());
             }
+
+              
+            System.out.println("\n==============================================");
+            System.out.println("---------- ESTUDIANTE ANA BELEN VAZQUEZ ----------");
+            System.out.println("==============================================");
+
+            System.out.println("\n--- CONSULTA 1: FOODTRACKS CON SUPERFICIE MINIMA ---");
+            // Consulta sobre herencia
+            
+            List<FoodTrack> foodTracksSuperficie = unidadVentaABM.traerFoodTracksConSuperficieMinima(10.0);
+
+            System.out.println("FoodTracks encontrados: " + foodTracksSuperficie.size());
+
+            for (FoodTrack f : foodTracksSuperficie) {
+                System.out.println("-> " + f.getNombreComercial()
+                        + " | Código: " + f.getCodigo()
+                        + " | Superficie: " + f.getSuperficieM2() + " m2"
+                        + " | Patente: " + f.getPatente());
+            }
+
+       
+            System.out.println("\n--- CONSULTA 2: UNIDADES DE VENTA CON MÍNIMO DE PEDIDOS ---");
+            // Consulta sobre relacion uno a muchos
+            
+            List<UnidadVenta> unidadesConPedidos = unidadVentaABM.traerUnidadesVentaConMinimoPedidos(1);
+
+            System.out.println("Unidades encontradas: " + unidadesConPedidos.size());
+
+            for (UnidadVenta u : unidadesConPedidos) {
+                System.out.println("-> " + u.getNombreComercial()
+                        + " | Código: " + u.getCodigo());
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
