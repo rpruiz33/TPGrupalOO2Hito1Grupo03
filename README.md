@@ -3,10 +3,10 @@
 
 
 # Integrantes 
-Roberto Andres Ruiz Pereira-->rpruiz33
-Federico Matias Salvatierra-->Fsalvatierra 
-Leonel Alejandro Soloaga-->Le0oneL
-Ana Belen Vazquez-->anavazquez141
+# Roberto Andres Ruiz Pereira--> rpruiz33
+# Federico Matias Salvatierra--> Fsalvatierra 
+# Leonel Alejandro Soloaga--> Le0oneL
+# Ana Belen Vazquez--> anavazquez141
 
 # Sistema de Gestión de Festivales Gastronómicos
 
@@ -65,8 +65,6 @@ Proyecto de persistencia y consultas avanzadas sobre el modelo ORM (Hibernate ) 
 
 
 
----
-
 ## Tecnologías Utilizadas
 
 * **Lenguaje:** Java 17+
@@ -74,7 +72,6 @@ Proyecto de persistencia y consultas avanzadas sobre el modelo ORM (Hibernate ) 
 * **Base de Datos:** MySQL 
 * **Patrones Aplicados:** DAO (Data Access Object), ABM, Singleton, Herencia.
 
----
 
 ## Ejecución del Test
 
