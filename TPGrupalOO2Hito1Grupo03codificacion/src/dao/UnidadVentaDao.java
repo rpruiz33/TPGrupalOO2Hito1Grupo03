@@ -197,6 +197,56 @@ public class UnidadVentaDao {
 	    }
 	    return lista;
 	}
+	//Ana
+	public List<FoodTrack> traerFoodTracksPorSuperficieMinima(double minSuperficie) throws HibernateException {
+	    List<FoodTrack> lista = null;
+
+	    try {
+	        iniciaOperacion();
+
+	        String hql = "from FoodTrack f "
+	                   + "where f.superficieM2 >= :minSuperficie "
+	                   + "order by f.superficieM2 desc";
+
+	        lista = session.createQuery(hql, FoodTrack.class)
+	                .setParameter("minSuperficie", minSuperficie)
+	                .getResultList();
+
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	        throw he;
+	    } finally {
+	        session.close();
+	    }
+
+	    return lista;
+	}
+   //Ana
+	public List<UnidadVenta> traerUnidadesVentaConMinimoPedidos(long minPedidos) throws HibernateException {
+	    List<UnidadVenta> lista = null;
+
+	    try {
+	        iniciaOperacion();
+
+	        String hql = "select u from UnidadVenta u "
+	                   + "join u.pedidos p "
+	                   + "group by u "
+	                   + "having count(p) >= :minPedidos "
+	                   + "order by u.nombreComercial asc";
+
+	        lista = session.createQuery(hql, UnidadVenta.class)
+	                .setParameter("minPedidos", minPedidos)
+	                .getResultList();
+
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	        throw he;
+	    } finally {
+	        session.close();
+	    }
+
+	    return lista;
+	}
 }
 
 	
