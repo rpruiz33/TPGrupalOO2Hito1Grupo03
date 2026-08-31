@@ -298,7 +298,6 @@ public class TestFestival {
                         + " | Requiere electricidad: " + f.isRequiereElectricidad());
             }
 
-              
             System.out.println("\n==============================================");
             System.out.println("---------- ESTUDIANTE ANA BELEN VAZQUEZ ----------");
             System.out.println("==============================================");
