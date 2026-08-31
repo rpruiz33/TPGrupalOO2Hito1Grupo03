@@ -79,7 +79,7 @@ Proyecto de persistencia y consultas avanzadas sobre el modelo ORM (Hibernate ) 
 
 * **Relación ORM:** **Uno a Muchos (`UnidadVenta` → `Pedido`)**.
 
-* **Descripción:** Obtiene las unidades de venta que poseen una cantidad de pedidos mayor o igual al mínimo indicado. La consulta utiliza JOIN, GROUP BY y HAVING COUNT para agrupar las unidades de venta según sus pedidos y filtrar aquellas que cumplen con la cantidad mínima solicitada. Los resultados se ordenan alfabéticamente por nombre comercial.
+* **Descripción:** Obtiene las unidades de venta que poseen una cantidad de pedidos mayor o igual al mínimo indicado. La consulta utiliza JOIN para relacionar cada unidad de venta con sus pedidos, GROUP BY para agrupar los pedidos por cada unidad de venta y HAVING COUNT para contar los pedidos de cada grupo y conservar únicamente aquellas unidades que cumplen con la cantidad mínima solicitada. Los resultados se ordenan alfabéticamente por nombre comercial.
 
 
 ## Tecnologías Utilizadas
