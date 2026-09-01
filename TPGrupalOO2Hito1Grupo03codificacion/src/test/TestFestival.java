@@ -1,5 +1,5 @@
 package test;
-import dao.UnidadVentaDao;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +10,6 @@ import datos.Cajero;
 import datos.Cocinero;
 import datos.Festival;
 import datos.FoodTrack;
-import datos.ItemPedido;
 import datos.Pedido;
 import datos.Plato;
 import datos.PuestoDesarmable;
@@ -30,7 +29,7 @@ public class TestFestival {
 
     public static void main(String[] args) {
         try {
-        	ResetBaseDao.resetearBase(); 
+            ResetBaseDao.resetearBase(); 
             CocineroABM cocineroABM = new CocineroABM();
             CajeroABM cajeroABM = new CajeroABM();
             PlatoABM platoABM = new PlatoABM();
@@ -174,7 +173,7 @@ public class TestFestival {
             System.out.println("Pedido 1 con items: " + pedidoABM.traerConItems(idPedido1));
             System.out.println("Pedido 2 con items: " + pedidoABM.traerConItems(idPedido2));
 
-            // ---------- DATOS ADICIONALES (para que las consultas traigan más resultados) ----------
+            // ---------- DATOS ADICIONALES ----------
 
             // ---------- Staff adicional ----------
             long idCocinero4 = cocineroABM.agregar("Valentina", "Torres", "39222111",
@@ -320,18 +319,17 @@ public class TestFestival {
 
             System.out.println("\nCARGA DE DATOS FINALIZADA CORRECTAMENTE\n");
 
-            System.out.println("// =========================================================================");
-            System.out.println("// ---------- ESTUDIANTE RUIZ PEREIRA, ROBERTO ANDRES  ----------");
-            System.out.println("// =========================================================================");
-            System.out.println();
-            System.out.println("// =========================================================================");
-            System.out.println("// ---------- PRUEBA 1: CONSULTA (traerPuestos) ----------");
-            System.out.println("// =========================================================================");
-            System.out.println("=== PRUEBA DE CONSULTA  EN PUESTODESARMABLE ===");
+            // =========================================================================
+            // ---------- EJECUCIÓN DE CONSULTAS ----------
+            // =========================================================================
 
+            System.out.println("==============================================================");
+            System.out.println("---------- ESTUDIANTE RUIZ PEREIRA, ROBERTO ANDRES -----------");
+            System.out.println("==============================================================");
+
+            System.out.println("\n--- CONSULTA 1: PUESTOS DESARMABLES FILTRADOS ---");
             Set<PuestoDesarmable> puestosFiltrados = puestoABM.traerPuestos(1, 60, 5.0, 1);
-
-            System.out.println("Cantidad de puestos encontrados: " + puestosFiltrados.size());
+            System.out.println("Puestos encontrados: " + puestosFiltrados.size());
             for (PuestoDesarmable p : puestosFiltrados) {
                 System.out.println("-> " + p.getNombreComercial()
                         + " | Carpas: " + p.getCantidadCarpas()
@@ -339,120 +337,92 @@ public class TestFestival {
                         + " | Superficie: " + p.getSuperficieM2() + " m2");
             }
 
-            // =========================================================================
-            // ---------- PRUEBA 2: CONSULTA POR STAFF DE FESTIVAL --------------------
-            // =========================================================================
-            System.out.println("\n=== PRUEBA DE UNIDADES DE VENTA POR STAFF DE FESTIVAL ===");
-
-            System.out.println("\n--- CONSULTA: MÍNIMO 1 DE STAFF ---");
+            System.out.println("\n--- CONSULTA 2: UNIDADES DE VENTA POR MÍNIMO 1 DE STAFF DE FESTIVAL ---");
             Set<UnidadVenta> minStaff1 = festivalABM.traerUnidadesVentaPorStaffDeFestival(1);
-            System.out.println("Cantidad de unidades encontradas: " + minStaff1.size());
+            System.out.println("Unidades encontradas: " + minStaff1.size());
             for (UnidadVenta u : minStaff1) {
-                System.out.println("-> " + u.getNombreComercial() + " | Codigo: " + u.getCodigo());
+                System.out.println("-> " + u.getNombreComercial() + " | Código: " + u.getCodigo());
             }
 
-            System.out.println("\n--- CONSULTA: MÍNIMO 2 DE STAFF ---");
+            System.out.println("\n--- CONSULTA 3: UNIDADES DE VENTA POR MÍNIMO 2 DE STAFF DE FESTIVAL ---");
             Set<UnidadVenta> minStaff2 = festivalABM.traerUnidadesVentaPorStaffDeFestival(2);
-            System.out.println("Cantidad de unidades encontradas: " + minStaff2.size());
+            System.out.println("Unidades encontradas: " + minStaff2.size());
             for (UnidadVenta u : minStaff2) {
-                System.out.println("-> " + u.getNombreComercial() + " | Codigo: " + u.getCodigo());
+                System.out.println("-> " + u.getNombreComercial() + " | Código: " + u.getCodigo());
             }
 
-            System.out.println("\n--- CONSULTA: MÍNIMO 3 DE STAFF ---");
+            System.out.println("\n--- CONSULTA 4: UNIDADES DE VENTA POR MÍNIMO 3 DE STAFF DE FESTIVAL ---");
             Set<UnidadVenta> minStaff3 = festivalABM.traerUnidadesVentaPorStaffDeFestival(3);
-            System.out.println("Cantidad de unidades encontradas: " + minStaff3.size());
+            System.out.println("Unidades encontradas: " + minStaff3.size());
             for (UnidadVenta u : minStaff3) {
-                System.out.println("-> " + u.getNombreComercial() + " | Codigo: " + u.getCodigo());
+                System.out.println("-> " + u.getNombreComercial() + " | Código: " + u.getCodigo());
             }
 
-            System.out.println("// =========================================================================");
-            System.out.println("// ---------- ESTUDIANTE Salvatierra, Federico Matias  ----------");
-            System.out.println("// =========================================================================");
-            System.out.println();
-            System.out.println("// =========================================================================");
-            System.out.println("// ---------- PRUEBA 2: CONSULTA (Cocineros por eventos) ----------");
-            System.out.println("// =========================================================================");
-            System.out.println("=== PRUEBA DE CONSULTA  EN  CocineroDao ===");
+            System.out.println("\n===========================================================");
+            System.out.println("---------- ESTUDIANTE SALVATIERRA, FEDERICO MATIAS ----------");
+            System.out.println("=============================================================");
 
-            System.out.println("\n=== PRUEBA DE COCINEROS ASIGNADOS A UN FESTIVAL POR RANGO DE FECHAS ===");
-
+            System.out.println("\n--- CONSULTA 1: COCINEROS ASIGNADOS A FESTIVAL POR RANGO DE FECHAS ---");
             LocalDate fechaInicioBusqueda = LocalDate.of(1900, 5, 1);
             LocalDate fechaFinBusqueda = LocalDate.of(2026, 9, 20);
-            Long idFestival = idFestival1; // Usa la variable de festival ya generada en la carga
-
-            System.out.println("\n--- CONSULTA: FESTIVAL ID " + idFestival + " ENTRE " + fechaInicioBusqueda + " Y " + fechaFinBusqueda + " ---");
+            Long idFestival = idFestival1;
 
             Set<Cocinero> cocinerosPorFecha = cocineroABM.traerCocinerosPorFestivalYFechas(idFestival, fechaInicioBusqueda, fechaFinBusqueda);
-
-            System.out.println("Cantidad de cocineros encontrados: " + cocinerosPorFecha.size());
-
+            System.out.println("Cocineros encontrados: " + cocinerosPorFecha.size());
             for (Cocinero c : cocinerosPorFecha) {
                 System.out.println("-> " + c.getNombre() + " " + c.getApellido() + " | Especialidad: " + c.getEspecialidad());
             }
 
-            System.out.println("\n=== PRUEBA DE UNIDADES DE VENTA FILTRADAS POR DNI, NACIMIENTO E INGRESO ===");
-
+            System.out.println("\n--- CONSULTA 2: UNIDADES DE VENTA FILTRADAS POR DATOS DE STAFF ---");
             String dniBusqueda = "68555666";
-            LocalDate nacBusqueda = LocalDate.of(1985, 9, 3); // Fecha ajustada al valor insertado arriba (idCocinero2)
+            LocalDate nacBusqueda = LocalDate.of(1985, 9, 3);
             LocalDate ingBusqueda = LocalDate.of(2022, 3, 15);
 
-            System.out.println("\n--- CONSULTA: BUSCANDO UNIDADES DEL STAFF CON DNI " + dniBusqueda + " ---");
             Set<UnidadVenta> unidadesPorStaff = unidadVentaABM.traerUnidadesVentaPorDatosStaff(dniBusqueda, nacBusqueda, ingBusqueda);
-
-            System.out.println("Cantidad de unidades encontradas: " + unidadesPorStaff.size());
-
+            System.out.println("Unidades encontradas: " + unidadesPorStaff.size());
             for (UnidadVenta u : unidadesPorStaff) {
                 System.out.println("-> " + u.getNombreComercial()
-                                 + " | Codigo: " + u.getCodigo()
-                                 + " | Superficie: " + u.getSuperficieM2() + "m2");
+                        + " | Código: " + u.getCodigo()
+                        + " | Superficie: " + u.getSuperficieM2() + " m2");
             }
-            System.out.println("\n\n// ===============================================================================");
-            System.out.println("// ----------    ESTUDIANTE SOLOAGA LEONEL     ----------");
-            System.out.println("// =====================================================================================");
-            System.out.println("// =====================================================================================");
-            System.out.println("// -- PRUEBA 3: CONSULTA (PLATOS POR UNIDAD DE VENTA Y FOODTRACK CON ELECTRICIDAD) --");
-            System.out.println("// =====================================================================================\n");
 
+            System.out.println("\n==============================================");
+            System.out.println("---------- ESTUDIANTE SOLOAGA, LEONEL ----------");
+            System.out.println("================================================");
+
+            System.out.println("\n--- CONSULTA 1: PLATOS POR UNIDAD DE VENTA ---");
             long idUnidadVenta = idFoodTrack1;
             UnidadVenta unidad = unidadVentaABM.traerUnidadVentaConPlatos(idUnidadVenta);
             if (unidad == null) {
                 System.out.println("No existe la unidad de venta con ID: " + idUnidadVenta);
             } else {
-                System.out.println("Unidad: " + unidad.getNombreComercial());
-                System.out.println("Código: " + unidad.getCodigo());
-                System.out.println("Cantidad de platos encontrados: " + unidad.getPlatosOfrecidos().size());
+                System.out.println("Unidad: " + unidad.getNombreComercial() + " | Código: " + unidad.getCodigo());
+                System.out.println("Platos encontrados: " + unidad.getPlatosOfrecidos().size());
                 for (Plato p : unidad.getPlatosOfrecidos()) {
                     System.out.println("-> " + p.getNombre()
                             + " | Precio venta: $" + p.getPrecioVenta()
                             + " | Costo producción: $" + p.getCostoProduccion());
                 }
             }
-           /* System.out.println("\n// =========================================================================");
-            System.out.println("// ---------- PRUEBA 2: CONSULTA (FOODTRACKS CON ELECTRICIDAD) ----------");
-            System.out.println("// =========================================================================");*/
-            System.out.println("\n=== CONSULTA DE FOODTRACKS QUE REQUIEREN ELECTRICIDAD ===");
-            List<FoodTrack> foodTracks =   unidadVentaABM.traerFoodTracksConElectricidad(true);
-            System.out.println("\nCantidad de FoodTracks encontrados: " + foodTracks.size());
+
+            System.out.println("\n--- CONSULTA 2: FOODTRACKS QUE REQUIEREN ELECTRICIDAD ---");
+            List<FoodTrack> foodTracks = unidadVentaABM.traerFoodTracksConElectricidad(true);
+            System.out.println("FoodTracks encontrados: " + foodTracks.size());
             for (FoodTrack f : foodTracks) {
-                System.out.println("-> ID: " + f.getId()
+                System.out.println("-> " + f.getNombreComercial()
                         + " | Código: " + f.getCodigo()
-                        + " | Nombre: " + f.getNombreComercial()
-                        + " | Superficie: " + f.getSuperficieM2() + "m2"
+                        + " | Superficie: " + f.getSuperficieM2() + " m2"
                         + " | Patente: " + f.getPatente()
                         + " | Requiere electricidad: " + f.isRequiereElectricidad());
             }
 
-            System.out.println("\n==============================================");
+            System.out.println("\n================================================");
             System.out.println("---------- ESTUDIANTE ANA BELEN VAZQUEZ ----------");
-            System.out.println("==============================================");
+            System.out.println("==================================================");
 
             System.out.println("\n--- CONSULTA 1: FOODTRACKS CON SUPERFICIE MINIMA ---");
-            // Consulta sobre herencia
-            
             List<FoodTrack> foodTracksSuperficie = unidadVentaABM.traerFoodTracksConSuperficieMinima(10.0);
-
             System.out.println("FoodTracks encontrados: " + foodTracksSuperficie.size());
-
             for (FoodTrack f : foodTracksSuperficie) {
                 System.out.println("-> " + f.getNombreComercial()
                         + " | Código: " + f.getCodigo()
@@ -460,19 +430,14 @@ public class TestFestival {
                         + " | Patente: " + f.getPatente());
             }
 
-       
             System.out.println("\n--- CONSULTA 2: UNIDADES DE VENTA CON MÍNIMO DE PEDIDOS ---");
-            // Consulta sobre relacion uno a muchos
-            
             List<UnidadVenta> unidadesConPedidos = unidadVentaABM.traerUnidadesVentaConMinimoPedidos(1);
-
             System.out.println("Unidades encontradas: " + unidadesConPedidos.size());
-
             for (UnidadVenta u : unidadesConPedidos) {
                 System.out.println("-> " + u.getNombreComercial()
                         + " | Código: " + u.getCodigo());
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
