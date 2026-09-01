@@ -17,9 +17,7 @@ public class ItemPedidoABM {
         return dao.traerItemPedido(idItemPedido);
     }
 
-    // Agrega el item al pedido.
-    // El cascade="all-delete-orphan" de Pedido.items
-    // se encarga de persistir el ItemPedido.
+ 
     public int agregar(Pedido pedido, Plato plato, long cantidad, double precioUnidad)
             throws Exception {
 

@@ -174,6 +174,150 @@ public class TestFestival {
             System.out.println("Pedido 1 con items: " + pedidoABM.traerConItems(idPedido1));
             System.out.println("Pedido 2 con items: " + pedidoABM.traerConItems(idPedido2));
 
+            // ---------- DATOS ADICIONALES (para que las consultas traigan más resultados) ----------
+
+            // ---------- Staff adicional ----------
+            long idCocinero4 = cocineroABM.agregar("Valentina", "Torres", "39222111",
+                    LocalDate.of(1992, 6, 18), LocalDate.of(2023, 8, 5), 460000.0, "Panaderia");
+            long idCocinero5 = cocineroABM.agregar("Julian", "Diaz", "35777888",
+                    LocalDate.of(1987, 2, 25), LocalDate.of(2021, 9, 12), 480000.0, "Vegetariana");
+            long idCocinero6 = cocineroABM.agregar("Camila", "Herrera", "41666555",
+                    LocalDate.of(1994, 10, 30), LocalDate.of(2024, 1, 15), 440000.0, "Postres");
+
+            long idCajero4 = cajeroABM.agregar("Nicolas", "Molina", "38111999",
+                    LocalDate.of(1996, 5, 22), LocalDate.of(2023, 4, 10), 385000.0, "manana");
+            long idCajero5 = cajeroABM.agregar("Florencia", "Castro", "42888777",
+                    LocalDate.of(1999, 9, 9), LocalDate.of(2024, 7, 1), 375000.0, "tarde");
+            long idCajero6 = cajeroABM.agregar("Tomas", "Rivas", "37555444",
+                    LocalDate.of(1993, 12, 3), LocalDate.of(2022, 10, 20), 395000.0, "noche");
+
+            Cocinero cocinero4 = cocineroABM.traer(idCocinero4);
+            Cocinero cocinero5 = cocineroABM.traer(idCocinero5);
+            Cocinero cocinero6 = cocineroABM.traer(idCocinero6);
+            Cajero cajero4 = cajeroABM.traer(idCajero4);
+            Cajero cajero5 = cajeroABM.traer(idCajero5);
+            Cajero cajero6 = cajeroABM.traer(idCajero6);
+
+            System.out.println("Staff adicional creado: " + cocinero4 + " | " + cocinero5 + " | " + cocinero6 + " | "
+                    + cajero4 + " | " + cajero5 + " | " + cajero6);
+
+            // ---------- Platos adicionales ----------
+            long idPlato6 = platoABM.agregar("Pizza Artesanal", 5500.0, 2000.0);
+            long idPlato7 = platoABM.agregar("Milanesa Napolitana", 7200.0, 2800.0);
+            long idPlato8 = platoABM.agregar("Ensalada Fresca", 2800.0, 900.0);
+            long idPlato9 = platoABM.agregar("Alfajor Casero", 1800.0, 500.0);
+            long idPlato10 = platoABM.agregar("Limonada Natural", 1500.0, 400.0);
+
+            Plato plato6 = platoABM.traer(idPlato6);
+            Plato plato7 = platoABM.traer(idPlato7);
+            Plato plato8 = platoABM.traer(idPlato8);
+            Plato plato9 = platoABM.traer(idPlato9);
+            Plato plato10 = platoABM.traer(idPlato10);
+
+            System.out.println("Platos adicionales creados: " + plato6 + " | " + plato7 + " | " + plato8 + " | " + plato9 + " | " + plato10);
+
+            // ---------- Unidades de venta adicionales ----------
+            long idFoodTrack3 = foodTrackABM.agregar("FT00000003", "La Pizzeria Rodante", 20.0,
+                    cocinero4, "EF789GH", true);
+            long idFoodTrack4 = foodTrackABM.agregar("FT00000004", "Milanesas Express", 16.0,
+                    cocinero5, "GH012IJ", true);
+            long idPuesto4 = puestoABM.agregar("PD00000004", "Rincon Saludable", 7.5,
+                    cajero4, 2, 35);
+            long idPuesto5 = puestoABM.agregar("PD00000005", "Dulces y Bebidas", 6.0,
+                    cajero5, 1, 20);
+
+            foodTrackABM.asignarStaff(idFoodTrack3, cocinero4);
+            foodTrackABM.asignarStaff(idFoodTrack3, cajero4);
+            foodTrackABM.asignarStaff(idFoodTrack3, cajero6);
+            foodTrackABM.ofrecerPlato(idFoodTrack3, plato6);
+
+            foodTrackABM.asignarStaff(idFoodTrack4, cocinero5);
+            foodTrackABM.asignarStaff(idFoodTrack4, cajero5);
+            foodTrackABM.ofrecerPlato(idFoodTrack4, plato7);
+            foodTrackABM.ofrecerPlato(idFoodTrack4, plato8);
+
+            puestoABM.asignarStaff(idPuesto4, cajero4);
+            puestoABM.asignarStaff(idPuesto4, cocinero6);
+            puestoABM.ofrecerPlato(idPuesto4, plato8);
+
+            puestoABM.asignarStaff(idPuesto5, cajero5);
+            puestoABM.asignarStaff(idPuesto5, cajero6);
+            puestoABM.ofrecerPlato(idPuesto5, plato9);
+            puestoABM.ofrecerPlato(idPuesto5, plato10);
+
+            FoodTrack foodTrack3 = foodTrackABM.traer(idFoodTrack3);
+            FoodTrack foodTrack4 = foodTrackABM.traer(idFoodTrack4);
+            PuestoDesarmable puesto4 = puestoABM.traer(idPuesto4);
+            PuestoDesarmable puesto5 = puestoABM.traer(idPuesto5);
+
+            System.out.println("Unidades adicionales creadas: " + foodTrack3 + " | " + foodTrack4 + " | " + puesto4 + " | " + puesto5);
+
+            // ---------- Festivales adicionales ----------
+            Set<UnidadVenta> unidadesFestival4 = new HashSet<>();
+            unidadesFestival4.add(foodTrack3);
+            unidadesFestival4.add(puesto4);
+            Set<Staff> staffFestival4 = new HashSet<>();
+            staffFestival4.add(cocinero4);
+            staffFestival4.add(cajero4);
+            staffFestival4.add(cajero6);
+
+            long idFestival4 = festivalABM.agregar("Festival de Invierno", "Invierno",
+                    LocalDate.of(2026, 7, 1), LocalDate.of(2026, 7, 7),
+                    unidadesFestival4, staffFestival4);
+
+            Set<UnidadVenta> unidadesFestival5 = new HashSet<>();
+            unidadesFestival5.add(foodTrack4);
+            unidadesFestival5.add(puesto5);
+            unidadesFestival5.add(puesto2);
+            Set<Staff> staffFestival5 = new HashSet<>();
+            staffFestival5.add(cocinero5);
+            staffFestival5.add(cajero5);
+            staffFestival5.add(cajero6);
+            staffFestival5.add(cocinero6);
+
+            long idFestival5 = festivalABM.agregar("Encuentro Gourmet", "Primavera",
+                    LocalDate.of(2026, 10, 1), LocalDate.of(2026, 10, 5),
+                    unidadesFestival5, staffFestival5);
+
+            Festival festival4 = festivalABM.traer(idFestival4);
+            Festival festival5 = festivalABM.traer(idFestival5);
+
+            System.out.println("Festivales adicionales creados: " + festival4 + " | " + festival5);
+
+            // ---------- Pedidos + Items adicionales ----------
+            long idPedido3 = pedidoABM.agregar(LocalDate.of(2026, 9, 17), festival1, puesto3);
+            Pedido pedido3 = pedidoABM.traer(idPedido3);
+            itemPedidoABM.agregar(pedido3, plato5, 4, plato5.getPrecioVenta());
+
+            long idPedido4 = pedidoABM.agregar(LocalDate.of(2026, 7, 2), festival4, foodTrack3);
+            Pedido pedido4 = pedidoABM.traer(idPedido4);
+            itemPedidoABM.agregar(pedido4, plato6, 2, plato6.getPrecioVenta());
+
+            long idPedido5 = pedidoABM.agregar(LocalDate.of(2026, 7, 3), festival4, puesto4);
+            Pedido pedido5 = pedidoABM.traer(idPedido5);
+            itemPedidoABM.agregar(pedido5, plato8, 3, plato8.getPrecioVenta());
+
+            long idPedido6 = pedidoABM.agregar(LocalDate.of(2026, 10, 2), festival5, foodTrack4);
+            Pedido pedido6 = pedidoABM.traer(idPedido6);
+            itemPedidoABM.agregar(pedido6, plato7, 1, plato7.getPrecioVenta());
+            itemPedidoABM.agregar(pedido6, plato8, 2, plato8.getPrecioVenta());
+
+            long idPedido7 = pedidoABM.agregar(LocalDate.of(2026, 10, 3), festival5, puesto5);
+            Pedido pedido7 = pedidoABM.traer(idPedido7);
+            itemPedidoABM.agregar(pedido7, plato9, 5, plato9.getPrecioVenta());
+            itemPedidoABM.agregar(pedido7, plato10, 5, plato10.getPrecioVenta());
+
+            long idPedido8 = pedidoABM.agregar(LocalDate.of(2026, 1, 15), festival2, foodTrack2);
+            Pedido pedido8 = pedidoABM.traer(idPedido8);
+            itemPedidoABM.agregar(pedido8, plato4, 2, plato4.getPrecioVenta());
+
+            System.out.println("Pedido 3 con items: " + pedidoABM.traerConItems(idPedido3));
+            System.out.println("Pedido 4 con items: " + pedidoABM.traerConItems(idPedido4));
+            System.out.println("Pedido 5 con items: " + pedidoABM.traerConItems(idPedido5));
+            System.out.println("Pedido 6 con items: " + pedidoABM.traerConItems(idPedido6));
+            System.out.println("Pedido 7 con items: " + pedidoABM.traerConItems(idPedido7));
+            System.out.println("Pedido 8 con items: " + pedidoABM.traerConItems(idPedido8));
+
             System.out.println("\nCARGA DE DATOS FINALIZADA CORRECTAMENTE\n");
 
             System.out.println("// =========================================================================");
@@ -334,4 +478,3 @@ public class TestFestival {
         }
     }
 }
-
