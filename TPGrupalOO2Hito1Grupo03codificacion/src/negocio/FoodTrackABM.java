@@ -30,11 +30,11 @@ public class FoodTrackABM {
         return dao.traerFoodTrack(idUnidadVenta);
     }
 
-    // CORREGIDO: Retorna long en lugar de int
+    
     public long agregar(String codigo, String nombreComercial, double superficieM2, Staff responsable,
                         String patente, boolean requiereElectricidad) throws Exception {
         
-        // CORREGIDO: Validar formato de código antes de ir a la DB
+        
         if (codigo == null || codigo.length() != 10) {
             throw new Exception("ERROR el codigo de unidad debe tener 10 caracteres");
         }
@@ -69,7 +69,7 @@ public class FoodTrackABM {
     }
 
     public void asignarStaff(long idUnidadVenta, Staff staff) throws Exception {
-        // 1. Intentar traer con fetch si tenés el método especializado
+    
         UnidadVenta u = unidadVentaDao.traerUnidadVentaConStaff(idUnidadVenta);
         
         if (u == null) {
