@@ -28,17 +28,19 @@ import negocio.UnidadVentaABM;
 public class TestFestival {
 
     public static void main(String[] args) {
-        try {
-            ResetBaseDao.resetearBase(); 
-            CocineroABM cocineroABM = new CocineroABM();
-            CajeroABM cajeroABM = new CajeroABM();
-            PlatoABM platoABM = new PlatoABM();
-            FoodTrackABM foodTrackABM = new FoodTrackABM();
-            PuestoDesarmableABM puestoABM = new PuestoDesarmableABM();
-            FestivalABM festivalABM = new FestivalABM();
-            PedidoABM pedidoABM = new PedidoABM();
-            ItemPedidoABM itemPedidoABM = new ItemPedidoABM();
-            UnidadVentaABM unidadVentaABM = new UnidadVentaABM();
+    	try {
+    	    ResetBaseDao.resetearBase();
+    	    CocineroABM cocineroABM = CocineroABM.getInstancia();
+    	    CajeroABM cajeroABM = CajeroABM.getInstancia();
+    	    PlatoABM platoABM = PlatoABM.getInstancia();
+    	    FoodTrackABM foodTrackABM = FoodTrackABM.getInstancia();
+    	    PuestoDesarmableABM puestoABM = PuestoDesarmableABM.getInstancia();
+    	    FestivalABM festivalABM = FestivalABM.getInstancia();
+    	    PedidoABM pedidoABM = PedidoABM.getInstancia();
+    	    ItemPedidoABM itemPedidoABM = ItemPedidoABM.getInstancia();
+    	    UnidadVentaABM unidadVentaABM = UnidadVentaABM.getInstancia();
+
+    	    // --------- Staff ---------
 
             // ---------- Staff ----------
             long idCocinero1 = cocineroABM.agregar("Lucia", "Fernandez", "40111222",

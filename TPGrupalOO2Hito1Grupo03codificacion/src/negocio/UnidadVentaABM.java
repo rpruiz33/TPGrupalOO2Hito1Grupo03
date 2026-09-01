@@ -10,7 +10,17 @@ import datos.UnidadVenta;
 
 public class UnidadVentaABM {
 
-    UnidadVentaDao dao = UnidadVentaDao.getIntancia();
+    private static UnidadVentaABM instancia;
+    private UnidadVentaDao dao = UnidadVentaDao.getIntancia();
+
+    protected UnidadVentaABM() {}
+
+    public static UnidadVentaABM getInstancia() {
+        if (instancia == null) {
+            instancia = new UnidadVentaABM();
+        }
+        return instancia;
+    }
 
     public UnidadVenta traer(long idUnidadVenta) {
         return dao.traerUnidadVenta(idUnidadVenta);

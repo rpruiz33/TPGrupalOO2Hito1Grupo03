@@ -10,18 +10,27 @@ import datos.Plato;
 
 public class ItemPedidoABM {
 
-    ItemPedidoDao dao = ItemPedidoDao.getIntancia();
-    PedidoDao pedidoDao = PedidoDao.getIntancia();
+    private static ItemPedidoABM instancia;
+    private ItemPedidoDao dao = ItemPedidoDao.getIntancia();
+    private PedidoDao pedidoDao = PedidoDao.getIntancia();
+
+    protected ItemPedidoABM() {}
+
+    public static ItemPedidoABM getInstancia() {
+        if (instancia == null) {
+            instancia = new ItemPedidoABM();
+        }
+        return instancia;
+    }
 
     public ItemPedido traer(long idItemPedido) {
         return dao.traerItemPedido(idItemPedido);
     }
 
- 
     public int agregar(Pedido pedido, Plato plato, long cantidad, double precioUnidad)
             throws Exception {
 
-        ItemPedido item = new ItemPedido( plato, cantidad, precioUnidad);
+        ItemPedido item = new ItemPedido(plato, cantidad, precioUnidad);
 
         pedido.getItems().add(item);
 

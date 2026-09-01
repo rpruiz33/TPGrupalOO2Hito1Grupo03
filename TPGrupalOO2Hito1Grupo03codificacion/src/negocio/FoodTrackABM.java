@@ -13,8 +13,18 @@ import datos.UnidadVenta;
 
 public class FoodTrackABM {
 
-    FoodTrackDao dao = FoodTrackDao.getIntancia();
-    UnidadVentaDao unidadVentaDao = UnidadVentaDao.getIntancia();
+    private static FoodTrackABM instancia;
+    private FoodTrackDao dao = FoodTrackDao.getIntancia();
+    private UnidadVentaDao unidadVentaDao = UnidadVentaDao.getIntancia();
+
+    protected FoodTrackABM() {}
+
+    public static FoodTrackABM getInstancia() {
+        if (instancia == null) {
+            instancia = new FoodTrackABM();
+        }
+        return instancia;
+    }
 
     public FoodTrack traer(long idUnidadVenta) {
         return dao.traerFoodTrack(idUnidadVenta);
@@ -62,16 +72,13 @@ public class FoodTrackABM {
         // 1. Intentar traer con fetch si tenés el método especializado
         UnidadVenta u = unidadVentaDao.traerUnidadVentaConStaff(idUnidadVenta);
         
-        
         if (u == null) {
             u = unidadVentaDao.traer(idUnidadVenta);
         }
         
- 
         if (u == null) {
             throw new RuntimeException("ERROR: No existe unidad con ID: " + idUnidadVenta);
         }
-        
         
         u.asignarStaff(staff);
         unidadVentaDao.actualizar(u);

@@ -10,7 +10,17 @@ import datos.UnidadVenta;
 
 public class FestivalABM {
 
-    FestivalDao dao = FestivalDao.getIntancia();
+    private static FestivalABM instancia;
+    private FestivalDao dao = FestivalDao.getIntancia();
+
+    protected FestivalABM() {}
+
+    public static FestivalABM getInstancia() {
+        if (instancia == null) {
+            instancia = new FestivalABM();
+        }
+        return instancia;
+    }
 
     public Festival traer(long idFestival) {
         return dao.traerFestival(idFestival);
@@ -42,10 +52,7 @@ public class FestivalABM {
         dao.eliminar(f);
     }
 
-  
     public Set<UnidadVenta> traerUnidadesVentaPorStaffDeFestival(long minStaff) {
         return dao.traerUnidadesVentaPorStaffDeFestival(minStaff);
     }
-
-
 }
