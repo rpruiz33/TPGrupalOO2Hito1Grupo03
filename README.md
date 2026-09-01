@@ -19,7 +19,7 @@ Proyecto de persistencia y consultas avanzadas sobre el modelo ORM (Hibernate ) 
 ### 1. Ruiz Pereira, Roberto Andrés
 
 * **Caso de Uso 1 (Herencia / Polimorfismo): Consulta de Puestos Desarmables**
-* **Método:** `PuestoDesarmableABM.traerPuestosComplejos(cantCarpasMin, tiempoMontajeMax, superficieMin, id)`
+* **Método:** `PuestoDesarmableABM.traerPuestos(cantCarpasMin, tiempoMontajeMax, superficieMin, id)`
 * **Relación ORM:** **Herencia (`UnidadVenta` $\leftarrow$ `PuestoDesarmable`)**.
 * **Descripción:** Filtra instancias específicas de la subclase `PuestoDesarmable` que heredan de `UnidadVenta` (`superficieM2`, `nombreComercial`), evaluando tanto sus atributos propios (`cantidadCarpas`, `tiempoMontajeMin`) como los heredados para la organización logística del predio.
 
