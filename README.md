@@ -52,16 +52,16 @@ Proyecto de persistencia y consultas avanzadas sobre el modelo ORM (Hibernate ) 
 
 ### 3. Soloaga, Leonel
 
-* **Caso de Uso 1 (Uno a Muchos con Fetch Join / Lazy Loading): Carga Optimizada de Platos por Unidad de Venta**
+* **Caso de Uso 1 (Muchos a Muchos con Fetch Join / Lazy Loading): Carga Optimizada de Platos por Unidad de Venta**
 * **Método:** `UnidadVentaABM.traerUnidadVentaConPlatos(idUnidadVenta)`
-* **Relación ORM:** **Muchos a Muchos (`UnidadVenta` $\leftrightarrow$ `Plato`) con `FETCH JOIN**`.
-* **Descripción:** Realiza la recuperación de una `UnidadVenta` junto con la inicialización explícita de su colección de platos offered (`FETCH JOIN`), previniendo excepciones de inicialización perezosa (*LazyInitializationException*) en la capa de negocio.
+* **Relación ORM:** **Muchos a Muchos (`UnidadVenta` $\leftrightarrow$ `Plato`) con `FETCH JOIN`.
+* **Descripción:** Realiza la recuperación de una `UnidadVenta` junto con la inicialización explícita de su colección de platos ofrecidos (`FETCH JOIN`), previniendo excepciones de inicialización perezosa (*LazyInitializationException*) en la capa de negocio.
 
 
-* **Caso de Uso 2 (Herencia / Discriminador o Subclase): FoodTracks por Requerimiento Eléctrico**
+* **Caso de Uso 2 (Herencia / Subclase): FoodTracks por Requerimiento Eléctrico**
 * **Método:** `UnidadVentaABM.traerFoodTracksConElectricidad(requiereElectricidad)`
 * **Relación ORM:** **Herencia (`UnidadVenta` $\leftarrow$ `FoodTrack`)**.
-* **Descripción:** Filtra directamente sobre la subclase `FoodTrack` los registros que requieren conexión eléctrica (`requiereElectricidad = true/false`), permitiendo la correcta zonificación dentro del plano del evento.
+* **Descripción:** Filtra directamente sobre la subclase `FoodTrack` los registros que requieren o no conexión eléctrica (`requiereElectricidad = true/false`), permitiendo la correcta zonificación dentro del plano del evento.
 
 ### 4. Vazquez, Ana 
 
@@ -69,7 +69,7 @@ Proyecto de persistencia y consultas avanzadas sobre el modelo ORM (Hibernate ) 
 
 * **Método:** `UnidadVentaABM.traerFoodTracksPorSuperficieMinima(double minSuperficie)`
 
-* **Relación ORM:** **Herencia (`UnidadVenta` ← `FoodTrack`)**.
+* **Relación ORM:** **Herencia (`UnidadVenta` ← `FoodTrack`) mediante joined-subclass**.
 
 * **Descripción:** Realiza una consulta sobre la subclase `FoodTrack`, heredada de `UnidadVenta`, filtrando los FoodTracks cuya superficie sea mayor o igual a la superficie mínima indicada. Los resultados se ordenan de mayor a menor superficie.
 
