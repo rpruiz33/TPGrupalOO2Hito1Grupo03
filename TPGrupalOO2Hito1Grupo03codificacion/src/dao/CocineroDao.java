@@ -100,7 +100,7 @@ public class CocineroDao {
 	    try {
 	        iniciaOperacion();
 	        
-	        String hql = "select distinct c from Cocinero c "
+	        String hql = "from Cocinero c "
 	                   + "where exists ("
 	                   + "    from Festival f "
 	                   + "    join f.staffGeneral sg "
@@ -133,5 +133,5 @@ public class CocineroDao {
 	        session.close();
 	    }
 	    return lista;
-	}
+	} 
 }

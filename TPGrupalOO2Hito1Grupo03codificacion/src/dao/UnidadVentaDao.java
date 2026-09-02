@@ -96,11 +96,9 @@ public class UnidadVentaDao {
 	    Set<UnidadVenta> lista = null;
 	    try {
 	        iniciaOperacion();
-	        String hql = "select distinct u from UnidadVenta u "
-	                   + "left join u.staffPuesto sp "
-	                   + "left join u.responsable r "
-	                   + "where (sp.dni = :dni and sp.fechaNacimiento = :fechaNacimiento and sp.fechaIngreso = :fechaIngreso) "
-	                   + "or (r.dni = :dni and r.fechaNacimiento = :fechaNacimiento and r.fechaIngreso = :fechaIngreso)";
+	        String hql = "from UnidadVenta u "
+	                   + "where u in (select u1 from UnidadVenta u1 left join u1.staffPuesto sp where sp.dni = :dni and sp.fechaNacimiento = :fechaNacimiento and sp.fechaIngreso = :fechaIngreso) "
+	                   + "or (u.responsable.dni = :dni and u.responsable.fechaNacimiento = :fechaNacimiento and u.responsable.fechaIngreso = :fechaIngreso)";
 
 	        lista = new java.util.HashSet<>(
 	            session.createQuery(hql, UnidadVenta.class)
@@ -118,6 +116,7 @@ public class UnidadVentaDao {
 	    }
 	    return lista;
 	}
+
 	public UnidadVenta traerUnidadVenta(long id) {
 		UnidadVenta objeto = null;
 		try {
