@@ -72,17 +72,24 @@ public class TestFestival {
                 foodTrackABM.agregar("FT00000004", "Milanesas Express", 16.0, c[4], "GH012IJ", true)
             };
 
-            foodTrackABM.asignarStaff(idsFT[0], c[0]); foodTrackABM.asignarStaff(idsFT[0], caj[1]);
-            foodTrackABM.ofrecerPlato(idsFT[0], p[0]); foodTrackABM.ofrecerPlato(idsFT[0], p[1]);
+            foodTrackABM.asignarStaff(idsFT[0], c[0]); 
+            foodTrackABM.asignarStaff(idsFT[0], caj[1]);
+            foodTrackABM.ofrecerPlato(idsFT[0], p[0]); 
+            foodTrackABM.ofrecerPlato(idsFT[0], p[1]);
 
-            foodTrackABM.asignarStaff(idsFT[1], c[2]); foodTrackABM.asignarStaff(idsFT[1], caj[2]);
+            foodTrackABM.asignarStaff(idsFT[1], c[2]); 
+            foodTrackABM.asignarStaff(idsFT[1], caj[2]);
             foodTrackABM.ofrecerPlato(idsFT[1], p[3]);
 
-            foodTrackABM.asignarStaff(idsFT[2], c[3]); foodTrackABM.asignarStaff(idsFT[2], caj[3]); foodTrackABM.asignarStaff(idsFT[2], caj[5]);
+            foodTrackABM.asignarStaff(idsFT[2], c[3]); 
+            foodTrackABM.asignarStaff(idsFT[2], caj[3]); 
+            foodTrackABM.asignarStaff(idsFT[2], caj[5]);
             foodTrackABM.ofrecerPlato(idsFT[2], p[5]);
 
-            foodTrackABM.asignarStaff(idsFT[3], c[4]); foodTrackABM.asignarStaff(idsFT[3], caj[4]);
-            foodTrackABM.ofrecerPlato(idsFT[3], p[6]); foodTrackABM.ofrecerPlato(idsFT[3], p[7]);
+            foodTrackABM.asignarStaff(idsFT[3], c[4]);
+            foodTrackABM.asignarStaff(idsFT[3], caj[4]);
+            foodTrackABM.ofrecerPlato(idsFT[3], p[6]);
+            foodTrackABM.ofrecerPlato(idsFT[3], p[7]);
 
             FoodTrack[] ft = new FoodTrack[4];
             for (int i = 0; i < 4; i++) ft[i] = foodTrackABM.traer(idsFT[i]);
@@ -97,11 +104,20 @@ public class TestFestival {
                 puestoABM.agregar("PD00000005", "Dulces y Bebidas", 6.0, caj[4], 1, 20)
             };
 
-            puestoABM.asignarStaff(idsPD[0], caj[0]); puestoABM.asignarStaff(idsPD[0], c[1]); puestoABM.ofrecerPlato(idsPD[0], p[2]);
-            puestoABM.asignarStaff(idsPD[1], caj[2]); puestoABM.ofrecerPlato(idsPD[1], p[1]);
-            puestoABM.asignarStaff(idsPD[2], caj[1]); puestoABM.ofrecerPlato(idsPD[2], p[4]);
-            puestoABM.asignarStaff(idsPD[3], caj[3]); puestoABM.asignarStaff(idsPD[3], c[5]); puestoABM.ofrecerPlato(idsPD[3], p[7]);
-            puestoABM.asignarStaff(idsPD[4], caj[4]); puestoABM.asignarStaff(idsPD[4], caj[5]); puestoABM.ofrecerPlato(idsPD[4], p[8]); puestoABM.ofrecerPlato(idsPD[4], p[9]);
+            puestoABM.asignarStaff(idsPD[0], caj[0]);
+            puestoABM.asignarStaff(idsPD[0], c[1]);
+            puestoABM.ofrecerPlato(idsPD[0], p[2]);
+            puestoABM.asignarStaff(idsPD[1], caj[2]);
+            puestoABM.ofrecerPlato(idsPD[1], p[1]);
+            puestoABM.asignarStaff(idsPD[2], caj[1]);
+            puestoABM.ofrecerPlato(idsPD[2], p[4]);
+            puestoABM.asignarStaff(idsPD[3], caj[3]); 
+            puestoABM.asignarStaff(idsPD[3], c[5]);
+            puestoABM.ofrecerPlato(idsPD[3], p[7]);
+            puestoABM.asignarStaff(idsPD[4], caj[4]); 
+            puestoABM.asignarStaff(idsPD[4], caj[5]);
+            puestoABM.ofrecerPlato(idsPD[4], p[8]); 
+            puestoABM.ofrecerPlato(idsPD[4], p[9]);
 
             PuestoDesarmable[] pd = new PuestoDesarmable[5];
             for (int i = 0; i < 5; i++) pd[i] = puestoABM.traer(idsPD[i]);
@@ -132,13 +148,16 @@ public class TestFestival {
             Pedido[] ped = new Pedido[8];
             for (int i = 0; i < 8; i++) ped[i] = pedidoABM.traer(idsPed[i]);
 
-            itemPedidoABM.agregar(ped[0], p[0], 3, p[0].getPrecioVenta()); itemPedidoABM.agregar(ped[0], p[1], 1, p[1].getPrecioVenta());
+            itemPedidoABM.agregar(ped[0], p[0], 3, p[0].getPrecioVenta());
+            itemPedidoABM.agregar(ped[0], p[1], 1, p[1].getPrecioVenta());
             itemPedidoABM.agregar(ped[1], p[2], 2, p[2].getPrecioVenta());
             itemPedidoABM.agregar(ped[2], p[4], 4, p[4].getPrecioVenta());
             itemPedidoABM.agregar(ped[3], p[5], 2, p[5].getPrecioVenta());
             itemPedidoABM.agregar(ped[4], p[7], 3, p[7].getPrecioVenta());
-            itemPedidoABM.agregar(ped[5], p[6], 1, p[6].getPrecioVenta()); itemPedidoABM.agregar(ped[5], p[7], 2, p[7].getPrecioVenta());
-            itemPedidoABM.agregar(ped[6], p[8], 5, p[8].getPrecioVenta()); itemPedidoABM.agregar(ped[6], p[9], 5, p[9].getPrecioVenta());
+            itemPedidoABM.agregar(ped[5], p[6], 1, p[6].getPrecioVenta()); 
+            itemPedidoABM.agregar(ped[5], p[7], 2, p[7].getPrecioVenta());
+            itemPedidoABM.agregar(ped[6], p[8], 5, p[8].getPrecioVenta()); 
+            itemPedidoABM.agregar(ped[6], p[9], 5, p[9].getPrecioVenta());
             itemPedidoABM.agregar(ped[7], p[3], 2, p[3].getPrecioVenta());
 
             for (int i = 0; i < 8; i++) {
