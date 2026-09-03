@@ -197,8 +197,8 @@ public class UnidadVentaDao {
 	    return lista;
 	}
 	//Ana
-	public List<FoodTrack> traerFoodTracksPorSuperficieMinima(double minSuperficie) throws HibernateException {
-	    List<FoodTrack> lista = null;
+	public Set<FoodTrack> traerFoodTracksPorSuperficieMinima(double minSuperficie) throws HibernateException {
+	    Set<FoodTrack> lista = null;
 
 	    try {
 	        iniciaOperacion();
@@ -207,9 +207,11 @@ public class UnidadVentaDao {
 	                   + "where f.superficieM2 >= :minSuperficie "
 	                   + "order by f.superficieM2 desc";
 
-	        lista = session.createQuery(hql, FoodTrack.class)
-	                .setParameter("minSuperficie", minSuperficie)
-	                .getResultList();
+	         lista = new java.util.LinkedHashSet<>(
+	                session.createQuery(hql, FoodTrack.class)
+	                       .setParameter("minSuperficie", minSuperficie)
+	                       .getResultList()
+	            );
 
 	    } catch (HibernateException he) {
 	        manejaExcepcion(he);
@@ -221,8 +223,8 @@ public class UnidadVentaDao {
 	    return lista;
 	}
    //Ana
-	public List<UnidadVenta> traerUnidadesVentaConMinimoPedidos(long minPedidos) throws HibernateException {
-	    List<UnidadVenta> lista = null;
+	public Set<UnidadVenta> traerUnidadesVentaConMinimoPedidos(long minPedidos) throws HibernateException {
+	    Set<UnidadVenta> lista = null;
 
 	    try {
 	        iniciaOperacion();
@@ -233,9 +235,11 @@ public class UnidadVentaDao {
 	                   + "having count(p) >= :minPedidos "
 	                   + "order by u.nombreComercial asc";
 
-	        lista = session.createQuery(hql, UnidadVenta.class)
-	                .setParameter("minPedidos", minPedidos)
-	                .getResultList();
+	         lista = new java.util.HashSet<>(
+	                session.createQuery(hql, UnidadVenta.class)
+	                       .setParameter("minPedidos", minPedidos)
+	                       .getResultList()
+	            );
 
 	    } catch (HibernateException he) {
 	        manejaExcepcion(he);
