@@ -316,7 +316,7 @@ public class TestFestival {
             }
 
             System.out.println("\n--- CONSULTA 2: FOODTRACKS QUE REQUIEREN ELECTRICIDAD ---");
-            List<FoodTrack> foodTracks = unidadVentaABM.traerFoodTracksConElectricidad(true);
+            Set<FoodTrack> foodTracks = unidadVentaABM.traerFoodTracksConElectricidad(true);
             System.out.println("FoodTracks encontrados: " + foodTracks.size());
             for (FoodTrack fItem : foodTracks) {
                 System.out.println("-> " + fItem.getNombreComercial() + " [" + fItem.getCodigo() + "] | Superficie: " + fItem.getSuperficieM2() + " m2 | Patente: " + fItem.getPatente() + " | Requiere electricidad: " + fItem.isRequiereElectricidad());

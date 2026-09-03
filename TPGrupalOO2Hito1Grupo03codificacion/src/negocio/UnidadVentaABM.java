@@ -46,7 +46,7 @@ public class UnidadVentaABM {
         return dao.traerUnidadVentaConPlatos(idUnidadVenta);
     }
 
-    public List<FoodTrack> traerFoodTracksConElectricidad(boolean requiereElectricidad) {
+    public Set<FoodTrack> traerFoodTracksConElectricidad(boolean requiereElectricidad) {
         return dao.traerFoodTracksConElectricidad(requiereElectricidad);
     }
 

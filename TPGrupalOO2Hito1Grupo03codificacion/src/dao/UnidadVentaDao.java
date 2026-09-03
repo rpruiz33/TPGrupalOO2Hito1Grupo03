@@ -180,14 +180,16 @@ public class UnidadVentaDao {
 	    return unidad;
 	}
 	
-	public List<FoodTrack> traerFoodTracksConElectricidad(boolean requiereElectricidad) throws HibernateException {
-	    List<FoodTrack> lista = null;
+	public Set<FoodTrack> traerFoodTracksConElectricidad(boolean requiereElectricidad) throws HibernateException {
+	    Set<FoodTrack> lista = null;
 	    try {
 	        iniciaOperacion();
 	        String hql = "from FoodTrack f where f.requiereElectricidad = :requiere";
-	        lista = session.createQuery(hql, FoodTrack.class)
+	        lista = new java.util.LinkedHashSet<>(
+	        		session.createQuery(hql, FoodTrack.class)
 	                .setParameter("requiere", requiereElectricidad)
-	                .getResultList();
+	                .getResultList()
+	                );
 	    } catch (HibernateException he) {
 	        manejaExcepcion(he);
 	        throw he;
