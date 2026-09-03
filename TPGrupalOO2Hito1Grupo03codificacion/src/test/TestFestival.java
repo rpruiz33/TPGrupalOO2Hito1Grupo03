@@ -1,7 +1,6 @@
 package test;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,7 +36,11 @@ public class TestFestival {
             };
             Cocinero[] c = new Cocinero[6];
             for (int i = 0; i < 6; i++) c[i] = cocineroABM.traer(idsC[i]);
-            System.out.println("Cocineros creados: " + Arrays.toString(c));
+
+            System.out.println("--- Cocineros Creados ---");
+            for (Cocinero coc : c) {
+                System.out.println("  • " + coc.getNombre() + " " + coc.getApellido() + " | DNI: " + coc.getDni() + " | Especialidad: " + coc.getEspecialidad());
+            }
 
             // 2. CAJEROS
             long[] idsCaj = {
@@ -50,19 +53,32 @@ public class TestFestival {
             };
             Cajero[] caj = new Cajero[6];
             for (int i = 0; i < 6; i++) caj[i] = cajeroABM.traer(idsCaj[i]);
-            System.out.println("Cajeros creados: " + Arrays.toString(caj));
+
+            System.out.println("\n--- Cajeros Creados ---");
+            for (Cajero cajero : caj) {
+                System.out.println("  • " + cajero.getNombre() + " " + cajero.getApellido() + " | DNI: " + cajero.getDni() + " | Turno: " + cajero.getTurno());
+            }
 
             // 3. PLATOS
             long[] idsP = {
-                platoABM.agregar("Choripan", 3500.0, 1200.0), platoABM.agregar("Hamburguesa Completa", 6800.0, 2600.0),
-                platoABM.agregar("Torta Frita", 2000.0, 600.0), platoABM.agregar("Papas Rusticas", 3000.0, 900.0),
-                platoABM.agregar("Emponadas de Carne", 2500.0, 800.0), platoABM.agregar("Pizza Artesanal", 5500.0, 2000.0),
-                platoABM.agregar("Milanesa Napolitana", 7200.0, 2800.0), platoABM.agregar("Ensalada Fresca", 2800.0, 900.0),
-                platoABM.agregar("Alfajor Casero", 1800.0, 500.0), platoABM.agregar("Limonada Natural", 1500.0, 400.0)
+                platoABM.agregar("Choripan", 3500.0, 2000),
+                platoABM.agregar("Hamburguesa Completa", 6800.0, 2000),
+                platoABM.agregar("Torta Frita", 2000.0, 2000),
+                platoABM.agregar("Papas Rusticas", 3000.0, 2000),
+                platoABM.agregar("Empanadas de Carne", 2500.0, 2000),
+                platoABM.agregar("Pizza Artesanal", 5500.0, 2000),
+                platoABM.agregar("Milanesa Napolitana", 7200.0, 2000),
+                platoABM.agregar("Ensalada Fresca", 2800.0, 2000),
+                platoABM.agregar("Alfajor Casero", 1800.0, 2000),
+                platoABM.agregar("Limonada Natural", 1500.0, 2000)
             };
             Plato[] p = new Plato[10];
             for (int i = 0; i < 10; i++) p[i] = platoABM.traer(idsP[i]);
-            System.out.println("Platos creados: " + Arrays.toString(p));
+
+            System.out.println("\n--- Platos Creados ---");
+            for (Plato plato : p) {
+                System.out.println("  • " + plato.getNombre() + " | Precio: $" + plato.getPrecioVenta());
+            }
 
             // 4. FOODTRACKS
             long[] idsFT = {
@@ -93,7 +109,11 @@ public class TestFestival {
 
             FoodTrack[] ft = new FoodTrack[4];
             for (int i = 0; i < 4; i++) ft[i] = foodTrackABM.traer(idsFT[i]);
-            System.out.println("FoodTracks creados: " + Arrays.toString(ft));
+
+            System.out.println("\n--- FoodTracks Creados ---");
+            for (FoodTrack foodTrack : ft) {
+                System.out.println("  • " + foodTrack.getNombreComercial() + " [" + foodTrack.getCodigo() + "] | Patente: " + foodTrack.getPatente() + " | Elec: " + (foodTrack.isRequiereElectricidad() ? "Sí" : "No"));
+            }
 
             // 5. PUESTOS DESARMABLES
             long[] idsPD = {
@@ -107,13 +127,17 @@ public class TestFestival {
             puestoABM.asignarStaff(idsPD[0], caj[0]);
             puestoABM.asignarStaff(idsPD[0], c[1]);
             puestoABM.ofrecerPlato(idsPD[0], p[2]);
+
             puestoABM.asignarStaff(idsPD[1], caj[2]);
             puestoABM.ofrecerPlato(idsPD[1], p[1]);
+
             puestoABM.asignarStaff(idsPD[2], caj[1]);
             puestoABM.ofrecerPlato(idsPD[2], p[4]);
+
             puestoABM.asignarStaff(idsPD[3], caj[3]); 
             puestoABM.asignarStaff(idsPD[3], c[5]);
             puestoABM.ofrecerPlato(idsPD[3], p[7]);
+
             puestoABM.asignarStaff(idsPD[4], caj[4]); 
             puestoABM.asignarStaff(idsPD[4], caj[5]);
             puestoABM.ofrecerPlato(idsPD[4], p[8]); 
@@ -121,17 +145,74 @@ public class TestFestival {
 
             PuestoDesarmable[] pd = new PuestoDesarmable[5];
             for (int i = 0; i < 5; i++) pd[i] = puestoABM.traer(idsPD[i]);
-            System.out.println("Puestos creados: " + Arrays.toString(pd));
 
-            // 6. FESTIVALES
-            long idF1 = festivalABM.agregar("Mega Rock Festival", "Primavera", LocalDate.of(2026, 9, 15), LocalDate.of(2026, 9, 20), new HashSet<>(Arrays.asList(ft[0], pd[0], pd[2])), new HashSet<>(Arrays.asList(caj[0], caj[1], c[2])));
-            long idF2 = festivalABM.agregar("Feria de Verano", "Verano", LocalDate.of(2026, 1, 10), LocalDate.of(2026, 1, 20), new HashSet<>(Arrays.asList(pd[1], ft[1])), new HashSet<>(Arrays.asList(caj[1], caj[2])));
-            long idF3 = festivalABM.agregar("Festival Gastronomico", "Otono", LocalDate.of(2026, 4, 5), LocalDate.of(2026, 4, 12), new HashSet<>(List.of(ft[0])), new HashSet<>(List.of(c[0])));
-            long idF4 = festivalABM.agregar("Festival de Invierno", "Invierno", LocalDate.of(2026, 7, 1), LocalDate.of(2026, 7, 7), new HashSet<>(Arrays.asList(ft[2], pd[3])), new HashSet<>(Arrays.asList(c[3], caj[3], caj[5])));
-            long idF5 = festivalABM.agregar("Encuentro Gourmet", "Primavera", LocalDate.of(2026, 10, 1), LocalDate.of(2026, 10, 5), new HashSet<>(Arrays.asList(ft[3], pd[4], pd[1])), new HashSet<>(Arrays.asList(c[4], caj[4], caj[5], c[5])));
+            System.out.println("\n--- Puestos Desarmables Creados ---");
+            for (PuestoDesarmable puesto : pd) {
+                System.out.println("  • " + puesto.getNombreComercial() + " [" + puesto.getCodigo() + "] | Carpas: " + puesto.getCantidadCarpas() + " | Tiempo Montaje: " + puesto.getTiempoMontajeMin() + " min");
+            }
+
+            // 6. FESTIVALES (Usando unicamente HashSet)
+            Set<UnidadVenta> uF1 = new HashSet<>();
+            uF1.add(ft[0]);
+            uF1.add(pd[0]);
+            uF1.add(pd[2]);
+
+            Set<Staff> sF1 = new HashSet<>();
+            sF1.add(caj[0]);
+            sF1.add(caj[1]);
+            sF1.add(c[2]);
+
+            long idF1 = festivalABM.agregar("Mega Rock Festival", "Primavera", LocalDate.of(2026, 9, 15), LocalDate.of(2026, 9, 20), uF1, sF1);
+
+            Set<UnidadVenta> uF2 = new HashSet<>();
+            uF2.add(pd[1]);
+            uF2.add(ft[1]);
+
+            Set<Staff> sF2 = new HashSet<>();
+            sF2.add(caj[1]);
+            sF2.add(caj[2]);
+
+            long idF2 = festivalABM.agregar("Feria de Verano", "Verano", LocalDate.of(2026, 1, 10), LocalDate.of(2026, 1, 20), uF2, sF2);
+
+            Set<UnidadVenta> uF3 = new HashSet<>();
+            uF3.add(ft[0]);
+
+            Set<Staff> sF3 = new HashSet<>();
+            sF3.add(c[0]);
+
+            long idF3 = festivalABM.agregar("Festival Gastronomico", "Otono", LocalDate.of(2026, 4, 5), LocalDate.of(2026, 4, 12), uF3, sF3);
+
+            Set<UnidadVenta> uF4 = new HashSet<>();
+            uF4.add(ft[2]);
+            uF4.add(pd[3]);
+
+            Set<Staff> sF4 = new HashSet<>();
+            sF4.add(c[3]);
+            sF4.add(caj[3]);
+            sF4.add(caj[5]);
+
+            long idF4 = festivalABM.agregar("Festival de Invierno", "Invierno", LocalDate.of(2026, 7, 1), LocalDate.of(2026, 7, 7), uF4, sF4);
+
+            Set<UnidadVenta> uF5 = new HashSet<>();
+            uF5.add(ft[3]);
+            uF5.add(pd[4]);
+            uF5.add(pd[1]);
+
+            Set<Staff> sF5 = new HashSet<>();
+            sF5.add(c[4]);
+            sF5.add(caj[4]);
+            sF5.add(caj[5]);
+            sF5.add(c[5]);
+
+            long idF5 = festivalABM.agregar("Encuentro Gourmet", "Primavera", LocalDate.of(2026, 10, 1), LocalDate.of(2026, 10, 5), uF5, sF5);
 
             Festival f1 = festivalABM.traer(idF1), f2 = festivalABM.traer(idF2), f4 = festivalABM.traer(idF4), f5 = festivalABM.traer(idF5);
-            System.out.println("Festivales creados: " + f1 + " | " + f2 + " | " + festivalABM.traer(idF3) + " | " + f4 + " | " + f5);
+
+            System.out.println("\n--- Festivales Creados ---");
+            Festival[] listaFestivales = {f1, f2, festivalABM.traer(idF3), f4, f5};
+            for (Festival fest : listaFestivales) {
+                System.out.println("  • " + fest.getNombre() + " (" + fest.getTemporada()+ ") | Desde: " + fest.getFechaInicio() + " Hasta: " + fest.getFechaFin());
+            }
 
             // 7. PEDIDOS E ITEMS
             long[] idsPed = {
@@ -160,6 +241,7 @@ public class TestFestival {
             itemPedidoABM.agregar(ped[6], p[9], 5, p[9].getPrecioVenta());
             itemPedidoABM.agregar(ped[7], p[3], 2, p[3].getPrecioVenta());
 
+            System.out.println("\n--- Pedidos e Items Registrados ---");
             for (int i = 0; i < 8; i++) {
                 System.out.println("Pedido " + (i + 1) + " con items: " + pedidoABM.traerConItems(idsPed[i]));
             }
@@ -175,23 +257,29 @@ public class TestFestival {
             Set<PuestoDesarmable> puestosFiltrados = puestoABM.traerPuestos(1, 60, 5.0, 1);
             System.out.println("Puestos encontrados: " + puestosFiltrados.size());
             for (PuestoDesarmable pdItem : puestosFiltrados) {
-                System.out.println("-> " + pdItem.getNombreComercial() + " | Carpas: " + pdItem.getCantidadCarpas() + " | Montaje: " + pdItem.getTiempoMontajeMin() + " min | Superficie: " + pdItem.getSuperficieM2() + " m2");
+                System.out.println("-> " + pdItem.getNombreComercial() + " [" + pdItem.getCodigo() + "] | Carpas: " + pdItem.getCantidadCarpas() + " | Montaje: " + pdItem.getTiempoMontajeMin() + " min | Superficie: " + pdItem.getSuperficieM2() + " m2");
             }
 
             System.out.println("\n--- CONSULTA 2: UNIDADES DE VENTA POR MÍNIMO 1 DE STAFF DE FESTIVAL ---");
             Set<UnidadVenta> minStaff1 = festivalABM.traerUnidadesVentaPorStaffDeFestival(1);
             System.out.println("Unidades encontradas: " + minStaff1.size());
-            for (UnidadVenta u : minStaff1) System.out.println("-> " + u.getNombreComercial() + " | Código: " + u.getCodigo());
+            for (UnidadVenta u : minStaff1) {
+                System.out.println("-> " + u.getNombreComercial() + " [" + u.getCodigo() + "]");
+            }
 
             System.out.println("\n--- CONSULTA 3: UNIDADES DE VENTA POR MÍNIMO 2 DE STAFF DE FESTIVAL ---");
             Set<UnidadVenta> minStaff2 = festivalABM.traerUnidadesVentaPorStaffDeFestival(2);
             System.out.println("Unidades encontradas: " + minStaff2.size());
-            for (UnidadVenta u : minStaff2) System.out.println("-> " + u.getNombreComercial() + " | Código: " + u.getCodigo());
+            for (UnidadVenta u : minStaff2) {
+                System.out.println("-> " + u.getNombreComercial() + " [" + u.getCodigo() + "]");
+            }
 
             System.out.println("\n--- CONSULTA 4: UNIDADES DE VENTA POR MÍNIMO 3 DE STAFF DE FESTIVAL ---");
             Set<UnidadVenta> minStaff3 = festivalABM.traerUnidadesVentaPorStaffDeFestival(3);
             System.out.println("Unidades encontradas: " + minStaff3.size());
-            for (UnidadVenta u : minStaff3) System.out.println("-> " + u.getNombreComercial() + " | Código: " + u.getCodigo());
+            for (UnidadVenta u : minStaff3) {
+                System.out.println("-> " + u.getNombreComercial() + " [" + u.getCodigo() + "]");
+            }
 
             System.out.println("\n===========================================================");
             System.out.println("---------- ESTUDIANTE SALVATIERRA, FEDERICO MATIAS ----------");
@@ -200,12 +288,16 @@ public class TestFestival {
             System.out.println("\n--- CONSULTA 1: COCINEROS ASIGNADOS A FESTIVAL POR RANGO DE FECHAS ---");
             Set<Cocinero> cocinerosPorFecha = cocineroABM.traerCocinerosPorFestivalYFechas(idF1, LocalDate.of(1900, 5, 1), LocalDate.of(2026, 9, 20));
             System.out.println("Cocineros encontrados: " + cocinerosPorFecha.size());
-            for (Cocinero cocItem : cocinerosPorFecha) System.out.println("-> " + cocItem.getNombre() + " " + cocItem.getApellido() + " | Especialidad: " + cocItem.getEspecialidad());
+            for (Cocinero cocItem : cocinerosPorFecha) {
+                System.out.println("-> " + cocItem.getNombre() + " " + cocItem.getApellido() + " | Especialidad: " + cocItem.getEspecialidad());
+            }
 
             System.out.println("\n--- CONSULTA 2: UNIDADES DE VENTA FILTRADAS POR DATOS DE STAFF ---");
             Set<UnidadVenta> unidadesPorStaff = unidadVentaABM.traerUnidadesVentaPorDatosStaff("68555666", LocalDate.of(1985, 9, 3), LocalDate.of(2022, 3, 15));
             System.out.println("Unidades encontradas: " + unidadesPorStaff.size());
-            for (UnidadVenta u : unidadesPorStaff) System.out.println("-> " + u.getNombreComercial() + " | Código: " + u.getCodigo() + " | Superficie: " + u.getSuperficieM2() + " m2");
+            for (UnidadVenta u : unidadesPorStaff) {
+                System.out.println("-> " + u.getNombreComercial() + " [" + u.getCodigo() + "] | Superficie: " + u.getSuperficieM2() + " m2");
+            }
 
             System.out.println("\n==============================================");
             System.out.println("---------- ESTUDIANTE SOLOAGA, LEONEL ----------");
@@ -216,15 +308,19 @@ public class TestFestival {
             if (unidad == null) {
                 System.out.println("No existe la unidad de venta con ID: " + idsFT[0]);
             } else {
-                System.out.println("Unidad: " + unidad.getNombreComercial() + " | Código: " + unidad.getCodigo());
+                System.out.println("Unidad: " + unidad.getNombreComercial() + " [" + unidad.getCodigo() + "]");
                 System.out.println("Platos encontrados: " + unidad.getPlatosOfrecidos().size());
-                for (Plato plItem : unidad.getPlatosOfrecidos()) System.out.println("-> " + plItem.getNombre() + " | Precio venta: $" + plItem.getPrecioVenta() + " | Costo producción: $" + plItem.getCostoProduccion());
+                for (Plato plItem : unidad.getPlatosOfrecidos()) {
+                    System.out.println("-> " + plItem.getNombre() + " | Precio: $" + plItem.getPrecioVenta());
+                }
             }
 
             System.out.println("\n--- CONSULTA 2: FOODTRACKS QUE REQUIEREN ELECTRICIDAD ---");
             List<FoodTrack> foodTracks = unidadVentaABM.traerFoodTracksConElectricidad(true);
             System.out.println("FoodTracks encontrados: " + foodTracks.size());
-            for (FoodTrack fItem : foodTracks) System.out.println("-> " + fItem.getNombreComercial() + " | Código: " + fItem.getCodigo() + " | Superficie: " + fItem.getSuperficieM2() + " m2 | Patente: " + fItem.getPatente() + " | Requiere electricidad: " + fItem.isRequiereElectricidad());
+            for (FoodTrack fItem : foodTracks) {
+                System.out.println("-> " + fItem.getNombreComercial() + " [" + fItem.getCodigo() + "] | Superficie: " + fItem.getSuperficieM2() + " m2 | Patente: " + fItem.getPatente() + " | Requiere electricidad: " + fItem.isRequiereElectricidad());
+            }
 
             System.out.println("\n================================================");
             System.out.println("---------- ESTUDIANTE ANA BELEN VAZQUEZ ----------");
@@ -233,12 +329,16 @@ public class TestFestival {
             System.out.println("\n--- CONSULTA 1: FOODTRACKS CON SUPERFICIE MINIMA ---");
             List<FoodTrack> foodTracksSuperficie = unidadVentaABM.traerFoodTracksConSuperficieMinima(10.0);
             System.out.println("FoodTracks encontrados: " + foodTracksSuperficie.size());
-            for (FoodTrack fItem : foodTracksSuperficie) System.out.println("-> " + fItem.getNombreComercial() + " | Código: " + fItem.getCodigo() + " | Superficie: " + fItem.getSuperficieM2() + " m2 | Patente: " + fItem.getPatente());
+            for (FoodTrack fItem : foodTracksSuperficie) {
+                System.out.println("-> " + fItem.getNombreComercial() + " [" + fItem.getCodigo() + "] | Superficie: " + fItem.getSuperficieM2() + " m2 | Patente: " + fItem.getPatente());
+            }
 
             System.out.println("\n--- CONSULTA 2: UNIDADES DE VENTA CON MÍNIMO DE PEDIDOS ---");
             List<UnidadVenta> unidadesConPedidos = unidadVentaABM.traerUnidadesVentaConMinimoPedidos(1);
             System.out.println("Unidades encontradas: " + unidadesConPedidos.size());
-            for (UnidadVenta u : unidadesConPedidos) System.out.println("-> " + u.getNombreComercial() + " | Código: " + u.getCodigo());
+            for (UnidadVenta u : unidadesConPedidos) {
+                System.out.println("-> " + u.getNombreComercial() + " [" + u.getCodigo() + "]");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

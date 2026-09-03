@@ -14,7 +14,7 @@ public class FoodTrackDao {
 	private Transaction tx;
 
 	private static FoodTrackDao dao = null;
-
+	
 	protected FoodTrackDao() { }
 
 	public static FoodTrackDao getIntancia() {

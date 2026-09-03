@@ -6,10 +6,10 @@ import java.util.Set;
 
 public abstract class UnidadVenta {
 
-    private Long id;
-    private String codigo;
-    private String nombreComercial;
-    private double superficieM2;
+	protected Long id;
+	protected String codigo;
+	protected String nombreComercial;
+	public double superficieM2;
 
     private Set<Pedido> pedidos = new HashSet<>();
     private Set<Plato> platosOfrecidos = new HashSet<>();
@@ -20,11 +20,11 @@ public abstract class UnidadVenta {
     public UnidadVenta() {
     }
 
-    public UnidadVenta(Long id, String codigo, String nombreComercial, double superficieM2,
+    public UnidadVenta( String codigo, String nombreComercial, double superficieM2,
                         Set<Pedido> pedidos, Set<Plato> platosOfrecidos,
                         Set<Staff> staffPuesto, Staff responsable) {
 
-        this.id = id;
+        
         this.codigo = codigo;
         this.nombreComercial = nombreComercial;
         this.superficieM2 = superficieM2;
@@ -38,7 +38,7 @@ public abstract class UnidadVenta {
         return id;
     }
 
-    public void setId(Long id) {
+    protected void setId(Long id) {
         this.id = id;
     }
 

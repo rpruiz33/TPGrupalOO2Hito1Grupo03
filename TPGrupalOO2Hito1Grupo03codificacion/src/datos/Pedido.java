@@ -13,12 +13,12 @@ public class Pedido {
     private Festival festival;
     private UnidadVenta unidadVenta;
 
-    public Pedido() {
+    public  Pedido() {
     }
 
-    public Pedido(Long id, Set<ItemPedido> items, LocalDate fecha,
+    public Pedido( Set<ItemPedido> items, LocalDate fecha,
                   Festival festival, UnidadVenta unidadVenta) {
-        this.id = id;
+        
         this.items = items;
         this.fecha = fecha;
         this.festival = festival;
@@ -50,7 +50,7 @@ public class Pedido {
         return id;
     }
 
-    public void setId(Long id) {
+    protected void setId(Long id) {
         this.id = id;
     }
 

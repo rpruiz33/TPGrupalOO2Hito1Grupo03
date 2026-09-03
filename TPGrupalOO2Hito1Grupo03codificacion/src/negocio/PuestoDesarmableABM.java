@@ -39,7 +39,7 @@ public class PuestoDesarmableABM {
         if (codigo == null || codigo.length() != 10) {
             throw new Exception("ERROR el codigo de unidad debe tener 10 caracteres");
         }
-        PuestoDesarmable p = new PuestoDesarmable(null, codigo, nombreComercial, superficieM2,
+        PuestoDesarmable p = new PuestoDesarmable(codigo, nombreComercial, superficieM2,
                 new HashSet<Pedido>(), new HashSet<Plato>(), new HashSet<Staff>(), responsable,
                 cantidadCarpas, tiempoMontajeMin);
         return dao.agregar(p);

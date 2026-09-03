@@ -8,6 +8,7 @@ public class ItemPedido {
     private Plato plato;
     private long cantidad;
     private double precioUnidad;
+    
     public ItemPedido() {
     }
 

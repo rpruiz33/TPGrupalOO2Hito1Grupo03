@@ -8,9 +8,9 @@ public class Cocinero extends Staff {
 
     public Cocinero() {  }
 
-    public Cocinero(Long id, String nombre, String apellido, String dni, LocalDate fechaNacimiento,
+    public Cocinero(String nombre, String apellido, String dni, LocalDate fechaNacimiento,
                      LocalDate fechaIngreso, double sueldoBase, String especialidad) {
-        super(id, nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase);
+        super(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase);
         this.especialidad = especialidad;
     }
     

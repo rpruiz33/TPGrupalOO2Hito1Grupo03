@@ -7,12 +7,12 @@ public class FoodTrack extends UnidadVenta {
     private String patente;
     private boolean requiereElectricidad;
 
-    public FoodTrack() { }
+    protected  FoodTrack() { }
 
-    public FoodTrack(Long id, String codigo, String nombreComercial, double superficieM2,
+    public FoodTrack(String codigo, String nombreComercial, double superficieM2,
                       Set<Pedido> pedidos, Set<Plato> platosOfrecidos, Set<Staff> staffPuesto, Staff responsable,
                       String patente, boolean requiereElectricidad) {
-        super(id, codigo, nombreComercial, superficieM2, pedidos, platosOfrecidos, staffPuesto, responsable);
+        super(codigo, nombreComercial, superficieM2, pedidos, platosOfrecidos, staffPuesto, responsable);
         this.patente = patente;
         this.requiereElectricidad = requiereElectricidad;
     }

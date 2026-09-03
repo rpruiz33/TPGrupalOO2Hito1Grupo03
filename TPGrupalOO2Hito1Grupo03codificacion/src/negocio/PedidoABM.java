@@ -28,7 +28,7 @@ public class PedidoABM {
     }
 
     public int agregar(LocalDate fecha, Festival festival, UnidadVenta unidadVenta) throws Exception {
-        Pedido p = new Pedido(null, new HashSet<>(), fecha, festival, unidadVenta);
+        Pedido p = new Pedido(new HashSet<>(), fecha, festival, unidadVenta);
         return dao.agregar(p);
     }
 

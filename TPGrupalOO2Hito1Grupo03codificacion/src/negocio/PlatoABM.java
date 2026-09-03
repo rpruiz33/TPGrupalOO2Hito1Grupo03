@@ -1,6 +1,7 @@
 package negocio;
 
 import dao.PlatoDao;
+import datos.Cocinero;
 import datos.Plato;
 
 public class PlatoABM {
@@ -27,7 +28,7 @@ public class PlatoABM {
 
     public int agregar(String nombre, double precioVenta, double costoProduccion) throws Exception {
         if (traer(nombre) != null) throw new Exception("ERROR ya existe un plato con nombre: " + nombre);
-        Plato p = new Plato(null, nombre, precioVenta, costoProduccion);
+        Plato p = new Plato(nombre, precioVenta,costoProduccion);
         return dao.agregar(p);
     }
 

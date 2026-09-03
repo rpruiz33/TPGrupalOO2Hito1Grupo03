@@ -11,8 +11,8 @@ public class Plato {
     public Plato() {
     }
 
-    public Plato(Long id, String nombre, double precioVenta, double costoProduccion) {
-        this.id = id;
+    public Plato(String nombre, double precioVenta, double costoProduccion) {
+        
         this.nombre = nombre;
         this.precioVenta = precioVenta;
         this.costoProduccion = costoProduccion;
@@ -54,7 +54,7 @@ public class Plato {
         return id;
     }
 
-    public void setId(Long id) {
+    protected void setId(Long id) {
         this.id = id;
     }
 

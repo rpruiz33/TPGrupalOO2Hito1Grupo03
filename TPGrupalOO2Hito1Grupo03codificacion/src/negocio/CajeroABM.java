@@ -30,7 +30,7 @@ public class CajeroABM {
     public int agregar(String nombre, String apellido, String dni, LocalDate fechaNacimiento,
             LocalDate fechaIngreso, double sueldoBase, String turno) throws Exception {
         if (staffDao.traerStaff(dni) != null) throw new Exception("ERROR ya existe staff con DNI: " + dni);
-        Cajero c = new Cajero(null, nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase, turno);
+        Cajero c = new Cajero(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase, turno);
         return dao.agregar(c);
     }
 

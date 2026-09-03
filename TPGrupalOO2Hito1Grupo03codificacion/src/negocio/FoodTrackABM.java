@@ -32,23 +32,22 @@ public class FoodTrackABM {
 
     
     public long agregar(String codigo, String nombreComercial, double superficieM2, Staff responsable,
-                        String patente, boolean requiereElectricidad) throws Exception {
-        
-        
-        if (codigo == null || codigo.length() != 10) {
-            throw new Exception("ERROR el codigo de unidad debe tener 10 caracteres");
-        }
-        
-        if (dao.traerFoodTrackPorCodigo(codigo) != null) {
-            throw new Exception("ERROR ya existe una unidad con codigo: " + codigo);
-        }
+            String patente, boolean requiereElectricidad) throws Exception {
 
-        FoodTrack f = new FoodTrack(null, codigo, nombreComercial, superficieM2,
-                new HashSet<Pedido>(), new HashSet<Plato>(), new HashSet<Staff>(), responsable,
-                patente, requiereElectricidad);
-                
-        return dao.agregar(f);
-    }
+    	if (codigo == null || codigo.length() != 10) {
+    		throw new Exception("ERROR el codigo de unidad debe tener 10 caracteres");
+    	}
+    	
+    	if (dao.traerFoodTrackPorCodigo(codigo) != null) {
+    		throw new Exception("ERROR ya existe una unidad con codigo: " + codigo);
+    	}
+
+    	FoodTrack f = new FoodTrack(nombreComercial, codigo, superficieM2,
+    			new HashSet<Pedido>(), new HashSet<Plato>(), new HashSet<Staff>(), responsable,
+    			patente, requiereElectricidad);
+    
+    	return dao.agregar(f);
+}
 
     public void modificar(FoodTrack f) throws Exception {
         dao.actualizar(f);

@@ -4,19 +4,19 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public abstract class Staff {
-    private Long id;
-    private String nombre;
-    private String apellido;
-    private String dni;
-    private LocalDate fechaNacimiento;
-    private LocalDate fechaIngreso;
-    private double sueldoBase;
+	protected Long id;
+	protected String nombre;
+	protected String apellido;
+	protected String dni;
+	protected LocalDate fechaNacimiento;
+	protected LocalDate fechaIngreso;
+	protected double sueldoBase;
 
-    public Staff() { }
+	public Staff() { }
 
-    public Staff(Long id, String nombre, String apellido, String dni, LocalDate fechaNacimiento,
+    public Staff( String nombre, String apellido, String dni, LocalDate fechaNacimiento,
                  LocalDate fechaIngreso, double sueldoBase) {
-        this.id = id;
+        
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -31,7 +31,7 @@ public abstract class Staff {
 		return id;
 	}
 
-	public void setId(Long id) {
+    protected void setId(Long id) {
 		this.id = id;
 	}
 
