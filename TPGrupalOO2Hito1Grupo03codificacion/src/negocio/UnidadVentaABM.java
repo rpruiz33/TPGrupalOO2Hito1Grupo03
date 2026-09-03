@@ -50,11 +50,11 @@ public class UnidadVentaABM {
         return dao.traerFoodTracksConElectricidad(requiereElectricidad);
     }
 
-    public List<FoodTrack> traerFoodTracksConSuperficieMinima(double minSuperficie) {
+    public Set<FoodTrack> traerFoodTracksConSuperficieMinima(double minSuperficie) {
         return dao.traerFoodTracksPorSuperficieMinima(minSuperficie);
     }
 
-    public List<UnidadVenta> traerUnidadesVentaConMinimoPedidos(long minPedidos) {
+    public Set<UnidadVenta> traerUnidadesVentaConMinimoPedidos(long minPedidos) {
         return dao.traerUnidadesVentaConMinimoPedidos(minPedidos);
     }
 
