@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -86,26 +87,32 @@ public class CajeroDao {
 		return objeto;
 	}
 
-	public List<Cajero> traerCajeros() throws HibernateException {
-		List<Cajero> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Cajero c order by c.apellido asc, c.nombre asc", Cajero.class).list();
-		} finally {
-			session.close();
-		}
-		return lista;
+	public Set<Cajero> traerCajeros() throws HibernateException {
+	    Set<Cajero> lista = null;
+	    try {
+	        iniciaOperacion();
+	        lista = new java.util.LinkedHashSet<>(
+	            session.createQuery("from Cajero c order by c.apellido asc, c.nombre asc", Cajero.class)
+	                   .getResultList()
+	        );
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 
-	public List<Cajero> traerCajerosPorTurno(String turno) throws HibernateException {
-		List<Cajero> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Cajero c where c.turno =:turno", Cajero.class)
-					.setParameter("turno", turno).list();
-		} finally {
-			session.close();
-		}
-		return lista;
+	public Set<Cajero> traerCajerosPorTurno(String turno) throws HibernateException {
+	    Set<Cajero> lista = null;
+	    try {
+	        iniciaOperacion();
+	        lista = new java.util.HashSet<>(
+	            session.createQuery("from Cajero c where c.turno =:turno", Cajero.class)
+	                   .setParameter("turno", turno)
+	                   .getResultList()
+	        );
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 }

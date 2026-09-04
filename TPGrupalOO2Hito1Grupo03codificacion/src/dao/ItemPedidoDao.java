@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -105,16 +106,18 @@ public class ItemPedidoDao {
         return objeto;
     }
 
-    public List<ItemPedido> traerItemsPedido() {
-        List<ItemPedido> lista = null;
+    public Set<ItemPedido> traerItemsPedido() {
+        Set<ItemPedido> lista = null;
 
         try {
             iniciaOperacion();
 
-            lista = session.createQuery(
+            lista = new java.util.HashSet<>(
+                session.createQuery(
                     "from ItemPedido",
                     ItemPedido.class
-            ).list();
+                ).getResultList()
+            );
 
         } finally {
             session.close();

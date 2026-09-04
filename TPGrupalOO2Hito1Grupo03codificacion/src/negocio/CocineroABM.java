@@ -49,11 +49,11 @@ public class CocineroABM {
         dao.eliminar(c);
     }
 
-    public List<Cocinero> traer() {
+    public Set<Cocinero> traer() {
         return dao.traerCocineros();
     }
 
-    public List<Cocinero> traerPorEspecialidad(String especialidad) {
+    public Set<Cocinero> traerPorEspecialidad(String especialidad) {
         return dao.traerCocinerosPorEspecialidad(especialidad);
     }
 

@@ -74,25 +74,32 @@ public class CocineroDao {
 		}
 		return objeto;
 	}
-	public List<Cocinero> traerCocineros() throws HibernateException {
-		List<Cocinero> lista=null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Cocinero c order by c.apellido asc, c.nombre asc", Cocinero.class).list();
-		} finally {
-			session.close();
-		}
-		return lista;
+	public Set<Cocinero> traerCocineros() throws HibernateException {
+	    Set<Cocinero> lista = null;
+	    try {
+	        iniciaOperacion();
+	        lista = new java.util.LinkedHashSet<>(
+	            session.createQuery("from Cocinero c order by c.apellido asc, c.nombre asc", Cocinero.class)
+	                   .getResultList()
+	        );
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
-	public List<Cocinero> traerCocinerosPorEspecialidad(String especialidad) throws HibernateException {
-		List<Cocinero> lista=null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Cocinero c where c.especialidad =:especialidad", Cocinero.class).setParameter("especialidad", especialidad).list();
-		} finally {
-			session.close();
-		}
-		return lista;
+	public Set<Cocinero> traerCocinerosPorEspecialidad(String especialidad) throws HibernateException {
+	    Set<Cocinero> lista = null;
+	    try {
+	        iniciaOperacion();
+	        lista = new java.util.HashSet<>(
+	            session.createQuery("from Cocinero c where c.especialidad =:especialidad", Cocinero.class)
+	                   .setParameter("especialidad", especialidad)
+	                   .getResultList()
+	        );
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 
 	public Set<Cocinero> traerCocinerosPorFestivalYFechas(Long idFestival, LocalDate fechaInicio, LocalDate fechaFin) throws HibernateException {

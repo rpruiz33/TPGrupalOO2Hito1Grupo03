@@ -1,7 +1,6 @@
 package dao;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Hibernate;
@@ -14,251 +13,250 @@ import datos.UnidadVenta;
 
 public class UnidadVentaDao {
 
-	private static Session session;
-	private Transaction tx;
+    private static Session session;
+    private Transaction tx;
 
-	private static UnidadVentaDao dao = null;
+    private static UnidadVentaDao dao = null;
 
-	
-	protected UnidadVentaDao() { }
+    protected UnidadVentaDao() { }
 
-	public static UnidadVentaDao getIntancia() {
-		if (dao == null) {
-			dao = new UnidadVentaDao();
-		}
-		return dao;
-	}
+    public static UnidadVentaDao getIntancia() {
+        if (dao == null) {
+            dao = new UnidadVentaDao();
+        }
+        return dao;
+    }
 
-	private void iniciaOperacion() throws HibernateException {
-		session = HibernateUtil.getSessionFactory().openSession();
-		tx = session.beginTransaction();
-	}
+    private void iniciaOperacion() throws HibernateException {
+        session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+    }
 
-	private void manejaExcepcion(HibernateException he) throws HibernateException {
-		tx.rollback();
-		throw new HibernateException("ERROR en la capa de acceso a datos", he);
-	}
+    private void manejaExcepcion(HibernateException he) throws HibernateException {
+        tx.rollback();
+        throw new HibernateException("ERROR en la capa de acceso a datos", he);
+    }
 
+    public long agregar(UnidadVenta objeto) {
+        long id = 0;
+        try {
+            iniciaOperacion();
+            id = (long) session.save(objeto);
+            tx.commit();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            session.close();
+        }
+        return id;
+    }
 
-	public long agregar(UnidadVenta objeto) {
-	    long id = 0;
-	    try {
-	        iniciaOperacion();
-	        id = (long) session.save(objeto);
-	        tx.commit();
-	    } catch (HibernateException he) {
-	        manejaExcepcion(he);
-	        throw he;
-	    } finally {
-	        session.close();
-	    }
-	    return id;
-	}
+    public void actualizar(UnidadVenta objeto) {
+        try {
+            iniciaOperacion();
+            session.update(objeto);
+            tx.commit();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            session.close();
+        }
+    }
 
-	public void actualizar(UnidadVenta objeto) {
-		try {
-			iniciaOperacion();
-			session.update(objeto);
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			session.close();
-		}
-	}
+    public void eliminar(UnidadVenta objeto) {
+        try {
+            iniciaOperacion();
+            session.delete(objeto);
+            tx.commit();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            session.close();
+        }
+    }
 
-	public void eliminar(UnidadVenta objeto) {
-		try {
-			iniciaOperacion();
-			session.delete(objeto);
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			session.close();
-		}
-	}
-	
-	public UnidadVenta traer(long idUnidadVenta) {
-	    UnidadVenta objeto = null;
-	    try {
-	        iniciaOperacion();
-	        objeto = session.get(UnidadVenta.class, idUnidadVenta);
-	    } finally {
-	        session.close();
-	    }
-	    return objeto;
-	}
+    public UnidadVenta traer(long idUnidadVenta) {
+        UnidadVenta objeto = null;
+        try {
+            iniciaOperacion();
+            objeto = session.get(UnidadVenta.class, idUnidadVenta);
+        } finally {
+            session.close();
+        }
+        return objeto;
+    }
 
-	public Set<UnidadVenta> traerUnidadesVentaPorDatosStaff(String dni, LocalDate fechaNacimiento, LocalDate fechaIngreso) throws HibernateException {
-	    Set<UnidadVenta> lista = null;
-	    try {
-	        iniciaOperacion();
-	        String hql = "from UnidadVenta u "
-	                   + "where u in (select u1 from UnidadVenta u1 left join u1.staffPuesto sp where sp.dni = :dni and sp.fechaNacimiento = :fechaNacimiento and sp.fechaIngreso = :fechaIngreso) "
-	                   + "or (u.responsable.dni = :dni and u.responsable.fechaNacimiento = :fechaNacimiento and u.responsable.fechaIngreso = :fechaIngreso)";
+    public Set<UnidadVenta> traerUnidadesVentaPorDatosStaff(String dni, LocalDate fechaNacimiento, LocalDate fechaIngreso) throws HibernateException {
+        Set<UnidadVenta> lista = null;
+        try {
+            iniciaOperacion();
+            String hql = "from UnidadVenta u "
+                       + "where u in (select u1 from UnidadVenta u1 left join u1.staffPuesto sp where sp.dni = :dni and sp.fechaNacimiento = :fechaNacimiento and sp.fechaIngreso = :fechaIngreso) "
+                       + "or (u.responsable.dni = :dni and u.responsable.fechaNacimiento = :fechaNacimiento and u.responsable.fechaIngreso = :fechaIngreso)";
 
-	        lista = new java.util.HashSet<>(
-	            session.createQuery(hql, UnidadVenta.class)
-	                   .setParameter("dni", dni)
-	                   .setParameter("fechaNacimiento", fechaNacimiento)
-	                   .setParameter("fechaIngreso", fechaIngreso)
-	                   .getResultList()
-	        );
+            lista = new java.util.HashSet<>(
+                session.createQuery(hql, UnidadVenta.class)
+                       .setParameter("dni", dni)
+                       .setParameter("fechaNacimiento", fechaNacimiento)
+                       .setParameter("fechaIngreso", fechaIngreso)
+                       .getResultList()
+            );
 
-	    } catch (HibernateException he) {
-	        manejaExcepcion(he);
-	        throw he;
-	    } finally {
-	        session.close();
-	    }
-	    return lista;
-	}
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            session.close();
+        }
+        return lista;
+    }
 
-	public UnidadVenta traerUnidadVenta(long id) {
-		UnidadVenta objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (UnidadVenta) session.get(UnidadVenta.class, id);
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
-	public List<UnidadVenta> traerUnidadVentas() throws HibernateException {
-		List<UnidadVenta> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from UnidadVenta u order by u.nombreComercial asc", UnidadVenta.class).list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
-	public List<UnidadVenta> traerUnidadVentasPorResponsable(long idStaff) throws HibernateException {
-		List<UnidadVenta> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from UnidadVenta u where u.responsable.id =:idStaff", UnidadVenta.class)
-					.setParameter("idStaff", idStaff).list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	public UnidadVenta traerUnidadVentaConStaff(long id) {
-		UnidadVenta objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (UnidadVenta) session.get(UnidadVenta.class, id);
-			if (objeto != null) {
-				Hibernate.initialize(objeto.getStaffPuesto());
-			}
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
+    public UnidadVenta traerUnidadVenta(long id) {
+        UnidadVenta objeto = null;
+        try {
+            iniciaOperacion();
+            objeto = (UnidadVenta) session.get(UnidadVenta.class, id);
+        } finally {
+            session.close();
+        }
+        return objeto;
+    }
 
-	public UnidadVenta traerUnidadVentaConPlatos(long idUnidadVenta) throws HibernateException {
-	    UnidadVenta unidad = null;
-	    try {
-	        iniciaOperacion();
-	        String hql = "from UnidadVenta u left join fetch u.platosOfrecidos where u.id = :id";
-	        unidad = (UnidadVenta) session.createQuery(hql)
-	                .setParameter("id", idUnidadVenta)
-	                .uniqueResult();
-	    } catch (HibernateException he) {
-	        manejaExcepcion(he);
-	        throw he;
-	    } finally {
-	        session.close();
-	    }
-	    return unidad;
-	}
-	
-	public Set<FoodTrack> traerFoodTracksConElectricidad(boolean requiereElectricidad) throws HibernateException {
-	    Set<FoodTrack> lista = null;
-	    try {
-	        iniciaOperacion();
-	        String hql = "from FoodTrack f where f.requiereElectricidad = :requiere";
-	        lista = new java.util.LinkedHashSet<>(
-	        		session.createQuery(hql, FoodTrack.class)
-	                .setParameter("requiere", requiereElectricidad)
-	                .getResultList()
-	                );
-	    } catch (HibernateException he) {
-	        manejaExcepcion(he);
-	        throw he;
-	    } finally {
-	        session.close();
-	    }
-	    return lista;
-	}
-	//Ana
-	public Set<FoodTrack> traerFoodTracksPorSuperficieMinima(double minSuperficie) throws HibernateException {
-	    Set<FoodTrack> lista = null;
+    public Set<UnidadVenta> traerUnidadVentas() throws HibernateException {
+        Set<UnidadVenta> lista = null;
+        try {
+            iniciaOperacion();
+            lista = new java.util.LinkedHashSet<>(
+                session.createQuery("from UnidadVenta u order by u.nombreComercial asc", UnidadVenta.class)
+                       .getResultList()
+            );
+        } finally {
+            session.close();
+        }
+        return lista;
+    }
 
-	    try {
-	        iniciaOperacion();
+    public Set<UnidadVenta> traerUnidadVentasPorResponsable(long idStaff) throws HibernateException {
+        Set<UnidadVenta> lista = null;
+        try {
+            iniciaOperacion();
+            lista = new java.util.HashSet<>(
+                session.createQuery("from UnidadVenta u where u.responsable.id =:idStaff", UnidadVenta.class)
+                       .setParameter("idStaff", idStaff)
+                       .getResultList()
+            );
+        } finally {
+            session.close();
+        }
+        return lista;
+    }
 
-	        String hql = "from FoodTrack f "
-	                   + "where f.superficieM2 >= :minSuperficie "
-	                   + "order by f.superficieM2 desc";
+    public UnidadVenta traerUnidadVentaConStaff(long id) {
+        UnidadVenta objeto = null;
+        try {
+            iniciaOperacion();
+            objeto = (UnidadVenta) session.get(UnidadVenta.class, id);
+            if (objeto != null) {
+                Hibernate.initialize(objeto.getStaffPuesto());
+            }
+        } finally {
+            session.close();
+        }
+        return objeto;
+    }
 
-	        lista = new java.util.LinkedHashSet<>(
-	                session.createQuery(hql, FoodTrack.class)
-	                       .setParameter("minSuperficie", minSuperficie)
-	                       .getResultList()
-	            );
+    public UnidadVenta traerUnidadVentaConPlatos(long idUnidadVenta) throws HibernateException {
+        UnidadVenta unidad = null;
+        try {
+            iniciaOperacion();
+            String hql = "from UnidadVenta u left join fetch u.platosOfrecidos where u.id = :id";
+            unidad = (UnidadVenta) session.createQuery(hql)
+                    .setParameter("id", idUnidadVenta)
+                    .uniqueResult();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            session.close();
+        }
+        return unidad;
+    }
 
-	    } catch (HibernateException he) {
-	    	
-	        manejaExcepcion(he);
-	        throw he;
-	        
-	    } finally {
-	    	
-	        session.close();
-	    }
+    public Set<FoodTrack> traerFoodTracksConElectricidad(boolean requiereElectricidad) throws HibernateException {
+        Set<FoodTrack> lista = null;
+        try {
+            iniciaOperacion();
+            String hql = "from FoodTrack f where f.requiereElectricidad = :requiere";
+            lista = new java.util.LinkedHashSet<>(
+                    session.createQuery(hql, FoodTrack.class)
+                    .setParameter("requiere", requiereElectricidad)
+                    .getResultList()
+                    );
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            session.close();
+        }
+        return lista;
+    }
 
-	    return lista;
-	}
-   //Ana
-	public Set<UnidadVenta> traerUnidadesVentaConMinimoPedidos(long minPedidos) throws HibernateException {
-	    Set<UnidadVenta> lista = null;
+    //Ana
+    public Set<FoodTrack> traerFoodTracksPorSuperficieMinima(double minSuperficie) throws HibernateException {
+        Set<FoodTrack> lista = null;
 
-	    try {
-	        iniciaOperacion();
+        try {
+            iniciaOperacion();
 
-	        String hql = "select u from UnidadVenta u "
-	                   + "join u.pedidos p "
-	                   + "group by u "
-	                   + "having count(p) >= :minPedidos "
-	                   + "order by u.nombreComercial asc";
+            String hql = "from FoodTrack f "
+                       + "where f.superficieM2 >= :minSuperficie "
+                       + "order by f.superficieM2 desc";
 
+            lista = new java.util.LinkedHashSet<>(
+                    session.createQuery(hql, FoodTrack.class)
+                           .setParameter("minSuperficie", minSuperficie)
+                           .getResultList()
+                );
 
-	        lista = new java.util.HashSet<>(
-	        		session.createQuery(hql, UnidadVenta.class)
-	                       .setParameter("minPedidos", minPedidos)
-	                       .getResultList()
-	            );
-	        
-	    } catch (HibernateException he) {
-	    	
-	        manejaExcepcion(he);
-	        throw he;
-	        
-	    } finally {
-	    	
-	        session.close();
-	    }
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            session.close();
+        }
 
-	    return lista;
-	}
+        return lista;
+    }
+
+    //Ana
+    public Set<UnidadVenta> traerUnidadesVentaConMinimoPedidos(long minPedidos) throws HibernateException {
+        Set<UnidadVenta> lista = null;
+
+        try {
+            iniciaOperacion();
+
+            String hql = "select u from UnidadVenta u "
+                       + "join u.pedidos p "
+                       + "group by u "
+                       + "having count(p) >= :minPedidos "
+                       + "order by u.nombreComercial asc";
+
+            lista = new java.util.HashSet<>(
+                    session.createQuery(hql, UnidadVenta.class)
+                           .setParameter("minPedidos", minPedidos)
+                           .getResultList()
+                );
+
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            session.close();
+        }
+
+        return lista;
+    }
 }
-
-	

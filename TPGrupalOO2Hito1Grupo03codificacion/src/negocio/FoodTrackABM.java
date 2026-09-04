@@ -2,6 +2,7 @@ package negocio;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import dao.FoodTrackDao;
 import dao.UnidadVentaDao;
@@ -59,11 +60,11 @@ public class FoodTrackABM {
         dao.eliminar(f);
     }
 
-    public List<FoodTrack> traer() {
+    public Set<FoodTrack> traer() {
         return dao.traerFoodTracks();
     }
 
-    public List<FoodTrack> traerPorElectricidad(boolean requiereElectricidad) {
+    public Set<FoodTrack> traerPorElectricidad(boolean requiereElectricidad) {
         return dao.traerFoodTracksPorElectricidad(requiereElectricidad);
     }
 

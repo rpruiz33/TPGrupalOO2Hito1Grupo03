@@ -55,11 +55,11 @@ public class PuestoDesarmableABM {
         dao.eliminar(p);
     }
 
-    public List<PuestoDesarmable> traer() {
+    public Set<PuestoDesarmable> traer() {
         return dao.traerPuestosDesarmables();
     }
 
-    public List<PuestoDesarmable> traerPorCantidadCarpasMinima(int minimoCarpas) {
+    public Set<PuestoDesarmable> traerPorCantidadCarpasMinima(int minimoCarpas) {
         return dao.traerPuestosPorCantidadCarpasMinima(minimoCarpas);
     }
 

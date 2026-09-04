@@ -100,27 +100,33 @@ public class PuestoDesarmableDao {
 		return objeto;
 	}
 
-	public List<PuestoDesarmable> traerPuestosDesarmables() throws HibernateException {
-		List<PuestoDesarmable> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from PuestoDesarmable p order by p.nombreComercial asc", PuestoDesarmable.class).list();
-		} finally {
-			session.close();
-		}
-		return lista;
+	public Set<PuestoDesarmable> traerPuestosDesarmables() throws HibernateException {
+	    Set<PuestoDesarmable> lista = null;
+	    try {
+	        iniciaOperacion();
+	        lista = new java.util.LinkedHashSet<>(
+	            session.createQuery("from PuestoDesarmable p order by p.nombreComercial asc", PuestoDesarmable.class)
+	                   .getResultList()
+	        );
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 
-	public List<PuestoDesarmable> traerPuestosPorCantidadCarpasMinima(int minimoCarpas) throws HibernateException {
-		List<PuestoDesarmable> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from PuestoDesarmable p where p.cantidadCarpas >=:minimo", PuestoDesarmable.class)
-					.setParameter("minimo", minimoCarpas).list();
-		} finally {
-			session.close();
-		}
-		return lista;
+	public Set<PuestoDesarmable> traerPuestosPorCantidadCarpasMinima(int minimoCarpas) throws HibernateException {
+	    Set<PuestoDesarmable> lista = null;
+	    try {
+	        iniciaOperacion();
+	        lista = new java.util.HashSet<>(
+	            session.createQuery("from PuestoDesarmable p where p.cantidadCarpas >=:minimo", PuestoDesarmable.class)
+	                   .setParameter("minimo", minimoCarpas)
+	                   .getResultList()
+	        );
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 	public Set<PuestoDesarmable> traerPuestos(int minCarpas, int maxTiempoMontaje, double minSuperficie, long minStaff) throws HibernateException {
 	    Set<PuestoDesarmable> lista = null;

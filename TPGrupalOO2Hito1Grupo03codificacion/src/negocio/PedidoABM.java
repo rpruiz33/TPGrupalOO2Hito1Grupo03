@@ -3,6 +3,7 @@ package negocio;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import dao.PedidoDao;
 import datos.Festival;
@@ -42,15 +43,15 @@ public class PedidoABM {
         dao.eliminar(p);
     }
 
-    public List<Pedido> traer() {
+    public Set<Pedido> traer() {
         return dao.traerPedido();
     }
 
-    public List<Pedido> traerPorFestival(long idFestival) {
+    public Set<Pedido> traerPorFestival(long idFestival) {
         return dao.traerPedidoPorFestival(idFestival);
     }
 
-    public List<Pedido> traerPorUnidadVenta(long idunidadVenta) {
+    public Set<Pedido> traerPorUnidadVenta(long idunidadVenta) {
         return dao.traerPedidoPorUnidadVenta(idunidadVenta);
     }
 

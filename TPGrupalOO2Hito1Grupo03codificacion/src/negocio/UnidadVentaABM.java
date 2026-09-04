@@ -26,7 +26,7 @@ public class UnidadVentaABM {
         return dao.traerUnidadVenta(idUnidadVenta);
     }
 
-    public List<UnidadVenta> traer() {
+    public Set<UnidadVenta> traer() {
         return dao.traerUnidadVentas();
     }
 
@@ -34,7 +34,7 @@ public class UnidadVentaABM {
         return dao.traerUnidadVentaConStaff(idUnidadVenta);
     }
 
-    public List<UnidadVenta> traerPorResponsable(long idStaff) {
+    public Set<UnidadVenta> traerPorResponsable(long idStaff) {
         return dao.traerUnidadVentasPorResponsable(idStaff);
     }
 

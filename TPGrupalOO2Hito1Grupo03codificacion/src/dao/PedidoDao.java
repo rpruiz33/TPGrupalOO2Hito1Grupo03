@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -88,26 +89,32 @@ public class PedidoDao {
 		}
 		return objeto;
 	}
-	public List<Pedido> traerPedido() throws HibernateException {
-		List<Pedido> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Pedido p order by p.fecha desc", Pedido.class).list();
-		} finally {
-			session.close();
-		}
-		return lista;
+	public Set<Pedido> traerPedido() throws HibernateException {
+	    Set<Pedido> lista = null;
+	    try {
+	        iniciaOperacion();
+	        lista = new java.util.LinkedHashSet<>(
+	            session.createQuery("from Pedido p order by p.fecha desc", Pedido.class)
+	                   .getResultList()
+	        );
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
-	public List<Pedido> traerPedidoPorFestival(long idFestival) throws HibernateException {
-		List<Pedido> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Pedido p where p.festival.idFestival =:idFestival", Pedido.class)
-					.setParameter("idFestival", idFestival).list();
-		} finally {
-			session.close();
-		}
-		return lista;
+	public Set<Pedido> traerPedidoPorFestival(long idFestival) throws HibernateException {
+	    Set<Pedido> lista = null;
+	    try {
+	        iniciaOperacion();
+	        lista = new java.util.HashSet<>(
+	            session.createQuery("from Pedido p where p.festival.idFestival =:idFestival", Pedido.class)
+	                   .setParameter("idFestival", idFestival)
+	                   .getResultList()
+	        );
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 	public Pedido traerPedidoYItems(long id) {
 		Pedido objeto = null;
@@ -121,14 +128,16 @@ public class PedidoDao {
 		}
 		return objeto;
 	}
-	public List<Pedido> traerPedidoPorUnidadVenta(long idUnidadVenta) {
-	    List<Pedido> lista = null;
+	public Set<Pedido> traerPedidoPorUnidadVenta(long idUnidadVenta) {
+	    Set<Pedido> lista = null;
 	    try {
 	        iniciaOperacion();
 	        String hql = "from Pedido p where p.unidadVenta.id = :idUnidadVenta";
-	        lista = session.createQuery(hql, Pedido.class)
-	                .setParameter("idUnidadVenta", idUnidadVenta)
-	                .list();
+	        lista = new java.util.HashSet<>(
+	            session.createQuery(hql, Pedido.class)
+	                   .setParameter("idUnidadVenta", idUnidadVenta)
+	                   .getResultList()
+	        );
 	    } finally {
 	        session.close();
 	    }

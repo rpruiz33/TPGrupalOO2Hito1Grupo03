@@ -1,6 +1,7 @@
 package negocio;
 
 import java.util.List;
+import java.util.Set;
 
 import dao.ItemPedidoDao;
 import dao.PedidoDao;
@@ -56,7 +57,7 @@ public class ItemPedidoABM {
         dao.eliminar(i);
     }
 
-    public List<ItemPedido> traer() {
+    public Set<ItemPedido> traer() {
         return dao.traerItemsPedido();
     }
 }

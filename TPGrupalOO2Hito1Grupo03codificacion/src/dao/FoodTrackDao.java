@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -98,26 +99,32 @@ public class FoodTrackDao {
 		return objeto;
 	}
 
-	public List<FoodTrack> traerFoodTracks() throws HibernateException {
-		List<FoodTrack> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from FoodTrack f order by f.nombreComercial asc", FoodTrack.class).list();
-		} finally {
-			session.close();
-		}
-		return lista;
+	public Set<FoodTrack> traerFoodTracks() throws HibernateException {
+	    Set<FoodTrack> lista = null;
+	    try {
+	        iniciaOperacion();
+	        lista = new java.util.LinkedHashSet<>(
+	            session.createQuery("from FoodTrack f order by f.nombreComercial asc", FoodTrack.class)
+	                   .getResultList()
+	        );
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 
-	public List<FoodTrack> traerFoodTracksPorElectricidad(boolean requiereElectricidad) throws HibernateException {
-		List<FoodTrack> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from FoodTrack f where f.requiereElectricidad =:req", FoodTrack.class)
-					.setParameter("req", requiereElectricidad).list();
-		} finally {
-			session.close();
-		}
-		return lista;
+	public Set<FoodTrack> traerFoodTracksPorElectricidad(boolean requiereElectricidad) throws HibernateException {
+	    Set<FoodTrack> lista = null;
+	    try {
+	        iniciaOperacion();
+	        lista = new java.util.HashSet<>(
+	            session.createQuery("from FoodTrack f where f.requiereElectricidad =:req", FoodTrack.class)
+	                   .setParameter("req", requiereElectricidad)
+	                   .getResultList()
+	        );
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 }

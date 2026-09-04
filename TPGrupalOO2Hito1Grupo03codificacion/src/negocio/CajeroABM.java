@@ -2,6 +2,7 @@ package negocio;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import dao.CajeroDao;
 import dao.StaffDao;
@@ -49,11 +50,11 @@ public class CajeroABM {
         dao.eliminar(c);
     }
 
-    public List<Cajero> traer() {
+    public Set<Cajero> traer() {
         return dao.traerCajeros();
     }
 
-    public List<Cajero> traerPorTurno(String turno) {
+    public Set<Cajero> traerPorTurno(String turno) {
         return dao.traerCajerosPorTurno(turno);
     }
 }
