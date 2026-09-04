@@ -209,16 +209,19 @@ public class UnidadVentaDao {
 	                   + "where f.superficieM2 >= :minSuperficie "
 	                   + "order by f.superficieM2 desc";
 
-	         lista = new java.util.LinkedHashSet<>(
+	        lista = new java.util.LinkedHashSet<>(
 	                session.createQuery(hql, FoodTrack.class)
 	                       .setParameter("minSuperficie", minSuperficie)
 	                       .getResultList()
 	            );
 
 	    } catch (HibernateException he) {
+	    	
 	        manejaExcepcion(he);
 	        throw he;
+	        
 	    } finally {
+	    	
 	        session.close();
 	    }
 
@@ -237,16 +240,20 @@ public class UnidadVentaDao {
 	                   + "having count(p) >= :minPedidos "
 	                   + "order by u.nombreComercial asc";
 
-	         lista = new java.util.HashSet<>(
-	                session.createQuery(hql, UnidadVenta.class)
+
+	        lista = new java.util.HashSet<>(
+	        		session.createQuery(hql, UnidadVenta.class)
 	                       .setParameter("minPedidos", minPedidos)
 	                       .getResultList()
 	            );
-
+	        
 	    } catch (HibernateException he) {
+	    	
 	        manejaExcepcion(he);
 	        throw he;
+	        
 	    } finally {
+	    	
 	        session.close();
 	    }
 
