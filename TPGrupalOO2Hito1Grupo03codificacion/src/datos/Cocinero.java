@@ -64,11 +64,5 @@ public class Cocinero extends Staff {
 				&& Objects.equals(especialidad, other.especialidad) && libretaSanitaria == other.libretaSanitaria;
 	}
 
-	@Override
-	public String toString() {
-		return "Cocinero [especialidad=" + especialidad + ", libretaSanitaria=" + libretaSanitaria
-				+ ", bonoPeligrosidad=" + bonoPeligrosidad + "]";
-	}
-
   
 }

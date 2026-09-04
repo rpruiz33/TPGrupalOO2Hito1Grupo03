@@ -7,15 +7,15 @@ public class Cajero extends Staff {
     private String turno;
     private int numeroDeCaja; 
     
-    private double falloDeCaja ;
+    private double PlusOAdiciona;
 
     public Cajero() { }
 
-	public Cajero(String turno, int numeroDeCaja, double falloDeCaja) {
+	public Cajero(String turno, int numeroDeCaja, double PlusOAdiciona) {
 		super();
 		this.turno = turno;
 		this.numeroDeCaja = numeroDeCaja;
-		this.falloDeCaja = falloDeCaja;
+		this.PlusOAdiciona= PlusOAdiciona;
 	}
 
 	public String getTurno() {
@@ -34,19 +34,21 @@ public class Cajero extends Staff {
 		this.numeroDeCaja = numeroDeCaja;
 	}
 
-	public double getFalloDeCaja() {
-		return falloDeCaja;
+
+
+	public double getPlusOAdiciona() {
+		return PlusOAdiciona;
 	}
 
-	public void setFalloDeCaja(double falloDeCaja) {
-		this.falloDeCaja = falloDeCaja;
+	public void setPlusOAdiciona(double plusOAdiciona) {
+		PlusOAdiciona = plusOAdiciona;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(falloDeCaja, numeroDeCaja, turno);
+		result = prime * result + Objects.hash(PlusOAdiciona, numeroDeCaja, turno);
 		return result;
 	}
 
@@ -61,13 +63,13 @@ public class Cajero extends Staff {
 		if (getClass() != obj.getClass())
 			return false;
 		Cajero other = (Cajero) obj;
-		return Double.doubleToLongBits(falloDeCaja) == Double.doubleToLongBits(other.falloDeCaja)
+		return Double.doubleToLongBits(PlusOAdiciona) == Double.doubleToLongBits(other.PlusOAdiciona)
 				&& numeroDeCaja == other.numeroDeCaja && Objects.equals(turno, other.turno);
 	}
 
 	@Override
 	public String toString() {
-		return "Cajero [turno=" + turno + ", numeroDeCaja=" + numeroDeCaja + ", falloDeCaja=" + falloDeCaja + "]";
+		return "Cajero [turno=" + turno + ", numeroDeCaja=" + numeroDeCaja + ", PlusOAdiciona=" + PlusOAdiciona + "]";
 	}
 
 }
