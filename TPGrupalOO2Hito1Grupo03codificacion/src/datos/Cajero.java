@@ -41,11 +41,11 @@ public class Cajero extends Staff {
 
 
 
-	public double getPlusOAdiciona() {
+	public double getPlusOAdicional() {
 		return PlusOAdicional;
 	}
 
-	public void setPlusOAdiciona(double plusOAdiciona) {
+	public void setPlusOAdicional(double plusOAdiciona) {
 		PlusOAdicional = plusOAdiciona;
 	}
 

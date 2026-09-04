@@ -245,7 +245,7 @@ public class RuizPereira_test {
             for (int i = 0; i < 8; i++) {
                 System.out.println("Pedido " + (i + 1) + " con items: " + pedidoABM.traerConItems(idsPed[i]));
             }
-
+  
             System.out.println("\nCARGA DE DATOS FINALIZADA CORRECTAMENTE\n");
 
             // CONSULTAS

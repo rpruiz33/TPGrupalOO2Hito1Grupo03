@@ -27,12 +27,12 @@ public class Test_Soloaga {
 
             // 1. COCINEROS
             long[] idsC = {
-            		cocineroABM.agregar("Lucia", "Fernandez", "401131222", LocalDate.of(1990, 4, 12), LocalDate.of(2023, 10, 1), 450000.0, "Parrilla", true, 25000.0),
-            		cocineroABM.agregar("Martin", "Gomez", "685556646", LocalDate.of(1985, 9, 3), LocalDate.of(2022, 3, 15), 470000.0, "Reposteria", true, 15000.0),
-            		cocineroABM.agregar("Roberto", "Sanchez", "352999888", LocalDate.of(1988, 11, 5), LocalDate.of(2021, 5, 10), 500000.0, "Comida Minuta", false, 20000.0),
-            		cocineroABM.agregar("Valentina", "Torres", "392262111", LocalDate.of(1992, 6, 18), LocalDate.of(2023, 8, 5), 460000.0, "Panaderia", true, 18000.0),
-            		cocineroABM.agregar("Julian", "Diaz", "357778888", LocalDate.of(1987, 2, 25), LocalDate.of(2021, 9, 12), 480000.0, "Vegetariana", false, 12000.0),
-            		cocineroABM.agregar("Camila", "Herrera", "416366555", LocalDate.of(1994, 10, 30), LocalDate.of(2024, 1, 15), 440000.0, "Postres", true, 15000.0)
+            		cocineroABM.agregar("Lucia", "Fernandez", "40111222", LocalDate.of(1990, 4, 12), LocalDate.of(2023, 10, 1), 450000.0, "Parrilla", true, 25000.0),
+            		cocineroABM.agregar("Martin", "Gomez", "68555666", LocalDate.of(1985, 9, 3), LocalDate.of(2022, 3, 15), 470000.0, "Reposteria", true, 15000.0),
+            		cocineroABM.agregar("Roberto", "Sanchez", "32999888", LocalDate.of(1988, 11, 5), LocalDate.of(2021, 5, 10), 500000.0, "Comida Minuta", false, 20000.0),
+            		cocineroABM.agregar("Valentina", "Torres", "39222111", LocalDate.of(1992, 6, 18), LocalDate.of(2023, 8, 5), 460000.0, "Panaderia", true, 18000.0),
+            		cocineroABM.agregar("Julian", "Diaz", "35777888", LocalDate.of(1987, 2, 25), LocalDate.of(2021, 9, 12), 480000.0, "Vegetariana", false, 12000.0),
+            		cocineroABM.agregar("Camila", "Herrera", "41666555", LocalDate.of(1994, 10, 30), LocalDate.of(2024, 1, 15), 440000.0, "Postres", true, 15000.0)
             };
             Cocinero[] c = new Cocinero[6];
             for (int i = 0; i < 6; i++) c[i] = cocineroABM.traer(idsC[i]);
@@ -44,12 +44,12 @@ public class Test_Soloaga {
 
             // 2. CAJEROS
             long[] idsCaj = {
-            		cajeroABM.agregar("Lucia", "Fernandez", "40111222", LocalDate.of(1990, 4, 12), LocalDate.of(2023, 10, 1), 450000.0, "Mañana", 1, 15000.0),
-            		cajeroABM.agregar("Martin", "Gomez", "68555666", LocalDate.of(1985, 9, 3), LocalDate.of(2022, 3, 15), 470000.0, "Tarde", 2, 18000.0),
-            		cajeroABM.agregar("Roberto", "Sanchez", "32999888", LocalDate.of(1988, 11, 5), LocalDate.of(2021, 5, 10), 500000.0, "Mañana", 3, 20000.0),
-            		cajeroABM.agregar("Valentina", "Torres", "39222111", LocalDate.of(1992, 6, 18), LocalDate.of(2023, 8, 5), 460000.0, "Noche", 1, 15000.0),
-            		cajeroABM.agregar("Julian", "Diaz", "35777888", LocalDate.of(1987, 2, 25), LocalDate.of(2021, 9, 12), 480000.0, "Tarde", 4, 18000.0),
-            		cajeroABM.agregar("Camila", "Herrera", "41666555", LocalDate.of(1994, 10, 30), LocalDate.of(2024, 1, 15), 440000.0, "Noche", 2, 12000.0)
+            		cajeroABM.agregar("Lucia", "Fernandez", "401111222", LocalDate.of(1990, 4, 12), LocalDate.of(2023, 10, 1), 450000.0, "Mañana", 1, 15000.0),
+            		cajeroABM.agregar("Martin", "Gomez", "685551666", LocalDate.of(1985, 9, 3), LocalDate.of(2022, 3, 15), 470000.0, "Tarde", 2, 18000.0),
+            		cajeroABM.agregar("Roberto", "Sanchez", "312999888", LocalDate.of(1988, 11, 5), LocalDate.of(2021, 5, 10), 500000.0, "Mañana", 3, 20000.0),
+            		cajeroABM.agregar("Valentina", "Torres", "392221111", LocalDate.of(1992, 6, 18), LocalDate.of(2023, 8, 5), 460000.0, "Noche", 1, 15000.0),
+            		cajeroABM.agregar("Julian", "Diaz", "357778188", LocalDate.of(1987, 2, 25), LocalDate.of(2021, 9, 12), 480000.0, "Tarde", 4, 18000.0),
+            		cajeroABM.agregar("Camila", "Herrera", "416166555", LocalDate.of(1994, 10, 30), LocalDate.of(2024, 1, 15), 440000.0, "Noche", 2, 12000.0)
             };
             Cajero[] caj = new Cajero[6];
             for (int i = 0; i < 6; i++) caj[i] = cajeroABM.traer(idsCaj[i]);
@@ -271,8 +271,8 @@ public class Test_Soloaga {
             for (FoodTrack fItem : foodTracks) {
                 System.out.println("-> " + fItem.getNombreComercial() + " [" + fItem.getCodigo() + "] | Superficie: " + fItem.getSuperficieM2() + " m2 | Patente: " + fItem.getPatente() + " | Requiere electricidad: " + fItem.isRequiereElectricidad());
             }
-
-          
+            System.out.println("\n--- PRUEBA SUBTOTAL ITEMS PEDIDO Y TOTAL PLATO ---");
+           
         } catch (Exception e) {
             e.printStackTrace();
         }

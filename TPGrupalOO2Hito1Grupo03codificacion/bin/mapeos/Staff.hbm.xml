@@ -34,7 +34,12 @@
 
             <property name="especialidad" column="especialidad"
                       type="string" not-null="true"/>
+                      
+   			<property name="libretaSanitaria" column="libretaSanitaria"
+              			type="boolean" not-null="true"/>
 
+   			 <property name="bonoPeligrosidad" column="bonoPeligrosidad"
+            		   type="double" not-null="true"/>
         </joined-subclass>
 
         <joined-subclass name="Cajero" table="cajero">
@@ -43,6 +48,12 @@
 
             <property name="turno" column="turno"
                       type="string" not-null="true"/>
+                      
+              <property name="numeroDeCaja" column="numeroDeCaja"
+              				type="int" not-null="true"/>
+
+    		<property name="PlusOAdicional" column="PlusOAdicional"
+    		              type="double" not-null="true"/>
 
         </joined-subclass>
 

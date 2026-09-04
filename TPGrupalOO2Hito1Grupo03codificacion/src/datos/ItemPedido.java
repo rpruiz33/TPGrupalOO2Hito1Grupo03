@@ -45,12 +45,19 @@ public class ItemPedido {
 
     @Override
 	public String toString() {
-		return "ItemPedido [id=" +  ", plato=" + plato + ", cantidad=" + cantidad + ", precioUnidad=" + precioUnidad
-				+ "]";
+    	 return "ItemPedido [" +
+    	            "id=" + id +
+    	            ", plato=" + plato +
+    	            ", cantidad=" + cantidad +
+    	            ", precioUnidad=" + precioUnidad +
+    	            ", subtotal=" + calcularSubtotal() +
+    	            "]";
 	}
 
 
-
+    public double calcularSubtotal() {
+        return cantidad * precioUnidad;
+    }
    
 
     public Plato getPlato() {

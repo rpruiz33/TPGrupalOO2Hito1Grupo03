@@ -56,6 +56,7 @@ public class PedidoABM {
     }
 
     public Pedido traerConItems(long idPedido) {
-        return dao.traerPedidoYItems(idPedido);
+       return dao.traerPedidoYItems(idPedido);
+    
     }
 }

@@ -249,7 +249,7 @@ public class TestFestival {
             System.out.println("\nCARGA DE DATOS FINALIZADA CORRECTAMENTE\n");
 
             // CONSULTAS
-            System.out.println("==============================================================");
+           /* System.out.println("==============================================================");
             System.out.println("---------- ESTUDIANTE RUIZ PEREIRA, ROBERTO ANDRES -----------");
             System.out.println("==============================================================");
 
@@ -316,7 +316,7 @@ public class TestFestival {
             System.out.println("Unidades encontradas: " + unidadesConPedidos.size());
             for (UnidadVenta u : unidadesConPedidos) {
                 System.out.println("-> " + u.getNombreComercial() + " [" + u.getCodigo() + "]");
-            }
+            }*/
 
         } catch (Exception e) {
             e.printStackTrace();

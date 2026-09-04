@@ -43,6 +43,9 @@ public class Pedido {
         return "Pedido{" +
                 "id=" + id +
                 ", fecha=" + fecha +
+                ", total=" + calcularTotal() +
+                ", items=" + items +
+                
                 '}';
     }
 
@@ -54,6 +57,16 @@ public class Pedido {
         this.id = id;
     }
 
+    public double calcularTotal() {
+        double total = 0;
+
+        for (ItemPedido item : items) {
+            total += item.calcularSubtotal();
+        }
+
+        return total;
+    }
+    
     public Set<ItemPedido> getItems() {
         return items;
     }
