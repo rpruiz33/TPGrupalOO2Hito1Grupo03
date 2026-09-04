@@ -29,9 +29,9 @@ public class CocineroABM {
     }
 
     public int agregar(String nombre, String apellido, String dni, LocalDate fechaNacimiento,
-            LocalDate fechaIngreso, double sueldoBase, String especialidad) throws Exception {
+            LocalDate fechaIngreso, double sueldoBase, String especialidad, boolean libretaSanitaria, double bonoPeligrosidad) throws Exception {
         if (staffDao.traerStaff(dni) != null) throw new Exception("ERROR ya existe staff con DNI: " + dni);
-        Cocinero c = new Cocinero(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase, especialidad);
+        Cocinero c = new Cocinero(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase, especialidad, libretaSanitaria,  bonoPeligrosidad);
         return dao.agregar(c);
     }
 

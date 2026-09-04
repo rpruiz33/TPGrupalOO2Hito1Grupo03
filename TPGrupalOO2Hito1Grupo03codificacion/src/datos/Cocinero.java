@@ -10,11 +10,16 @@ public class Cocinero extends Staff {
 
     public Cocinero() {  }
 
-	public Cocinero(String especialidad, boolean libretaSanitaria, double bonoPeligrosidad) {
-		super();
+
+	
+
+	public Cocinero(String nombre, String apellido, String dni, LocalDate fechaNacimiento, LocalDate fechaIngreso,
+			double sueldoBase,String especialidad, boolean libretaSanitaria, double bonoPeligrosidad) {
+		super(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase);
 		this.especialidad = especialidad;
 		this.libretaSanitaria = libretaSanitaria;
 		this.bonoPeligrosidad = bonoPeligrosidad;
+		
 	}
 
 	public String getEspecialidad() {

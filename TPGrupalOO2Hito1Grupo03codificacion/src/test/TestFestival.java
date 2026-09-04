@@ -27,12 +27,12 @@ public class TestFestival {
 
             // 1. COCINEROS
             long[] idsC = {
-                cocineroABM.agregar("Lucia", "Fernandez", "40111222", LocalDate.of(1990, 4, 12), LocalDate.of(2023, 10, 1), 450000.0, "Parrilla"),
-                cocineroABM.agregar("Martin", "Gomez", "68555666", LocalDate.of(1985, 9, 3), LocalDate.of(2022, 3, 15), 470000.0, "Reposteria"),
-                cocineroABM.agregar("Roberto", "Sanchez", "32999888", LocalDate.of(1988, 11, 5), LocalDate.of(2021, 5, 10), 500000.0, "Comida Minuta"),
-                cocineroABM.agregar("Valentina", "Torres", "39222111", LocalDate.of(1992, 6, 18), LocalDate.of(2023, 8, 5), 460000.0, "Panaderia"),
-                cocineroABM.agregar("Julian", "Diaz", "35777888", LocalDate.of(1987, 2, 25), LocalDate.of(2021, 9, 12), 480000.0, "Vegetariana"),
-                cocineroABM.agregar("Camila", "Herrera", "41666555", LocalDate.of(1994, 10, 30), LocalDate.of(2024, 1, 15), 440000.0, "Postres")
+            		cocineroABM.agregar("Lucia", "Fernandez", "40111222", LocalDate.of(1990, 4, 12), LocalDate.of(2023, 10, 1), 450000.0, "Parrilla", true, 25000.0),
+            		cocineroABM.agregar("Martin", "Gomez", "68555666", LocalDate.of(1985, 9, 3), LocalDate.of(2022, 3, 15), 470000.0, "Reposteria", true, 15000.0),
+            		cocineroABM.agregar("Roberto", "Sanchez", "32999888", LocalDate.of(1988, 11, 5), LocalDate.of(2021, 5, 10), 500000.0, "Comida Minuta", false, 20000.0),
+            		cocineroABM.agregar("Valentina", "Torres", "39222111", LocalDate.of(1992, 6, 18), LocalDate.of(2023, 8, 5), 460000.0, "Panaderia", true, 18000.0),
+            		cocineroABM.agregar("Julian", "Diaz", "35777888", LocalDate.of(1987, 2, 25), LocalDate.of(2021, 9, 12), 480000.0, "Vegetariana", false, 12000.0),
+            		cocineroABM.agregar("Camila", "Herrera", "41666555", LocalDate.of(1994, 10, 30), LocalDate.of(2024, 1, 15), 440000.0, "Postres", true, 15000.0)
             };
             Cocinero[] c = new Cocinero[6];
             for (int i = 0; i < 6; i++) c[i] = cocineroABM.traer(idsC[i]);
@@ -44,12 +44,12 @@ public class TestFestival {
 
             // 2. CAJEROS
             long[] idsCaj = {
-                cajeroABM.agregar("Ana", "Lopez", "65222111", LocalDate.of(1998, 1, 20), LocalDate.of(2024, 6, 1), 380000.0, "manana"),
-                cajeroABM.agregar("Diego", "Perez", "82444333", LocalDate.of(1995, 7, 8), LocalDate.of(2023, 11, 20), 390000.0, "noche"),
-                cajeroABM.agregar("Sofia", "Ramirez", "71333444", LocalDate.of(2000, 3, 14), LocalDate.of(2024, 2, 1), 370000.0, "tarde"),
-                cajeroABM.agregar("Nicolas", "Molina", "38111999", LocalDate.of(1996, 5, 22), LocalDate.of(2023, 4, 10), 385000.0, "manana"),
-                cajeroABM.agregar("Florencia", "Castro", "42888777", LocalDate.of(1999, 9, 9), LocalDate.of(2024, 7, 1), 375000.0, "tarde"),
-                cajeroABM.agregar("Tomas", "Rivas", "37555444", LocalDate.of(1993, 12, 3), LocalDate.of(2022, 10, 20), 395000.0, "noche")
+            		cajeroABM.agregar("Lucia", "Fernandez", "40111222", LocalDate.of(1990, 4, 12), LocalDate.of(2023, 10, 1), 450000.0, "Mañana", 1, 15000.0),
+            		cajeroABM.agregar("Martin", "Gomez", "68555666", LocalDate.of(1985, 9, 3), LocalDate.of(2022, 3, 15), 470000.0, "Tarde", 2, 18000.0),
+            		cajeroABM.agregar("Roberto", "Sanchez", "32999888", LocalDate.of(1988, 11, 5), LocalDate.of(2021, 5, 10), 500000.0, "Mañana", 3, 20000.0),
+            		cajeroABM.agregar("Valentina", "Torres", "39222111", LocalDate.of(1992, 6, 18), LocalDate.of(2023, 8, 5), 460000.0, "Noche", 1, 15000.0),
+            		cajeroABM.agregar("Julian", "Diaz", "35777888", LocalDate.of(1987, 2, 25), LocalDate.of(2021, 9, 12), 480000.0, "Tarde", 4, 18000.0),
+            		cajeroABM.agregar("Camila", "Herrera", "41666555", LocalDate.of(1994, 10, 30), LocalDate.of(2024, 1, 15), 440000.0, "Noche", 2, 12000.0)
             };
             Cajero[] caj = new Cajero[6];
             for (int i = 0; i < 6; i++) caj[i] = cajeroABM.traer(idsCaj[i]);
