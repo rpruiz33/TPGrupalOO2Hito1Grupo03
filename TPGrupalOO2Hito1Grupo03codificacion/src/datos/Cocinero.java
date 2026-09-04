@@ -5,18 +5,19 @@ import java.util.Objects;
 
 public class Cocinero extends Staff {
     private String especialidad;
+    private boolean libretaSanitaria;
+    private double bonoPeligrosidad;
 
     public Cocinero() {  }
 
-    public Cocinero(String nombre, String apellido, String dni, LocalDate fechaNacimiento,
-                     LocalDate fechaIngreso, double sueldoBase, String especialidad) {
-        super(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase);
-        this.especialidad = especialidad;
-    }
-    
-    
+	public Cocinero(String especialidad, boolean libretaSanitaria, double bonoPeligrosidad) {
+		super();
+		this.especialidad = especialidad;
+		this.libretaSanitaria = libretaSanitaria;
+		this.bonoPeligrosidad = bonoPeligrosidad;
+	}
 
-    public String getEspecialidad() {
+	public String getEspecialidad() {
 		return especialidad;
 	}
 
@@ -24,23 +25,50 @@ public class Cocinero extends Staff {
 		this.especialidad = especialidad;
 	}
 
+	public boolean isLibretaSanitaria() {
+		return libretaSanitaria;
+	}
+
+	public void setLibretaSanitaria(boolean libretaSanitaria) {
+		this.libretaSanitaria = libretaSanitaria;
+	}
+
+	public double getBonoPeligrosidad() {
+		return bonoPeligrosidad;
+	}
+
+	public void setBonoPeligrosidad(double bonoPeligrosidad) {
+		this.bonoPeligrosidad = bonoPeligrosidad;
+	}
+
 	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Cocinero cocinero = (Cocinero) o;
-        return Objects.equals(especialidad, cocinero.especialidad);
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(bonoPeligrosidad, especialidad, libretaSanitaria);
+		return result;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), especialidad);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cocinero other = (Cocinero) obj;
+		return Double.doubleToLongBits(bonoPeligrosidad) == Double.doubleToLongBits(other.bonoPeligrosidad)
+				&& Objects.equals(especialidad, other.especialidad) && libretaSanitaria == other.libretaSanitaria;
+	}
 
-    @Override
-    public String toString() {
-        return "Cocinero{" + "especialidad='" + especialidad + '\'' +
-                "} " + super.toString();
-    }
+	@Override
+	public String toString() {
+		return "Cocinero [especialidad=" + especialidad + ", libretaSanitaria=" + libretaSanitaria
+				+ ", bonoPeligrosidad=" + bonoPeligrosidad + "]";
+	}
+
+  
 }

@@ -5,18 +5,20 @@ import java.util.Objects;
 
 public class Cajero extends Staff {
     private String turno;
+    private int numeroDeCaja; 
+    
+    private double falloDeCaja ;
 
     public Cajero() { }
 
-    public Cajero(String nombre, String apellido, String dni, LocalDate fechaNacimiento,
-                  LocalDate fechaIngreso, double sueldoBase, String turno) {
-        super( nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase);
-        this.turno = turno;
-    }
-    
-    
+	public Cajero(String turno, int numeroDeCaja, double falloDeCaja) {
+		super();
+		this.turno = turno;
+		this.numeroDeCaja = numeroDeCaja;
+		this.falloDeCaja = falloDeCaja;
+	}
 
-    public String getTurno() {
+	public String getTurno() {
 		return turno;
 	}
 
@@ -24,22 +26,49 @@ public class Cajero extends Staff {
 		this.turno = turno;
 	}
 
+	public int getNumeroDeCaja() {
+		return numeroDeCaja;
+	}
+
+	public void setNumeroDeCaja(int numeroDeCaja) {
+		this.numeroDeCaja = numeroDeCaja;
+	}
+
+	public double getFalloDeCaja() {
+		return falloDeCaja;
+	}
+
+	public void setFalloDeCaja(double falloDeCaja) {
+		this.falloDeCaja = falloDeCaja;
+	}
+
 	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Cajero cajero = (Cajero) o;
-        return Objects.equals(turno, cajero.turno);
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(falloDeCaja, numeroDeCaja, turno);
+		return result;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), turno);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cajero other = (Cajero) obj;
+		return Double.doubleToLongBits(falloDeCaja) == Double.doubleToLongBits(other.falloDeCaja)
+				&& numeroDeCaja == other.numeroDeCaja && Objects.equals(turno, other.turno);
+	}
 
-    @Override
-    public String toString() {
-        return "Cajero{" + "turno='" + turno + '\'' + "} " + super.toString();
-    }
+	@Override
+	public String toString() {
+		return "Cajero [turno=" + turno + ", numeroDeCaja=" + numeroDeCaja + ", falloDeCaja=" + falloDeCaja + "]";
+	}
+
 }
+   
